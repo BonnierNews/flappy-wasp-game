@@ -1,5 +1,6 @@
 # expressen-lifestyle-netlight-codepub
 
+
 # Filer och mappar
 - index.html – Grundläggande HTML och CSS för julkort.
 - pynt/ – t.ex. julgran.svg
@@ -8,5 +9,5 @@
 # Guider
 - Pynta Julkort.md
 - Exportera Julkort.md
-- Lägg till animationer.md
-- Rimgenerator.md
+- Lägg till animationer.md (vi använder ett bibliotek)
+- Rimgenerator.md (vi använder ett API)
