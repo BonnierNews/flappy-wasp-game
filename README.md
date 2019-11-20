@@ -1,13 +1,11 @@
-# expressen-lifestyle-netlight-codepub
+# Förslag på vad vi kan göra
+- Adventskalender
+- Rimgenerator
+- Julkort
+- Julkortsgenerator
 
-
-# Filer och mappar
-- index.html – Grundläggande HTML och CSS för julkort.
-- pynt/ – t.ex. julgran.svg
-- animationer/ – t.ex. snöar.js
-
-# Guider
-- Pynta Julkort.md
-- Exportera Julkort.md
-- Lägg till animationer.md (vi använder ett bibliotek)
-- Rimgenerator.md (vi använder ett API)
+# Dokument med instruktioner till deltagarna
+- [HTML/CSS] Pynta julkort med HTML och CSS
+- [JS] Exportera julkort som en bild
+- [JS] Skapa julkortsgenerator
+- [CSS] Lägg till animationer
