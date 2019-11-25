@@ -19,7 +19,11 @@ function Pipe() {
     }
 
     this.pass = function(wasp) {
-      if (wasp) return true;
+      if (wasp.x > this.x && !this.passed) {
+        this.passed = true;
+        return true;
+      }
+      return false;
     }
 
     this.show = function() {

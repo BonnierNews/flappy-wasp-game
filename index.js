@@ -3,14 +3,14 @@ let pipes;
 let waspImg;
 let backgroundImg;
 let backgroundX = 0;
-let polkaImg;
 let isOver = false;
 let score = 0;
+let presentImg;
 
 function preload() {
   waspImg = loadImage('wasp.png');
   backgroundImg = loadImage('background.png');
-  polkaImg = loadImage('polka.png');
+  presentImg = loadImage('present.png');
 }
 
 function setup() {
@@ -62,6 +62,15 @@ function draw() {
 
   showScores();
 
+  for (let i = presents.length-1; i >= 0; i--) {
+    presents[i].show();
+    presents[i].update();
+  }
+
+  if (frameCount % 75 == 0) {
+    presents.push(new christmasPresent());
+  }
+
 }
 
 function keyPressed() {
@@ -72,12 +81,16 @@ function keyPressed() {
 }
 
 function gameover() {
-  textSize(64);
-  textAlign(CENTER, CENTER);
-  text("GAMEOVER", width / 2, height / 2);
+  textSize(50);
+  fill(000);
+  text("GAME OVER", 50, 300);
   isOver = true;
   noLoop();
 }
+
+// function extraScore() {
+
+// }
 
 function reset() {
   backgroundX = 0;
@@ -87,9 +100,12 @@ function reset() {
   isOver = false;
   score = 0;
   loop();
+  presents = [];
+  presents.push(new christmasPresent());
 }
 
 function showScores() {
+  fill(000);
   textSize(32);
-  text("score: " + score, 1, 32);
+  text("Score: " + score, 1, 32);
 }
