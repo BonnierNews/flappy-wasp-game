@@ -1,29 +1,47 @@
-let bird;
-let pipes = [];
+let wasp;
+let trees = [];
+let waspImg;
+let backgroundImg;
+
+function preload() {
+  waspImg = loadImage('wasp.png');
+  backgroundImg = loadImage('background.png');
+}
 
 function setup() {
   createCanvas(400, 600);
-  bird = new Bird();
-  pipes.push(new Pipe());
+  wasp = new Wasp();
+  trees.push(new Tree());
 }
 
 function draw() {
-  background(0, 4, 200);
-  bird.show();
-  bird.update();
+  background(200, 96, 34);  
+  image(backgroundImg, 0, 0, 800, 600);
+
+  for (let i = trees.length-1; i >= 0; i--) {
+    trees[i].show();
+    trees[i].update();
+
+    if (trees[i].hits(wasp)) {
+      console.log('HIT!!:)');
+    }
+
+    if (trees[i].offscreen()) {
+      trees.splice(i, 1);
+    }
+  }
+
+  wasp.show();
+  wasp.update();
 
   if (frameCount % 100 == 0) {
-    pipes.push(new Pipe());
+    trees.push(new Tree());
   }
 
-  for (let i = 0; i < pipes.length; i++) {
-    pipes[i].show();
-    pipes[i].update();
-  }
 }
 
 function keyPressed() {
   if (key == ' ') {
-    bird.up();
+    wasp.up();
   }
 }

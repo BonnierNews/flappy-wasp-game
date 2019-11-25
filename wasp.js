@@ -1,24 +1,21 @@
-function Bird() {
+function Wasp() {
   this.y = height / 2;
   this.x = 64;
-
-  this.gravity = 0.6;
-  this.lift = -25;
+  this.gravity = 0.1;
+  this.lift = -10;
   this.velocity = 0;
 
   this.show = function() {
-    fill(255);
-    ellipse(this.x, this.y, 32, 32);
+    image(waspImg, this.x - 16, this.y - 16, 32, 32);
   }
 
   this.up = function() {
     this.velocity += this.lift; 
-    console.log(this.velocity);
   }
 
   this.update = function() {
     this.velocity += this.gravity;
-    this.velocity += 0.9;
+    this.velocity += 0.2;
     this.y += this.velocity;
 
     if (this.y > height) {
