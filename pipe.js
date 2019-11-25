@@ -1,4 +1,4 @@
-function Tree() {
+function Pipe() {
     this.top = random(height/2);
     this.bottom = random(height/2);
     this.x = width;
@@ -18,13 +18,17 @@ function Tree() {
       return false;
     }
 
+    this.pass = function(wasp) {
+      if (wasp) return true;
+    }
+
     this.show = function() {
       fill(121, 85, 72);
       if (this.highlight) {
         fill(255, 0, 0);
       }
       rect(this.x, 0, this.w, this.top);
-      rect(this.x, height-this.bottom, this.w, this.bottom);
+      rect(this.x, height-this.bottom, this.w, this.bottom);  
     }
 
     this.update = function() {
