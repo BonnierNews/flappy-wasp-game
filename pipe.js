@@ -5,16 +5,12 @@ function Pipe() {
     this.w = 20;
     this.speed = 2;
 
-    this.highlight = false;
-
     this.hits = function(wasp) {
       if (wasp.y < this.top || wasp.y > height - this.bottom) {
         if (wasp.x > this.x && wasp.x < this.x + this.w) {
-          this.highlight = true;
           return true;
         }
       }
-      this.highlight = false;
       return false;
     }
 
@@ -28,9 +24,6 @@ function Pipe() {
 
     this.show = function() {
       fill(121, 85, 72);
-      if (this.highlight) {
-        fill(255, 0, 0);
-      }
       rect(this.x, 0, this.w, this.top);
       rect(this.x, height-this.bottom, this.w, this.bottom);  
     }

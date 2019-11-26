@@ -65,6 +65,10 @@ function draw() {
   for (let i = presents.length-1; i >= 0; i--) {
     presents[i].show();
     presents[i].update();
+    if (presents[i].hits(wasp)) {
+      score += 3;
+      presents.splice(i, 1);
+    }
   }
 
   if (frameCount % 75 == 0) {
