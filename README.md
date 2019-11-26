@@ -1,7 +1,7 @@
 # Flappy Wasp Game
 
 
-## Steg 0. Sätt upp miljö
+## Steg 0. Kom igång
 
 ***[[HITTA STARTFILERNA HÄR]](https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-0)***
 
