@@ -3,7 +3,7 @@
 
 ## Steg 0. Sätt upp miljö
 
-<a href="https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-0"><button>SE DEN FÄRDIGA KODEN HÄR</button></a>
+***[[SE DEN FÄRDIGA KODEN HÄR]](https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-0)***
 
 ### Ladda ner projekt
 Du hittar projektet på https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub. För att ladda ner projektet så trycker du på en gröna knappen “Clone or download”. Då öppnas en liten ruta. Längst ner till höger står det “Download ZIP”, tryck på den så laddas projektet ner till din dator.
@@ -18,6 +18,9 @@ Du laddar ner Live Server som en plugin till Visual Studio Code. När du har lad
 
 
 ## Steg 1. Lägg till p5.js
+
+***[[SE DEN FÄRDIGA KODEN HÄR]](https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-1)***
+
 Vi börjar med att gå in på https://p5js.org/get-started/ för att ladda ner biblioteket. 
 
 ```html
@@ -36,7 +39,7 @@ Vi börjar med att gå in på https://p5js.org/get-started/ för att ladda ner b
 
 ## Steg 2. Skapa spelet – game.js
 
-<a href="https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-1"><button>SE DEN FÄRDIGA KODEN HÄR</button></a>
+***[[SE DEN FÄRDIGA KODEN HÄR]](https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-2)***
 
 Nu när vi har en HTML-sida och kan visa den i webbläsarfönstret med vår server så kan vi gå vidare till att faktiskt skapa själva spelet!
 
@@ -59,7 +62,7 @@ Lägg till filen i din index.html för att den ska synas på din hemsida.
 
 ## Steg 3. Skapa geting – wasp.js
 
-<a href="https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-3"><button>SE DEN FÄRDIGA KODEN HÄR</button></a>
+***[[SE DEN FÄRDIGA KODEN HÄR]](https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-3)***
 
 Skapa en ny fil wasp.js.
 
@@ -79,7 +82,7 @@ function Wasp() {}
 
 ## Steg 4. Skapa hinder – pipe.js
 
-<a href="https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-4"><button>SE DEN FÄRDIGA KODEN HÄR</button></a>
+***[[SE DEN FÄRDIGA KODEN HÄR]](https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-4)***
 
 Skapa en ny fil pipe.js.
 
@@ -90,7 +93,7 @@ function Pipe() {}
 
 ## Steg 5. Skapa poängräknare
 
-<a href="https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-5"><button>SE DEN FÄRDIGA KODEN HÄR</button></a>
+***[[SE DEN FÄRDIGA KODEN HÄR]](https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-5)***
 
 ## Idéer till utökningar av spelet
 - Visa poängräknare som ökar med tiden.
