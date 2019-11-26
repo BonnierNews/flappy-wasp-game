@@ -3,7 +3,7 @@
 
 ## Steg 0. Sätt upp miljö
 
-***[[SE DEN FÄRDIGA KODEN HÄR]](https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-0)***
+***[[HITTA STARTFILERNA HÄR]](https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-0)***
 
 ### Ladda ner projekt
 Du hittar startfilerna på https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-0. För att ladda ner projektet så trycker du på en gröna knappen “Clone or download”. Då öppnas en liten ruta. Längst ner till höger står det “Download ZIP”, tryck på den så laddas projektet ner till din dator.
