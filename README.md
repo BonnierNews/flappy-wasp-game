@@ -1,101 +1,33 @@
 # Flappy Wasp Game
 
+## Step 0. Getting Started
 
-## Steg 0. Kom igång
+### Download project from GitHub
+Download project by clicking the green button named “Clone or download”. When a small dialogue appears, click “Download ZIP” in the right bottom corner to download it to your computer. Or if you have `git` installed, you can just clone the project.
 
-***[[HITTA STARTFILERNA HÄR]](https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-0)***
+### Install Visual Studio Code
+Download Visual Studio Code from https://code.visualstudio.com/ or use editor of your choice. You also need to be able to run a local server on your computer. Open your server in a web browser.
 
-### Ladda ner projekt
-Du hittar startfilerna [här](https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-0). För att ladda ner projektet så trycker du på en gröna knappen “Clone or download”. Då öppnas en liten ruta. Längst ner till höger står det “Download ZIP”, tryck på den så laddas projektet ner till din dator.
-
-### Installera Visual Studio Code
-Du kan ladda ner Visual Studio Code på https://code.visualstudio.com/. Installera och öppna programmet på din dator.
-
-### Installera Live Server-plugin
-Du laddar ner Live Server som en plugin till Visual Studio Code. När du har laddat ner pluginen så kan du starta en server genom att trycke på “Go Live” ner i högra hörnet på Visual Studio Code.
-
-Öppna localhost:5500 och du borde nu se en hemsida där det står “Flappy Wasp Game”.
+**TIP:** In Visual Studio Code you can install [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) as a plugin from the Visual Studio Code Marketplace. When Live Server is installed, you should be able to click “Go Live” in the bottom right corner of the Visual Studio Code editor.
 
 
-## Steg 1. Lägg till p5.js
+## Step 1. Create game
 
-***[[SE DEN FÄRDIGA KODEN HÄR]](https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-1)***
+### Create a canvas
+Get started with p5.js by visiting https://p5js.org/get-started/. The first thing we need to do is add a canvas by using the createCanvas() function. See example [here](https://p5js.org/reference/#/p5/createCanvas).
 
-Vi börjar med att gå in på https://p5js.org/get-started/ för att ladda ner biblioteket. 
+### Add a background
+When we have a canvas we should add a background. Use the `images/background.png`. See example [here](https://p5js.org/reference/#/p5/image).
 
-```html
-<!DOCTYPE html>
-<html>
-<head>
-<title>Flappy Wasp Game</title>
-</head>
-<body>
-<h1>Flappy Wasp Game</h1>
-<script src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.js"></script>
-</body>
-</html>
-```
+## Step 2. Create wasp
 
+## Step 3. Create pipes
 
-## Steg 2. Skapa spelet – game.js
+## Step 4. Create score
 
-***[[SE DEN FÄRDIGA KODEN HÄR]](https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-2)***
+## Step 5. Create presents
 
-Nu när vi har en HTML-sida och kan visa den i webbläsarfönstret med vår server så kan vi gå vidare till att faktiskt skapa själva spelet!
-
-```JavaScript
-function init() {
-	this.x = 0;
-}
-```
-
-Lägg till filen i din index.html för att den ska synas på din hemsida.
-
-```html
-<!DOCTYPE html>
-<html>
-<script src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.js"></script>
-<script src="game.js"></script>
-</html>
-```
-
-
-## Steg 3. Skapa geting – wasp.js
-
-***[[SE DEN FÄRDIGA KODEN HÄR]](https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-3)***
-
-Skapa en ny fil wasp.js.
-
-```JavaScript
-function Wasp() {}
-```
-
-```html
-<!DOCTYPE html>
-<html>
-<script src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.js"></script>
-<script src="game.js"></script>
-<script src="wasp.js"></script>
-</html>
-```
-
-
-## Steg 4. Skapa hinder – pipe.js
-
-***[[SE DEN FÄRDIGA KODEN HÄR]](https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-4)***
-
-Skapa en ny fil pipe.js.
-
-```JavaScript
-function Pipe() {}
-```
-
-
-## Steg 5. Skapa poängräknare
-
-***[[SE DEN FÄRDIGA KODEN HÄR]](https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-5)***
-
-## Idéer till utökningar av spelet
+## More ideas
 - Visa poängräknare som ökar med tiden.
 - Lägg till tidningar som ger extrapoäng.
 - Lägg till “aftonbladet” tidningar som tar poäng.
