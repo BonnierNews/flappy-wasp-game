@@ -3,6 +3,8 @@
 
 ## Steg 0. Sätt upp miljö
 
+<a href="https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-0"><button>SE DEN FÄRDIGA KODEN HÄR</button></a>
+
 ### Ladda ner projekt
 Du hittar projektet på https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub. För att ladda ner projektet så trycker du på en gröna knappen “Clone or download”. Då öppnas en liten ruta. Längst ner till höger står det “Download ZIP”, tryck på den så laddas projektet ner till din dator.
 
@@ -33,6 +35,9 @@ Vi börjar med att gå in på https://p5js.org/get-started/ för att ladda ner b
 
 
 ## Steg 2. Skapa spelet – game.js
+
+<a href="https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-1"><button>SE DEN FÄRDIGA KODEN HÄR</button></a>
+
 Nu när vi har en HTML-sida och kan visa den i webbläsarfönstret med vår server så kan vi gå vidare till att faktiskt skapa själva spelet!
 
 ```JavaScript
@@ -53,6 +58,9 @@ Lägg till filen i din index.html för att den ska synas på din hemsida.
 
 
 ## Steg 3. Skapa geting – wasp.js
+
+<a href="https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-3"><button>SE DEN FÄRDIGA KODEN HÄR</button></a>
+
 Skapa en ny fil wasp.js.
 
 ```JavaScript
@@ -70,6 +78,9 @@ function Wasp() {}
 
 
 ## Steg 4. Skapa hinder – pipe.js
+
+<a href="https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-4"><button>SE DEN FÄRDIGA KODEN HÄR</button></a>
+
 Skapa en ny fil pipe.js.
 
 ```JavaScript
@@ -77,8 +88,9 @@ function Pipe() {}
 ```
 
 
-## Steg 8. Skapa poängräknare
+## Steg 5. Skapa poängräknare
 
+<a href="https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-5"><button>SE DEN FÄRDIGA KODEN HÄR</button></a>
 
 ## Idéer till utökningar av spelet
 - Visa poängräknare som ökar med tiden.
