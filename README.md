@@ -6,7 +6,7 @@
 ***[[SE DEN FÄRDIGA KODEN HÄR]](https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-0)***
 
 ### Ladda ner projekt
-Du hittar projektet på https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub. För att ladda ner projektet så trycker du på en gröna knappen “Clone or download”. Då öppnas en liten ruta. Längst ner till höger står det “Download ZIP”, tryck på den så laddas projektet ner till din dator.
+Du hittar startfilerna på https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-0. För att ladda ner projektet så trycker du på en gröna knappen “Clone or download”. Då öppnas en liten ruta. Längst ner till höger står det “Download ZIP”, tryck på den så laddas projektet ner till din dator.
 
 ### Installera Visual Studio Code
 Du kan ladda ner Visual Studio Code på https://code.visualstudio.com/. Installera och öppna programmet på din dator.
