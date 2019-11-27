@@ -19,34 +19,31 @@ Download Visual Studio Code from https://code.visualstudio.com/ or use editor of
 
 
 ## 1. **Create game**
+Get started with p5.js by visiting https://p5js.org/get-started/.
 
 ### 1.1. **Create a canvas**
-Get started with p5.js by visiting https://p5js.org/get-started/. The first thing we need to do is add a canvas by using the [createCanvas()](https://p5js.org/reference/#/p5/createCanvas) function. Add it in the `index.js` file. See example [here](https://p5js.org/reference/#/p5/createCanvas).
+The first thing we need to do is add a canvas by using the [createCanvas()](https://p5js.org/reference/#/p5/createCanvas) function. Pass the `CANVAS_WIDTH` and `CANVAS_HEIGHT` variables as arguments. Add it inside `function setup()` in `index.js` file. This will create a white canvas, so nothing will show yet in the browser.
 
 <details>
 <summary><b>Cheatsheet: Check the code here</b></summary>
-
 <h4>index.js</h4><pre>
 function setup() {
-  <b>createCanvas(400, 600);</b>
+  <b>createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);</b>
 }</pre>
-
 </details>
 
 ### 1.2. **Add a background**
-When we have a canvas we can add a background image. In `index.js`, use p5.js’s [image()](https://p5js.org/reference/#/p5/image) function to add the `background.png` image. See example [here](https://p5js.org/reference/#/p5/image). 
+In `index.js`, use [loadImage()](https://p5js.org/reference/#/p5/loadImage) and [image()](https://p5js.org/reference/#/p5/image) function to show `images/background.png` as a background. **TIP:** You can use `backgroundImg.width` as an argument to `image()`.
 
 <details>
 <summary><b>Cheatsheet: Check the code here</b></summary>
-
 <h4>index.js</h4><pre>
 function preload() {
   <b>backgroundImg = loadImage("images/background.png");</b>
-}
+}<br>
 function draw() {
-  <b>image(backgroundImg, 0, 0, 400, 600);</b>
+  <b>image(backgroundImg, 0, 0, backgroundImg.width, CANVAS_HEIGHT);</b>
 }</pre>
-
 </details>
 
 ---
@@ -56,13 +53,30 @@ function draw() {
 
 
 ### 2.1. **Show wasp**
-In `wasp.js`, use p5.js’s [image()](https://p5js.org/reference/#/p5/image) function in the `this.show()` function. Pass the variables `this.x`, `this.y` and `this.size` as parameters to the image() function.
-
-Then in `index.js`, create a new wasp instance and call the wasp’s `show()` function in the `draw()` function.
+In `index.js`, use [loadImage()](https://p5js.org/reference/#/p5/loadImage) to load `images/wasp.png` and assign it to the variable `waspImg`.
 
 <details>
 <summary><b>Cheatsheet: Check the code here</b></summary>
+<h4>index.js</h4><pre>
+function preload() {
+  <b>waspImg = loadImage("images/wasp.png");</b>
+}</pre>
+</details>
 
+In `wasp.js`, use p5.js’s [image()](https://p5js.org/reference/#/p5/image) function in the `this.show()` function. Pass the variables `this.x`, `this.y` and `this.size` as parameters.
+
+<details>
+<summary><b>Cheatsheet: Check the code here</b></summary>
+<h4>wasp.js</h4><pre>
+this.show = function() {
+  <b>image(waspImg, this.x - 16, this.y - 16, 32, 32);</b>
+}</pre>
+</details>
+
+Then in `index.js`, load the image by using [loadImage()](https://p5js.org/reference/#/p5/loadImage). Then create a new wasp instance, `wasp = new Wasp()`, and call the `wasp.show()` function in the `draw()` function.
+
+<details>
+<summary><b>Cheatsheet: Check the code here</b></summary>
 <h4>index.js</h4><pre>
 function preload() {
   backgroundImg = loadImage("background.png");
@@ -75,12 +89,10 @@ function draw() {
   <b>wasp.update();</b>
   <b>wasp.show();</b>
 }</pre>
-
 <h4>wasp.js</h4><pre>
 this.show = function() {
   <b>image(waspImg, this.x - 16, this.y - 16, 32, 32);</b>
 }</pre>
-
 </details>
 
 
@@ -89,14 +101,12 @@ The wasp should fall to the ground because it is affected by gravity! In `wasp.j
 
 <details>
 <summary><b>Cheatsheet: Check the code here</b></summary>
-
 <h4>wasp.js</h4><pre>
 this.update = function() {
   <b>this.velocity += this.gravity;</b>
   <b>this.velocity += 0.2;</b>
   <b>this.y += this.velocity;</b>
 }</pre>
-
 </details>
 
 
@@ -134,14 +144,12 @@ We want to draw pipes both at the top and the bottom of the canvas. We can draw 
 
 <details>
 <summary><b>Cheatsheet: Check the code here</b></summary>
-
 <h4>pipe.js</h4><pre>
 this.show = function() {
   <b>fill(121, 85, 72);</b>
   <b>rect(this.x, 0, this.width, this.topPipeHeight);</b>
   <b>rect(this.x, CANVAS_HEIGHT - this.bottomPipeHeight, this.width, this.bottomPipeHeight);</b>
 }</pre>
-
 <h4>index.js</h4><pre>
 function startGame() {
   <b>pipes = [];</b>
@@ -179,57 +187,72 @@ Here we should add more logic in the for-loop in `index.js`, that goes through e
 </details>
 
 ### 4.1 **Display score**
-To display the score, which is plain text, we want to use p5 function's, such as `text()`. The text function takes the text, the score variable and the position - where you want to position it on the site. <br> Feel free to play around with the different function's but we will come a long way with text size and color.
+In `showScores()` we want to display the score, which is plain text, here we can use p5 function's, such as [text()](https://p5js.org/reference/#/p5/text) function. We have to pass in the text, variable and position. The position can be e.g 1, 32.
+
+Feel free to play around with the different function's but we will come a long way with text size and color.
 
 <details>
 <summary><b>Cheatsheet: Check the code here</b></summary>
-
 <h4>index.js</h4><pre>
 function showScores() {
   <b>fill(000);</b>
   <b>textSize(32);</b>
   <b>text("Score: " + score, 1, 32);</b>
 }</pre>
-
 </details>
 
 ### 4.2 **Call the score function**
-Do not forget to call the score function we just created in `index.js`. Call the function inside of the for-loop that goes through each pipe, without this step nothing will happen.
+Do not forget to call the `showScores()` we just created in `index.js`. Call the function inside the for-loop that goes through each pipe, without this step nothing will happen.
 
 <details>
 <summary><b>Cheatsheet: Check the code here</b></summary>
-
 <h4>index.js</h4><pre>
 <b>showScores();</pre></b>
-
 </details>
 
 ---
 
 
 ## 5. **Create presents**
-We want something that the wasp can collect to get extra score. To make the game more christmas-y we can add christmas presents that randomly flies against us. But this time, compared to the pipes, we actually want to hit the presents to get extra score.
+We want something that the wasp can collect to get extra score. To make the game more christmas-y we can add christmas presents that randomly flies against the wasp. But this time, compared to the pipes, we actually want to hit the presents to be able to get extra score. 
+
+To start off with the presents we want to declare a global variable in `index.js`. 
+
+<details>
+<summary><b>Cheatsheet: Check the code here</b></summary>
+<h4>index.js</h4><pre>
+<b>let presentImg;</pre></b>
+</details><br>
+
+To start off with the presents we want to set up a `show()` and a `update()` in `christmasPresent.js`. Do not forget to use this when creating the functions. E.g: `this.show = function()`.
+The `show()` will take the present variable, (which we have not declared yet), x, y, width and height.
+
+<details>
+<summary><b>Cheatsheet: Check the code here</b></summary>
+<h4>christmasPresent.js</h4><pre>
+<b>this.show = function() {</b>
+<b> image(presentImg, this.x, this.y, this.width, this.height);</b>
+<b>}</b>
 <br>
-To start off with the presents we want to set up a show and a update function in `christmasPresent.js`. The `show()` will take the present variable, (which we have not declared yet), x, y, width and height.
+<b>this.update = function() {</b>
+<b> this.x -= this.speed;</b>
+<b>}</pre></b>
+</details>
 
 ### 5.1 **Show presents**
 To use the present we want to create a global variable in `index.js` and also set the image using `image()` from p5 in the preload function. 
 
-
 <details>
 <summary><b>Cheatsheet: Check the code here</b></summary>
-
 <h4>index.js</h4><pre>
 <b>let presentImg;</b>
 <b>presentImg = loadImage('present.png');</pre></b>
-
 </details>
 
 
 WIP: Loop through all presents 
 <details>
 <summary><b>Cheatsheet: Check the code here</b></summary>
-
 <h4>index.js</h4><pre>
 <b>for (let i = presents.length-1; i >= 0; i--) {</b>
 <b> presents[i].show();</b>
@@ -243,7 +266,6 @@ WIP: Loop through all presents
 <b> presents = [];</b>
 <b> presents.push(new christmasPresent());</b>
 <b>}</pre></b>
-
 </details>
 
 ---
