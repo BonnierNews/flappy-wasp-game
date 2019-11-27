@@ -28,7 +28,7 @@ Get started with p5.js by visiting https://p5js.org/get-started/. The first thin
 
 <h4>index.js</h4><pre>
 function setup() {
-  <b style="color: green;">createCanvas(400, 600);</b>
+  <b>createCanvas(400, 600);</b>
 }</pre>
 
 </details>
@@ -40,12 +40,11 @@ When we have a canvas we can add a background image. In `index.js`, use p5.js’
 <summary><b>Cheatsheet: Check the code here</b></summary>
 
 <h4>index.js</h4><pre>
-<b style="color: green;">let backgroundImg;</b>
 function preload() {
-  <b style="color: green;">backgroundImg = loadImage("background.png");</b>
+  <b>backgroundImg = loadImage("images/background.png");</b>
 }
 function draw() {
-  <b style="color: green;">image(backgroundImg, 0, 0, 400, 600);</b>
+  <b>image(backgroundImg, 0, 0, 400, 600);</b>
 }</pre>
 
 </details>
@@ -66,38 +65,39 @@ Then in `index.js`, create a new wasp instance and call the wasp’s `show()` fu
 
 <h4>index.js</h4><pre>
 function preload() {
-  backgroundImg = loadImage('background.png');
-  <b style="color: green;">waspImg = loadImage('wasp.png');</b>
-}
+  backgroundImg = loadImage("background.png");
+  <b>waspImg = loadImage("wasp.png");</b>
+}<br>
+function startGame() {
+  <b>wasp = new Wasp();</b>
+}<br>
 function draw() {
-  wasp.update();
-  wasp.show();
+  <b>wasp.update();</b>
+  <b>wasp.show();</b>
 }</pre>
 
 <h4>wasp.js</h4><pre>
 this.show = function() {
-  <b style="color: green;">image(waspImg, this.x - 16, this.y - 16, 32, 32);</b>
+  <b>image(waspImg, this.x - 16, this.y - 16, 32, 32);</b>
 }</pre>
 
 </details>
 
 
 ### 2.2. **Add gravity**
-The wasp should fall to the ground because it is affected by gravity! In `wasp.js`, we need to use `this.gravity`, `this.y`, and `this.velocity` (the wasp’s speed) to create a falling wasp. Try adding gravity in `this.show` in `wasp.js` and then use the `wasp.show()` in the the `draw()` function.
+The wasp should fall to the ground because it is affected by gravity! In `wasp.js`, we need to use `this.gravity`, `this.y`, and `this.velocity` (the wasp’s speed) to create a falling wasp. Try adding gravity in `this.show` in `wasp.js` and then use the `wasp.show()` in the the `draw()` function. **BONUS:** See if you can check if the wasp falls outside the canvas and stop the wasp from falling!
 
 <details>
 <summary><b>Cheatsheet: Check the code here</b></summary>
 
 <h4>wasp.js</h4><pre>
 this.update = function() {
-  <b style="color: green;">this.velocity += this.gravity;</b>
-  <b style="color: green;">this.velocity += 0.2;</b>
-  <b style="color: green;">this.y += this.velocity;</b>
+  <b>this.velocity += this.gravity;</b>
+  <b>this.velocity += 0.2;</b>
+  <b>this.y += this.velocity;</b>
 }</pre>
 
 </details>
-
-**BONUS:** See if you can check if the wasp falls outside the canvas and stop the wasp from falling!
 
 
 ### 2.3. **Add jump**
@@ -108,14 +108,14 @@ Now the wasp is just falling. It must be able to fly!
 
 <h4>index.js</h4><pre>
 function keyPressed() {
-  <b style="color: green;">if (key === " ") {
+  <b>if (key === " ") {
     wasp.up();
   }</b>
 }</pre>
 
 <h4>wasp.js</h4><pre>
 this.up = function() {
-  <b style="color: green;">this.velocity += this.lift;</b>
+  <b>this.velocity += this.lift;</b>
 }</pre>
 
 </details>
@@ -124,37 +124,72 @@ this.up = function() {
 
 
 ## 3. **Create pipes**
+We want the wasp to move past obstacles, like in Flappy Bird. We can do that by adding some code to the `pipe.js` and it to `index.js`.
 
-
-### 3.1. **Show pipes**
-Show the pipes!
+### 3.1. **Show a pipe**
+To just show a pipe, we can start by just drawing a rectangle to the canvas.
 
 <details>
 <summary><b>Cheatsheet: Check the code here</b></summary>
 
 <h4>pipe.js</h4><pre>
 this.show = function() {
-  <b style="color: green;">fill(121, 85, 72);
-  rect(this.x, 0, this.w, this.top);
-  rect(this.x, height-this.bottom, this.w, this.bottom);</b>
-}
-this.update = function() {
-  <b style="color: green;">this.x -= this.speed;</b>
+  <b>fill(121, 85, 72);</b>
+  <b>rect(this.x, 0, this.width, this.topPipeHeight);</b>
+  <b>rect(this.x, CANVAS_HEIGHT - this.bottomPipeHeight, this.width, this.bottomPipeHeight);</b>
 }</pre>
 
 <h4>index.js</h4><pre>
-function keyPressed() {
-  <b style="color: green;">if (key === " ") {
-    wasp.up();
-  }</b>
-}</pre>
+</pre>
 
 </details>
+
+
+### 3.2. **Add movement to pipes**
+this.update = function() {
+  <b>this.x -= this.speed;</b>
+}
 
 ---
 
 
 ## 4. **Create score**
+Of course we want to show off our score and here you will check if the wasp has passed a pipe and add a score.
+Here you should add more logic in the for-loop in `index.js`, that goes through each pipe which you just did in the step above!
+
+<details>
+<summary><b>Cheatsheet: Check the code here</b></summary>
+<h4>index.js</h4><pre>
+  <b>if (pipes[i].pass(wasp)) {</b>
+    <b>score++;</b>
+  <b>}</pre></b>
+</details>
+
+### 4.1 **Display score**
+To display the score, which is plain text, we want to use p5 function's, such as text(). The text function takes the text, the score variable and the position - where you want to position it on the site. <br> Feel free to play around with the different function's but you will come a long way with text size and color.
+
+<details>
+<summary><b>Cheatsheet: Check the code here</b></summary>
+
+<h4>index.js</h4><pre>
+function showScores() {
+  <b>fill(000);</b>
+  <b>textSize(32);</b>
+  <b>text("Score: " + score, 1, 32);</b>
+}</pre>
+
+</details>
+
+### 4.2 **Call the score function**
+Do not forget to call the score function you just created in `index.js`. Call the function inside of the for-loop that goes through each pipe, without this step nothing will happen.
+
+<details>
+<summary><b>Cheatsheet: Check the code here</b></summary>
+
+<h4>index.js</h4><pre>
+<b>showScores();</pre></b>
+
+</details>
 
 ---
 
