@@ -21,7 +21,7 @@ Download Visual Studio Code from https://code.visualstudio.com/ or use editor of
 ## 1. **Create game**
 
 ### 1.1. **Create a canvas**
-Get started with p5.js by visiting https://p5js.org/get-started/. The first thing we need to do is add a canvas by using the [createCanvas()](https://p5js.org/reference/#/p5/createCanvas) function. Add it in the `index.js` file. See example [here](https://p5js.org/reference/#/p5/createCanvas).
+Get started with p5.js by visiting https://p5js.org/get-started/. The first thing we need to do is add a canvas by using the [createCanvas()](https://p5js.org/reference/#/p5/createCanvas) function. Add it in the `this.setup()` function in the `index.js` file. See example [here](https://p5js.org/reference/#/p5/createCanvas).
 
 <details>
 <summary><b>Cheatsheet: Check the code here</b></summary>
@@ -34,7 +34,7 @@ function setup() {
 </details>
 
 ### 1.2. **Add a background**
-When we have a canvas we can add a background image. In `index.js`, use p5.js’s [image()](https://p5js.org/reference/#/p5/image) function to add the `background.png` image. See example [here](https://p5js.org/reference/#/p5/image). 
+When we have a canvas we can add a background image. In `index.js`, in the `this.setup()` function, use p5.js’s [image()](https://p5js.org/reference/#/p5/image) function to add the `background.png` image. See example [here](https://p5js.org/reference/#/p5/image). 
 
 <details>
 <summary><b>Cheatsheet: Check the code here</b></summary>
