@@ -214,18 +214,26 @@ Do not forget to call the `showScores()` we just created in `index.js`. Call the
 
 
 ## 5. **Create presents**
-We want something that the wasp can collect to get extra score. To make the game more christmas-y we can add christmas presents that randomly flies against the wasp. But this time, compared to the pipes, we actually want to hit the presents to be able to get extra score. 
+We want something that the wasp can collect to get extra score. To make the game more christmas-y we can add christmas presents that randomly flies against the wasp. But this time, compared to the pipes, we actually want to hit each present to be able to get extra score. 
 
-To start off with the presents we want to declare a global variable in `index.js`. 
+To start off with the presents we want to declare a global variable in `index.js`. Next up we want to use the variable and set to a [loadImage()](https://p5js.org/reference/#/p5/loadimage), it is a magical p5 function, and take the present.png image which you will find in the images folder and use it inside of the `preload()`.
 
 <details>
 <summary><b>Cheatsheet: Check the code here</b></summary>
 <h4>index.js</h4><pre>
-<b>let presentImg;</pre></b>
-</details><br>
+<b>let presentImg;</b>
+<br>
+function preload() {
+  waspImg = loadImage('wasp.png');
+  backgroundImg = loadImage('background.png');
+<b>  presentImg = loadImage('present.png');</b>
+<b>}</pre></b>
+</details>
 
-To start off with the presents we want to set up a `show()` and a `update()` in `christmasPresent.js`. Do not forget to use this when creating the functions. E.g: `this.show = function()`.
-The `show()` will take the present variable, (which we have not declared yet), x, y, width and height.
+### 5.1 **Show presents**
+Then we want to set up a `show()` and a `update()` in `christmasPresent.js`. Do not forget to use `this` when creating the functions. E.g: `this.show = function()`.
+The `show()` will take the present variable, (which we have just declared), x, y, width and height.
+The `update()` will update the presents so they start moving from right to left of the canvas.
 
 <details>
 <summary><b>Cheatsheet: Check the code here</b></summary>
@@ -239,18 +247,10 @@ The `show()` will take the present variable, (which we have not declared yet), x
 <b>}</pre></b>
 </details>
 
-### 5.1 **Show presents**
-To use the present we want to create a global variable in `index.js` and also set the image using `image()` from p5 in the preload function. 
-
-<details>
-<summary><b>Cheatsheet: Check the code here</b></summary>
-<h4>index.js</h4><pre>
-<b>let presentImg;</b>
-<b>presentImg = loadImage('present.png');</pre></b>
-</details>
-
-
-WIP: Loop through all presents 
+### 5.2 **Hit detection**
+WIP
+### 5.3 **Get extra score**
+WIP
 <details>
 <summary><b>Cheatsheet: Check the code here</b></summary>
 <h4>index.js</h4><pre>
