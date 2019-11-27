@@ -5,38 +5,53 @@ function Pipe() {
     this.w = 20;
     this.speed = 2;
 
+
+    /**
+     * Hit detection: when the wasp hits the pipe
+     * @custom
+     */
     this.hits = function(wasp) {
-      if (wasp.y < this.top || wasp.y > height - this.bottom) {
-        if (wasp.x > this.x && wasp.x < this.x + this.w) {
-          return true;
-        }
-      }
-      return false;
+
     }
 
+
+    /**
+     * When the wasp passes a pipe
+     * @custom
+     */
     this.pass = function(wasp) {
-      if (wasp.x > this.x && !this.passed) {
-        this.passed = true;
-        return true;
-      }
-      return false;
+
     }
 
+
+    /**
+     * Create pipes
+     * Use fill and rect from p5 together with 
+     * the variables in the top
+     * @custom
+     */
     this.show = function() {
-      fill(121, 85, 72);
-      rect(this.x, 0, this.w, this.top);
-      rect(this.x, height-this.bottom, this.w, this.bottom);  
+ 
     }
 
+
+    /**
+     * Each pipe starts to the right of the canvas and
+     * moves to the left
+     * This function updates in draw()
+     * @custom
+     */
     this.update = function() {
-      this.x -= this.speed;
+      
     }
 
+
+    /**
+     * Check if the pipe is offscreen or not
+     * Use the variables in the top
+     * @custom
+     */
     this.offscreen = function() {
-      if (this.x < -this.w) {
-        return true; 
-      } else {
-        return false; 
-      }
+
     }
 }

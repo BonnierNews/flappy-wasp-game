@@ -1,103 +1,171 @@
 # Flappy Wasp Game
 
+This is a guide for making the Flappy Wasp Game.
 
-## Steg 0. Kom igång
-
-***[[HITTA STARTFILERNA HÄR]](https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-0)***
-
-### Ladda ner projekt
-Du hittar startfilerna [här](https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-0). För att ladda ner projektet så trycker du på en gröna knappen “Clone or download”. Då öppnas en liten ruta. Längst ner till höger står det “Download ZIP”, tryck på den så laddas projektet ner till din dator.
-
-### Installera Visual Studio Code
-Du kan ladda ner Visual Studio Code på https://code.visualstudio.com/. Installera och öppna programmet på din dator.
-
-### Installera Live Server-plugin
-Du laddar ner Live Server som en plugin till Visual Studio Code. När du har laddat ner pluginen så kan du starta en server genom att trycke på “Go Live” ner i högra hörnet på Visual Studio Code.
-
-Öppna localhost:5500 och du borde nu se en hemsida där det står “Flappy Wasp Game”.
+---
 
 
-## Steg 1. Lägg till p5.js
+## 0. **Getting Started**
 
-***[[SE DEN FÄRDIGA KODEN HÄR]](https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-1)***
+### 0.1. **Download project from GitHub**
+Download project by clicking the green button named “Clone or download”. When a small dialogue appears, click “Download ZIP” in the right bottom corner to download it to your computer. Or if you have `git` installed, you can just clone the project.
 
-Vi börjar med att gå in på https://p5js.org/get-started/ för att ladda ner biblioteket. 
+### 0.2. **Install Visual Studio Code**
+Download Visual Studio Code from https://code.visualstudio.com/ or use editor of your choice. You also need a running local server on your computer.
 
-```html
-<!DOCTYPE html>
-<html>
-<head>
-<title>Flappy Wasp Game</title>
-</head>
-<body>
-<h1>Flappy Wasp Game</h1>
-<script src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.js"></script>
-</body>
-</html>
-```
+**TIP:** In Visual Studio Code you can install [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) as a plugin from the [Visual Studio Code Marketplace](https://marketplace.visualstudio.com/). When Live Server is installed, you should be able to click “Go Live” in the bottom right corner of the Visual Studio Code editor.
+
+---
 
 
-## Steg 2. Skapa spelet – game.js
+## 1. **Create game**
 
-***[[SE DEN FÄRDIGA KODEN HÄR]](https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-2)***
+### 1.1. **Create a canvas**
+Get started with p5.js by visiting https://p5js.org/get-started/. The first thing we need to do is add a canvas by using the [createCanvas()](https://p5js.org/reference/#/p5/createCanvas) function. Add it in the `index.js` file. See example [here](https://p5js.org/reference/#/p5/createCanvas).
 
-Nu när vi har en HTML-sida och kan visa den i webbläsarfönstret med vår server så kan vi gå vidare till att faktiskt skapa själva spelet!
+<details>
+<summary><b>Cheatsheet: Check the code here</b></summary>
 
-```JavaScript
-function init() {
-	this.x = 0;
+<h4>index.js</h4><pre>
+function setup() {
+  <b style="color: green;">createCanvas(400, 600);</b>
+}</pre>
+
+</details>
+
+### 1.2. **Add a background**
+When we have a canvas we can add a background image. In `index.js`, use p5.js’s [image()](https://p5js.org/reference/#/p5/image) function to add the `background.png` image. See example [here](https://p5js.org/reference/#/p5/image). 
+
+<details>
+<summary><b>Cheatsheet: Check the code here</b></summary>
+
+<h4>index.js</h4><pre>
+<b style="color: green;">let backgroundImg;</b>
+function preload() {
+  <b style="color: green;">backgroundImg = loadImage("background.png");</b>
 }
-```
+function draw() {
+  <b style="color: green;">image(backgroundImg, 0, 0, 400, 600);</b>
+}</pre>
 
-Lägg till filen i din index.html för att den ska synas på din hemsida.
+</details>
 
-```html
-<!DOCTYPE html>
-<html>
-<script src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.js"></script>
-<script src="game.js"></script>
-</html>
-```
+---
 
 
-## Steg 3. Skapa geting – wasp.js
-
-***[[SE DEN FÄRDIGA KODEN HÄR]](https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-3)***
-
-Skapa en ny fil wasp.js.
-
-```JavaScript
-function Wasp() {}
-```
-
-```html
-<!DOCTYPE html>
-<html>
-<script src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.js"></script>
-<script src="game.js"></script>
-<script src="wasp.js"></script>
-</html>
-```
+## 2. **Create wasp**
 
 
-## Steg 4. Skapa hinder – pipe.js
+### 2.1. **Show wasp**
+In `wasp.js`, use p5.js’s [image()](https://p5js.org/reference/#/p5/image) function in the `this.show()` function. Pass the variables `this.x`, `this.y` and `this.size` as parameters to the image() function.
 
-***[[SE DEN FÄRDIGA KODEN HÄR]](https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-4)***
+Then in `index.js`, create a new wasp instance and call the wasp’s `show()` function in the `draw()` function.
 
-Skapa en ny fil pipe.js.
+<details>
+<summary><b>Cheatsheet: Check the code here</b></summary>
 
-```JavaScript
-function Pipe() {}
-```
+<h4>index.js</h4><pre>
+function preload() {
+  backgroundImg = loadImage('background.png');
+  <b style="color: green;">waspImg = loadImage('wasp.png');</b>
+}
+function draw() {
+  wasp.update();
+  wasp.show();
+}</pre>
+
+<h4>wasp.js</h4><pre>
+this.show = function() {
+  <b style="color: green;">image(waspImg, this.x - 16, this.y - 16, 32, 32);</b>
+}</pre>
+
+</details>
 
 
-## Steg 5. Skapa poängräknare
+### 2.2. **Add gravity**
+The wasp should fall to the ground because it is affected by gravity! In `wasp.js`, we need to use `this.gravity`, `this.y`, and `this.velocity` (the wasp’s speed) to create a falling wasp. Try adding gravity in `this.show` in `wasp.js` and then use the `wasp.show()` in the the `draw()` function.
 
-***[[SE DEN FÄRDIGA KODEN HÄR]](https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub/tree/steg-5)***
+<details>
+<summary><b>Cheatsheet: Check the code here</b></summary>
 
-## Idéer till utökningar av spelet
-- Visa poängräknare som ökar med tiden.
-- Lägg till tidningar som ger extrapoäng.
-- Lägg till “aftonbladet” tidningar som tar poäng.
-- Spelet ökar gradvis i hastighet ju längre man har spelat.
-- Gör en startskärm med Expressen-, Code Pub-, Netlight-loggan och “starta”-knapp.
+<h4>wasp.js</h4><pre>
+this.update = function() {
+  <b style="color: green;">this.velocity += this.gravity;</b>
+  <b style="color: green;">this.velocity += 0.2;</b>
+  <b style="color: green;">this.y += this.velocity;</b>
+}</pre>
+
+</details>
+
+**BONUS:** See if you can check if the wasp falls outside the canvas and stop the wasp from falling!
+
+
+### 2.3. **Add jump**
+Now the wasp is just falling. It must be able to fly! 
+
+<details>
+<summary><b>Cheatsheet: Check the code here</b></summary>
+
+<h4>index.js</h4><pre>
+function keyPressed() {
+  <b style="color: green;">if (key === " ") {
+    wasp.up();
+  }</b>
+}</pre>
+
+<h4>wasp.js</h4><pre>
+this.up = function() {
+  <b style="color: green;">this.velocity += this.lift;</b>
+}</pre>
+
+</details>
+
+---
+
+
+## 3. **Create pipes**
+
+
+### 3.1. **Show pipes**
+Show the pipes!
+
+<details>
+<summary><b>Cheatsheet: Check the code here</b></summary>
+
+<h4>pipe.js</h4><pre>
+this.show = function() {
+  <b style="color: green;">fill(121, 85, 72);
+  rect(this.x, 0, this.w, this.top);
+  rect(this.x, height-this.bottom, this.w, this.bottom);</b>
+}
+this.update = function() {
+  <b style="color: green;">this.x -= this.speed;</b>
+}</pre>
+
+<h4>index.js</h4><pre>
+function keyPressed() {
+  <b style="color: green;">if (key === " ") {
+    wasp.up();
+  }</b>
+}</pre>
+
+</details>
+
+---
+
+
+## 4. **Create score**
+
+---
+
+
+## 5. **Create presents**
+
+---
+
+
+## 6. **More ideas**
+- The game gradually increases in speed.
+- Make start screen with the Expressen, Code Pub, or Netlight logo.
+
+

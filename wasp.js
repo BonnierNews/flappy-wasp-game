@@ -5,27 +5,28 @@ function Wasp() {
   this.lift = -10;
   this.velocity = 0;
 
+  /**
+   * Show the wasp by using the image() from p5,
+   * which takes img, x, y and size
+   * @custom
+   */
   this.show = function() {
-    image(waspImg, this.x - 16, this.y - 16, 32, 32);
+    
   }
 
+  /**
+   * Make the wasp go upwards
+   * @custom
+   */
   this.up = function() {
-    this.velocity += this.lift; 
+    
   }
 
+  /**
+   * Create gravity
+   * @custom
+   */
   this.update = function() {
-    this.velocity += this.gravity;
-    this.velocity += 0.2;
-    this.y += this.velocity;
 
-    if (this.y > height) {
-      this.y = height;
-      this.velocity = 0;
-    }
-
-    if (this.y < 0) {
-      this.y = 0;
-      this.velocity = 0;
-    }
   }
 }
