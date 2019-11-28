@@ -12,6 +12,7 @@ function Wasp() {
   this.gravity = 0.1;
   this.lift = -10;
   this.velocity = 0;
+  this.size = 32;
 
   /****************************************************
    * Show the wasp by using the image() from p5,
