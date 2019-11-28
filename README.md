@@ -33,6 +33,12 @@ Get started with p5.js by visiting https://p5js.org/get-started/.
 
 The `index.html` contains `<script>` tags with all the JavaScript files we need to make the game. First we add `https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.js`, the library we are using for creative coding. Then all our custom files `index.js`, `wasp.js`, `pipe.js`, and `present.js`.
 
+---
+
+**ALERT:** This will make all variables accessible globally. So if you declare a variable in `index.js`, you will also be able to use it in, for example, `wasp.js`.
+
+---
+
 To help you, we have predefined all methods you need in the JavaScript files. In the below step, we will fill in those methods with code.
 
 
@@ -107,7 +113,6 @@ function draw() {
 ### 2.1. **Create wasp instance**
 
 - To create a wasp we must create an instance of the function `Wasp()`.
-- We can access Wasp as a global function.
 - [Read documentation about instances here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new).
 - Assign the instance to our `wasp` variable.
 
@@ -141,7 +146,7 @@ function preload() {
 
 - We want to draw the wasp on the canvas.
 - Use **p5.js**’s image() method. 
-- [Read documentation about image() here](https://p5js.org/reference/#/p5/loadImage).
+- [Read documentation about image() here](https://p5js.org/reference/#/p5/image).
 - Pass `waspImg`, `this.x`, `this.y` and `this.size` as parameters.
 
 **wasp.js**
@@ -151,6 +156,8 @@ this.show = function() {
   image(waspImg, this.x, this.y, this.size, this.size);
 }
 ```
+
+- We must also call the `wasp.show()` in `index.js` to draw the wasp.
 
 **index.js**
 
@@ -163,41 +170,81 @@ function draw() {
 
 ### 2.2. **Add gravity**
 
-The wasp should fall to the ground because it is affected by gravity! In `wasp.js`, we need to use `this.gravity`, `this.y`, and `this.velocity` (the wasp’s speed) to create a falling wasp. Try adding gravity in `this.show` in `wasp.js` and then use the `wasp.show()` in the the `draw()` function. **BONUS:** See if you can check if the wasp falls outside the canvas and stop the wasp from falling!
+- The wasp should fall to the ground because it is affected by gravity! 
+- In `wasp.js`, we need to use `this.gravity`, `this.y`, and `this.speed` (the wasp’s speed) to create a falling wasp.
 
-<details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Complete code</b></summary>
-<h4>wasp.js</h4><pre>
+**wasp.js**
+
+```js
 this.update = function() {
-  <b>this.velocity += this.gravity;</b>
-  <b>this.velocity += 0.2;</b>
-  <b>this.y += this.velocity;</b>
-}</pre>
-</details>
+  this.speed += this.gravity;
+  this.y += this.speed;
+}
+```
+
+- Don't forget to call `wasp.show()` in `index.js`!
+
+**index.js**
+
+```js
+function draw() {
+  // ...
+  wasp.show();
+  wasp.update();
+}
+```
+
+- **BONUS:** See if you can check if the wasp falls outside the canvas and stop the wasp from falling!
 
 
 ### 2.3. **Add jump**
-Now the wasp is just falling. It must be able to fly! Use the p5.js function named [keyPressed()](https://p5js.org/reference/#/p5/keyPressed) in `index.js`. Check if the space bar key is pressed, then call the `wasp.up()` function.
 
-<details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Complete code</b></summary>
-<h4>index.js</h4><pre>
+- Now the wasp is just falling. It must be able to fly!
+- Use the p5.js function named [keyPressed()](https://p5js.org/reference/#/p5/keyPressed) in `index.js`.
+- Check if the space bar key is pressed, then call the `wasp.up()` function.
+
+```js
 function keyPressed() {
-  <b>if (key === " ") {
+  if (key === " ") {
     wasp.up();
-  }</b>
-}</pre>
-</details><br>
+  }
+}
+```
 
-Nothing is happening when calling the `wasp.up()` function? We need to add some code to it! Go to `this.up()` in `wasp.js`. We must change the velocity of the wasp from going down to up.
+- Nothing is happening when calling the `wasp.up()` function? We need to add some code to it!
+- In `wasp.js`, go to `this.up()`.
+- We can make the wasp fly by adding a positive lift force to `this.speed`.
 
-<details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Complete code</b></summary>
-<h4>wasp.js</h4><pre>
+**wasp.js**
+
+```js
 this.up = function() {
-  <b>this.velocity += this.lift;</b>
-}</pre>
-</details>
+  this.speed += this.lift;
+}
+```
+
+
+### 2.3. **Create walls**
+
+- To stop the wasp from falling outside the canvas, we can check in the `this.update()` if the wasp position is inside the canvas.
+
+**wasp.js**
+
+```js
+this.update() {
+  // ... (earlier code)
+
+  if (this.y > CANVAS_HEIGHT) {
+    this.y = CANVAS_HEIGHT;
+    this.speed = 0;
+  }
+
+  if (this.y < 0) {
+    this.y = 0;
+    this.speed = 0;
+  }
+}
+```
 
 ---
 
@@ -205,37 +252,95 @@ this.up = function() {
 ## 3. **Create pipes**
 We want the wasp to move past obstacles, like the pipes in Flappy Bird.
 
-### 3.1. **Show pipes**
-We want to draw pipes both at the top and the bottom of the canvas. We can draw rectangles to the canvas by using p5.js's [rect()](https://p5js.org/reference/#/p5/rect) function. Add two rectangles to the `this.show()` function in `pipe.js`. 
+### 3.1. **Define how to draw pipes**
 
-<details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Complete code</b></summary>
-<h4>pipe.js</h4><pre>
+- We want to draw pipes both at the top and the bottom of the canvas.
+- We can draw rectangles to the canvas by using p5.js's [rect()](https://p5js.org/reference/#/p5/rect) function.
+- Add two rectangles to the `this.show()` function in `pipe.js`. 
+
+**pipe.js**
+```js
 this.show = function() {
-  <b>fill(121, 85, 72);</b>
-  <b>rect(this.x, 0, this.width, this.topPipeHeight);</b>
-  <b>rect(this.x, CANVAS_HEIGHT - this.bottomPipeHeight, this.width, this.bottomPipeHeight);</b>
-}</pre>
-<h4>index.js</h4><pre>
-function startGame() {
-  <b>pipes = [];</b>
-  <b>pipes.push(new Pipe());</b>
-}<br>
-function draw() {
-  <b>pipe.show();</b>
-}</pre>
-</details>
+  fill(121, 85, 72); // First we define a color to use.
+  rect(this.x, 0, this.width, this.topPipeHeight); // This will draw the top pipe.
+  rect(this.x, CANVAS_HEIGHT - this.bottomPipeHeight, this.width, this.bottomPipeHeight); // This will draw the bottom pipe.
+}
+```
 
+
+### 3.1. **Add new pipes**
+
+- Because we want to have many pipes, we create an array to store our pipes in.
+- We can then start by adding a pipe to the array.
+
+**index.js**
+
+```js
+function setup() {
+  // ... (earlier code)
+
+  pipes = [];
+  pipes.push(new Pipe());
+}
+```
+
+### 3.2. **Show pipes**
+
+- Because we have an array of pipes, we need to loop the array to be able to call the `pipe.show()`.
+
+**index.js**
+
+```js
+function draw() {
+  // ... (earlier code)
+  for (let pipe of pipes) {
+    pipe.show();
+  }
+}
+```
 
 ### 3.2. **Add movement to pipes**
 
-<details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Complete code</b></summary>
-<h4>pipe.js</h4><pre>
+- In `pipe.js`, we can add movement to the pipes by subtracting `this.speed` (the pipe's speed) from `this.x` (the pipes x position).
+
+**pipe.js**
+
+```js
 this.update = function() {
-  <b>this.x -= this.speed;</b>
-}</pre>
-</details>
+  this.x -= this.speed;
+}
+```
+
+- Don't forget to also call the `pipe.update()` function in `index.js`.
+
+**index.js**
+
+```js
+function draw() {
+  // ... (earlier code)
+
+  for (let pipe of pipes) {
+    pipe.show();
+    pipe.update();
+  }
+}
+```
+
+### 3.3. **Repeatedly add new pipes**
+
+- Now we only get two pipes and then nothing more!
+
+**index.js**
+
+```js
+function draw() {
+  // ... (earlier code)
+
+  if (frameCount % 100 == 0) {
+    pipes.push(new Pipe());
+  }
+}
+```
 
 ---
 
