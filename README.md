@@ -214,7 +214,7 @@ Do not forget to call the `showScores()` we just created in `index.js`. Call the
 
 
 ## 5. **Create presents**
-We want something that the wasp can collect to get extra score. To make the game more christmas-y we can add christmas presents that randomly flies against the wasp. But this time, compared to the pipes, we actually want to hit each present to be able to get extra score. 
+We want something that the wasp can collect to get extra score. To make the game more christmas-y we can generate christmas presents that randomly flies against the wasp. But this time, compared to the pipes, we actually want to hit each present to be able to get extra score. 
 
 To start off with the presents we want to declare a global variable in `index.js`. Next up we want to use the variable and set to a [loadImage()](https://p5js.org/reference/#/p5/loadimage), it is a magical p5 function, and take the present.png image which you will find in the images folder and use it inside of the `preload()`.
 
@@ -249,6 +249,9 @@ The `update()` will update the presents so they start moving from right to left 
 
 ### 5.2 **Hit detection**
 WIP
+  if (frameCount % 75 == 0) {
+    presents.push(new christmasPresent());
+  }
 ### 5.3 **Get extra score**
 WIP
 <details>
