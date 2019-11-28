@@ -82,6 +82,14 @@ function preload() {
 - [Read documentation about image() here](https://p5js.org/reference/#/p5/image).
 - Pass `backgroundImg`, `backgroundX`, `backgroundY`, `backgroundImg.width`, `CANVAS_HEIGHT` as arguments.
 
+**background.js**
+
+```js
+show() {
+  image(backgroundImg, backgroundX, backgroundY, backgroundImg.width, CANVAS_HEIGHT);
+}
+```
+
 **index.js**
 
 ```js
@@ -93,7 +101,26 @@ function draw() {
 
 ### 1.4. **Move background**
 
-Moving the background is a little complicated, so you can just call our utility function with ready code to make the background move!
+**background.js**
+
+```js
+update() {
+  // Subtract `this.x` with speed to move background to the left.
+  this.x -= this.speed;
+  // This handles the "infinite loop" by checking if
+  // the right edge of the image would be on the
+  // screen, if it is draw a second copy of the image
+  // right next to it once the second image gets to 
+  // the 0 point we can reset backgroundX to 0 and go 
+  // back to drawing just one image.
+  if (this.x <= -backgroundImg.width + width) {
+    image(backgroundImg, this.x + backgroundImg.width, 0, backgroundImg.width, height);
+    if (this.x <= -backgroundImg.width) {
+      this.x = 0;
+    }
+  }
+}
+```
 
 **index.js**
 
@@ -268,7 +295,7 @@ this.show = function() {
 ```
 
 
-### 3.1. **Add new pipes**
+### 3.2. **Add new pipes**
 
 - Because we want to have many pipes, we create an array to store our pipes in.
 - We can then start by adding a pipe to the array.
@@ -284,7 +311,7 @@ function setup() {
 }
 ```
 
-### 3.2. **Show pipes**
+### 3.3. **Show pipes**
 
 - Because we have an array of pipes, we need to loop the array to be able to call the `pipe.show()`.
 
@@ -299,7 +326,7 @@ function draw() {
 }
 ```
 
-### 3.2. **Add movement to pipes**
+### 3.4. **Add movement to pipes**
 
 - In `pipe.js`, we can add movement to the pipes by subtracting `this.speed` (the pipe's speed) from `this.x` (the pipes x position).
 
@@ -326,9 +353,9 @@ function draw() {
 }
 ```
 
-### 3.3. **Repeatedly add new pipes**
+### 3.5. **Repeatedly add new pipes**
 
-- Now we only get two pipes and then nothing more!
+- Now we only get two pipes and then nothing more.
 
 **index.js**
 
@@ -345,188 +372,57 @@ function draw() {
 ---
 
 ## 4. **Game over**
-It's game over when you hit a pipe. In `index.js` we have a `gameover()` and here we want to display a text using [text()](https://p5js.org/reference/#/p5/text), which takes plain text and the position. Do not forget to set the `isOver` variable to true, which is declared in the top. To actually end the game so it stops looping, add the [noLoop()](https://p5js.org/reference/#/p5/noLoop) in the function as well. 
 
-<details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Complete code</b></summary>
-<h4>index.js</h4><pre>
+- It's game over when you hit a pipe.
+- In `index.js` we have a `gameover()` and here we want to display a text using [text()](https://p5js.org/reference/#/p5/text), which takes plain text and the position.
+- Do not forget to set the `isOver` variable to true, which is declared in the top. To actually end the game so it stops looping, add the [noLoop()](https://p5js.org/reference/#/p5/noLoop) in the function as well. 
+
+**index.js**
+
+```js
 function gameover() {
-<b>  textSize(50);</b>
-<b>  fill(000);</b>
-<b>  text("GAME OVER", 50, 300);</b>
-<b>  isOver = true;</b>
-<b>  noLoop();</b>
-}</pre>
-</details>
+  textSize(50);
+  fill(000);
+  text("GAME OVER", 50, 300);
+  isOver = true;
+  noLoop();
+}
+```
 
-Add `isOver` and `startgame()` in `keyPressed()` to reset the game. 
+- Add `isOver` and `startgame()` in `keyPressed()` to reset the game. 
 
-<details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Complete code</b></summary>
-<h4>index.js</h4><pre>
+**index.js**
+
+```js
 function keyPressed() {
   if (key === " ") {
     wasp.up();
-      <b>if (isOver) startgame();</b>
+    if (isOver) startGame();
   }
-}</pre>
-</details><br>
+}
+```
 
 ---
 
 
 ## 5. **Create score**
+
 Of course we want to show off our score and here we will check if the wasp has passed a pipe and add a score.
 Here we should add more logic in the for-loop in `index.js`, that goes through each pipe which we just did in the step above!
 
-<details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Complete code</b></summary>
-<h4>index.js</h4><pre>
-  <b>if (pipes[i].pass(wasp)) {</b>
-    <b>score++;</b>
-  <b>}</pre></b>
-</details>
+**index.js**
+
+```js
+if (pipes[i].pass(wasp)) {
+  score++;
+}
+```
 
 We also have to use the score variable in `startgame()`, so the score starts at 0.
 
-<details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Complete code</b></summary>
-<h4>index.js</h4><pre>
-function startgame() {
-  backgroundX = 0;
-  pipes = [];
-  wasp = new Wasp();
-  pipes.push(new Pipe());
-  isOver = false;
-<b>score = 0;</b>
-  loop();
-}</pre>
-</details>
+**index.js**
 
-### 5.1 **Display score**
-In `showScores()` we want to display the score, which is plain text, here we can use p5 function's, such as [text()](https://p5js.org/reference/#/p5/text) function. We have to pass in the text, variable and position. The position can be e.g 1, 32.
-
-Feel free to play around with the different function's but we will come a long way with text size and color.
-
-<details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Complete code</b></summary>
-<h4>index.js</h4><pre>
-function showScores() {
-  <b>fill(000);</b>
-  <b>textSize(32);</b>
-  <b>text("Score: " + score, 1, 32);</b>
-}</pre>
-</details>
-
-### 5.2 **Call the score function**
-Do not forget to call the `showScores()` we just created in `index.js`. Call the function inside the for-loop that goes through each pipe, without this step nothing will happen.
-
-<details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Complete code</b></summary>
-<h4>index.js</h4><pre>
-<b>showScores();</pre></b>
-</details>
-
----
-
-
-## 6. **Create presents**
-We want something that the wasp can collect to get extra score. To make the game more christmas-y we can generate christmas presents that randomly flies against the wasp. But this time, compared to the pipes, we actually want to hit each present to be able to get extra score. 
-
-To start off with the presents we jump to `index.js` where we find a global variable in the top called `presentImg;`. Next up we want to use the variable and set to a [loadImage()](https://p5js.org/reference/#/p5/loadimage), which is a magical p5 function, and take the present.png image which you will find in the images folder and use it inside of the `preload()`.
-
-<details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Complete code</b></summary>
-<h4>index.js</h4><pre>
-let presentImg;
-<br>
-function preload() {
-  waspImg = loadImage('wasp.png');
-  backgroundImg = loadImage('background.png');
-<b>  presentImg = loadImage('present.png');</b>
-<b>}</pre></b>
-</details>
-
-### 6.1 **Show presents**
-In `present.js` we have to functions: `this.show = function()` and `this.update = function()`. Now we actually want to show the presents so add the present variable, x, y, width and height as parameters in the show function.
-
-The `update()` will update the presents so they start moving from right to left of the canvas. Take the x variable and substract with the speed variable.
-
-<details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Complete code</b></summary>
-<h4>present.js</h4><pre>
-this.show = function() {
-<b> image(presentImg, this.x, this.y, this.width, this.height);</b>
-<b>}</b>
-<br>
-this.update = function() {
-<b> this.x -= this.speed;</b>
-<b>}</pre></b>
-</details>
-
-
-When the steps above is completed we actually have to draw the presents in `function draw()` in `index.js`. To draw infinite loops of present we have to loop through all presents and for each present call the `show()` and `update()`.
-
-<details>
-<summary><b>Cheatsheet: Check the code here</b></summary>
-<h4>index.js</h4><pre>
-<b>for (let i = presents.length-1; i >= 0; i--) {</b>
-<b>   presents[i].show();</b>
-<b>   presents[i].update();</b>
-<b>}</pre></b>
-</details>
-
-### 6.2 **Hit detection**
-At this point we want something to happen when the wasp actually hits a present. Here we must do a calculation, a quite similar one to the calculation for the hit detection for the pipes. Use `this.hits = function(wasp)` in `present.js`.
-
-We must check if the height of the wasp is greater than the presents height and... you try to finish the calculation ;).  
-Write a `console.log` in the if-statement to check if it works. 
-
-<details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Complete code</b></summary>
-<h4>present.js</h4><pre>
-this.hits = function(wasp) {
-<b>   if (wasp.y > this.y && wasp.y < this.y + this.height) {</b>
-<b>     if (wasp.x > this.x && wasp.x < this.x + this.width) {</b>
-<b>       console.log("HITS");</b>
-<b>      return true;</b>
-<b>     }</b>
-<b>   }</b>
-<b>  return false;</b>
-<b> }</pre></b>
-</details>
-
-Now we want a new present to generate each 75% of the frame, use [frameCount()](https://p5js.org/reference/#/p5/frameCount) and push the presents to `christmasPresent()` in `index.js`.
-
-<details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Check the code here</b></summary>
-<h4>index.js</h4><pre>
-<b>if (frameCount % 75 == 0) {</b>
-<b>    presents.push(new christmasPresent());</b>
-<b> }</pre></b>
-</details>
-
-### 6.3 **Get extra score**
-To make the game more fun we can set that the user will get extra score when hitting a present. Add extra score in `index.js` in the for-loop we created in 5.1.
-<details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Check the code here</b></summary>
-<h4>index.js</h4><pre>
-  for (let i = presents.length-1; i >= 0; i--) {
-    presents[i].show();
-    presents[i].update();
-<b>    if (presents[i].hits(wasp)) {</b>
-<b>      score += 3;</b>
-<b>      presents.splice(i, 1);</b>
-<b>    }</b>
-  }</pre>
-</details>
-
-### 6.4 **Reset presents**
-When we start a new game we want the presents array to be empty. Add an empy array in `index.js` in the `startgame()`:
-
-<details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Check the code here</b></summary>
-<h4>index.js</h4><pre>
+```js
 function startgame() {
   backgroundX = 0;
   pipes = [];
@@ -535,35 +431,155 @@ function startgame() {
   isOver = false;
   score = 0;
   loop();
-<b>  presents = [];</b>
-<b>  presents.push(new christmasPresent());</b>
-}</pre>
-</details>
+}
+```
 
+### 5.1. **Display score**
+
+In `showScores()` we want to display the score, which is plain text, here we can use p5 function's, such as [text()](https://p5js.org/reference/#/p5/text) function. We have to pass in the text, variable and position. The position can be e.g 1, 32.
+
+Feel free to play around with the different function's but we will come a long way with text size and color.
+
+**index.js**
+
+```js
+function showScores() {
+  fill(000);
+  textSize(32);
+  text("Score: " + score, 1, 32);
+}
+```
+
+### 5.2 **Call the score function**
+
+Do not forget to call the `showScores()` we just created in `index.js`. Call the function inside the for-loop that goes through each pipe, without this step nothing will happen.
+
+**index.js**
+
+```js
+showScores();
+```
+
+---
+
+
+## 6. **Create presents**
+
+We want something that the wasp can collect to get extra score. To make the game more christmas-y we can generate christmas presents that randomly flies against the wasp. But this time, compared to the pipes, we actually want to hit each present to be able to get extra score. 
+
+To start off with the presents we jump to `index.js` where we find a global variable in the top called `presentImg;`. Next up we want to use the variable and set to a [loadImage()](https://p5js.org/reference/#/p5/loadimage), which is a magical p5 function, and take the present.png image which you will find in the images folder and use it inside of the `preload()`.
+
+**index.js**
+
+```js
+function preload() {
+  waspImg = loadImage("images/wasp.png");
+  backgroundImg = loadImage("images/background.png");
+  presentImg = loadImage("images/present.png");
+}
+```
+
+### 6.1. **Show presents**
+
+In `present.js` we have to functions: `this.show = function()` and `this.update = function()`. Now we actually want to show the presents so add the present variable, x, y, width and height as parameters in the show function.
+
+The `update()` will update the presents so they start moving from right to left of the canvas. Take the x variable and substract with the speed variable.
+
+**present.js**
+
+```js
+this.show = function() {
+  image(presentImg, this.x, this.y, this.width, this.height);
+}
+
+this.update = function() {
+ this.x -= this.speed;
+}
+```
+
+When the steps above is completed we actually have to draw the presents in `function draw()` in `index.js`. To draw infinite loops of present we have to loop through all presents and for each present call the `show()` and `update()`.
+
+**index.js**
+
+```js
+for (let i = presents.length-1; i >= 0; i--) {
+  presents[i].show();
+  presents[i].update();
+}
+```
+
+### 6.2 **Hit detection**
+
+At this point we want something to happen when the wasp actually hits a present. Here we must do a calculation, a quite similar one to the calculation for the hit detection for the pipes. Use `this.hits = function(wasp)` in `present.js`.
+
+We must check if the height of the wasp is greater than the presents height and... you try to finish the calculation ;).  
+Write a `console.log` in the if-statement to check if it works. 
+
+**present.js**
+
+```js
+this.hits = function(wasp) {
+  if (wasp.y > this.y && wasp.y < this.y + this.height) {
+    if (wasp.x > this.x && wasp.x < this.x + this.width) {
+      console.log("HITS");
+     return true;
+    }
+  }
+ return false;
+}
+```
+
+Now we want a new present to generate each 75% of the frame, use [frameCount()](https://p5js.org/reference/#/p5/frameCount) and push the presents to `christmasPresent()` in `index.js`.
+
+**index.js**
+
+```js
+if (frameCount % 75 == 0) {</b>
+  presents.push(new christmasPresent());
+}
+```
+
+### 6.3 **Get extra score**
+
+To make the game more fun we can set that the user will get extra score when hitting a present. Add extra score in `index.js` in the for-loop we created in 5.1.
+
+**index.js**
+
+```js
+for (let i = presents.length-1; i >= 0; i--) {
+  presents[i].show();
+  presents[i].update();
+  if (presents[i].hits(wasp)) {
+    score += 3;
+    presents.splice(i, 1);
+  }
+}
+```
+
+### 6.4 **Reset presents**
+
+When we start a new game we want the presents array to be empty. Add an empy array in `index.js` in the `startgame()`:
+
+**index.js**
+
+```js
+function startgame() {
+  backgroundX = 0;
+  pipes = [];
+  wasp = new Wasp();
+  pipes.push(new Pipe());
+  isOver = false;
+  score = 0;
+  loop();
+  presents = [];
+  presents.push(new christmasPresent());
+}
+```
 
 ---
 
 
 ## 7. **More ideas**
+
 - The game gradually increases in speed.
-- Make start screen with the Expressen, Code Pub, or Netlight logo.
-- Add a start game button
-
-### 6.1. **Add infinite looping background**
-
-**index.js**
-
-```js
-function draw() {
-  image(backgroundImg, backgroundX, backgroundY, backgroundImg.width, CANVAS_HEIGHT);
-
-  // Add this code to make the background loop.
-  backgroundX -= 1;
-  if (backgroundX <= -backgroundImg.width + width) {
-    image(backgroundImg, backgroundX + backgroundImg.width, 0, backgroundImg.width, height);
-    if (backgroundX <= -backgroundImg.width) {
-      backgroundX = 0;
-    }
-  }
-}
-```
+- Make start screen with, for example, the Expressen, Code Pub, or Netlight logo.
