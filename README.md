@@ -407,7 +407,7 @@ this.hits = function(wasp) {
 
 Now we want a new present to generate each 75% of the frame, use [frameCount()](https://p5js.org/reference/#/p5/frameCount) and push the presents to `christmasPresent()` in `index.js`.
 
-<details>
+<details style="border: 1px solid lightgray; padding: 10px;">
 <summary><b>Cheatsheet: Check the code here</b></summary>
 <h4>index.js</h4><pre>
 <b>if (frameCount % 75 == 0) {</b>
@@ -416,15 +416,9 @@ Now we want a new present to generate each 75% of the frame, use [frameCount()](
 </details>
 
 ### 5.3 **Get extra score**
-<<<<<<< HEAD
 To make the game more fun we can set that the user will get extra score when hitting a present. Add extra score in `index.js` in the for-loop we created in 5.1.
-<details>
-<summary><b>Cheatsheet: Check the code here</b></summary>
-=======
-WIP
 <details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Complete code</b></summary>
->>>>>>> a75794d7e83415eaaa31a7de8594570e885e19f9
+<summary><b>Cheatsheet: Check the code here</b></summary>
 <h4>index.js</h4><pre>
   for (let i = presents.length-1; i >= 0; i--) {
     presents[i].show();
