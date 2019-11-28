@@ -31,21 +31,15 @@ After Live Server is installed, you should be able to click “Go Live” in the
 
 Get started with p5.js by visiting https://p5js.org/get-started/.
 
+The `index.html` contains `<script>` tags with all the JavaScript files we need to make the game. First we add `https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.js`, the library we are using for creative coding. Then all our custom files `index.js`, `wasp.js`, `pipe.js`, and `present.js`.
 
-### 1.1. **Open index.html**
-
-This document contains `<script>` tags with all the JavaScript files we need to make the game. First we add `https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.js`, the library we are using for creative coding. Then all our custom files `index.js`, `wasp.js`, `pipe.js`, and `present.js`.
-
-
-### 1.2. **Open index.js**
-
-The index.js is our main file. To help you, we have predefined all methods you need.
+To help you, we have predefined all methods you need in the JavaScript files. In the below step, we will fill in those methods with code.
 
 
 ### 1.1. **Create a canvas**
 
-- To add a canvas with p5.js we can use their createCanvas() method.
-- This will create a white canvas, so nothing will show yet in the browser.
+- To add a canvas with **p5.js** we can use their `createCanvas()` method.
+- This will create a white canvas.
 - [Read documentation about createCanvas() here](https://p5js.org/reference/#/p5/createCanvas).
 - Pass `CANVAS_WIDTH` and `CANVAS_HEIGHT` as arguments.
 
@@ -53,17 +47,9 @@ The index.js is our main file. To help you, we have predefined all methods you n
 
 ```js
 function setup() {
-  // Use createCanvas() here.
+  createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 }
 ```
-
-<details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Complete code</b></summary>
-<h4>index.js</h4><pre>
-function setup() {
-  <b>createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);</b>
-}</pre>
-</details>
 
 
 ### 1.2. **Load background image**
@@ -78,18 +64,9 @@ function setup() {
 
 ```js
 function preload() {
-  // Use loadImage() here.
+  backgroundImg = loadImage("images/background.png");
 }
 ```
-
-<details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Complete code</b></summary>
-<h4>index.js</h4><pre>
-let backgroundImg;<br>
-function preload() {
-  <b>backgroundImg = loadImage("images/background.png");</b>
-}</pre>
-</details>
 
 
 ### 1.3. **Draw background**
@@ -103,42 +80,23 @@ function preload() {
 
 ```js
 function draw() {
-  // Use image() here.
+  image(backgroundImg, backgroundX, backgroundY, backgroundImg.width, CANVAS_HEIGHT);
 }
 ```
-
-<details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Complete code</b></summary>
-<h4>index.js</h4><pre>
-function draw() {
-  <b>image(backgroundImg, backgroundX, backgroundY, backgroundImg.width, CANVAS_HEIGHT);</b>
-}</pre>
-</details>
 
 
 ### 1.4. **Move background**
 
-- Now we want the clouds to move!
-- Use the `-=` to substract `1` from `backgroundX`.
-- This makes the background move 1 pixel every time **p5.js** re-draws the canvas.
+Moving the background is a little complicated, so you can just call our utility function with ready code to make the background move!
 
 **index.js**
 
 ```js
 function draw() {
   image(backgroundImg, backgroundX, backgroundY, backgroundImg.width, CANVAS_HEIGHT);
-  // Subtract 1 from backgroundX here.
+  moveBackground();
 }
 ```
-
-<details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Complete code</b></summary>
-<h4>index.js</h4><pre>
-function draw() {
-  image(backgroundImg, backgroundX, backgroundY, backgroundImg.width, CANVAS_HEIGHT);
-  <b>backgroundX -= 1;</b>
-}</pre>
-</details>
 
 ---
 
@@ -148,53 +106,35 @@ function draw() {
 
 ### 2.1. **Create wasp instance**
 
-- Start by opening `wasp.js`.
-- To create a wasp we must create an instance of the function `Wasp()` in `index.js`.
+- To create a wasp we must create an instance of the function `Wasp()`.
+- We can access Wasp as a global function.
 - [Read documentation about instances here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new).
-- Open `index.js`.
+- Assign the instance to our `wasp` variable.
 
 **index.js**
 
 ```js
-function startGame() {
-  // Create a new instance of Wasp() and assign it to our variable wasp.
+function setup() {
+  createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+  wasp = new Wasp();
 }
 ```
-
-<details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Complete code</b></summary>
-<h4>index.js</h4><pre>
-function startGame() {
-  <b>wasp = new Wasp();</b>
-}</pre>
-</details>
 
 
 ### 2.1. **Load wasp image**
 
-- We want to load our `images/wasp.png` image.
+- We want to load our `images/wasp.png`.
 - We can use **p5.js**'s method `loadImage()`.
 - [Read documentation about loadImage() here](https://p5js.org/reference/#/p5/loadImage).
 
 **index.js**
 
 ```js
-let backgroundImg;
-let waspImg;
-
 function preload() {
   backgroundImg = loadImage("images/background.png");
-  // Use loadImage() here.
+  waspImg = loadImage("images/wasp.png");
 }
 ```
-
-<details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Complete code</b></summary>
-<h4>index.js</h4><pre>
-function preload() {
-  <b>waspImg = loadImage("images/wasp.png");</b>
-}</pre>
-</details>
 
 
 ### 2.2. **Draw wasp image**
@@ -202,47 +142,23 @@ function preload() {
 - We want to draw the wasp on the canvas.
 - Use **p5.js**’s image() method. 
 - [Read documentation about image() here](https://p5js.org/reference/#/p5/loadImage).
-- Add variables `wasp.x`, `wasp.y` and `wasp.size` as parameters.
+- Pass `waspImg`, `this.x`, `this.y` and `this.size` as parameters.
+
+**wasp.js**
+
+```js
+this.show = function() {
+  image(waspImg, this.x, this.y, this.size, this.size);
+}
+```
 
 **index.js**
 
 ```js
-let backgroundImg;
-let waspImg;
-
 function draw() {
-  image(backgroundImg, 0, 0, backgroundImg.width, CANVAS_HEIGHT);
-  // Use image() here.
+  wasp.show();
 }
 ```
-
-<details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Complete code</b></summary>
-<h4>wasp.js</h4><pre>
-this.show = function() {
-  <b>image(waspImg, this.x - 16, this.y - 16, 32, 32);</b>
-}</pre>
-</details>
-
-<details style="border: 1px solid lightgray; padding: 10px;">
-<summary><b>Cheatsheet: Complete code</b></summary>
-<h4>index.js</h4><pre>
-function preload() {
-  backgroundImg = loadImage("background.png");
-  <b>waspImg = loadImage("wasp.png");</b>
-}<br>
-function startGame() {
-  <b>wasp = new Wasp();</b>
-}<br>
-function draw() {
-  image(backgroundImg, 0, 0, backgroundImg.width, CANVAS_HEIGHT);
-  <b>wasp.show();</b>
-}</pre>
-<h4>wasp.js</h4><pre>
-this.show = function() {
-  <b>image(waspImg, this.x - 16, this.y - 16, 32, 32);</b>
-}</pre>
-</details>
 
 
 ### 2.2. **Add gravity**
@@ -528,4 +444,21 @@ function startgame() {
 - Make start screen with the Expressen, Code Pub, or Netlight logo.
 - Add a start game button
 
+### 6.1. **Add infinite looping background**
 
+**index.js**
+
+```js
+function draw() {
+  image(backgroundImg, backgroundX, backgroundY, backgroundImg.width, CANVAS_HEIGHT);
+
+  // Add this code to make the background loop.
+  backgroundX -= 1;
+  if (backgroundX <= -backgroundImg.width + width) {
+    image(backgroundImg, backgroundX + backgroundImg.width, 0, backgroundImg.width, height);
+    if (backgroundX <= -backgroundImg.width) {
+      backgroundX = 0;
+    }
+  }
+}
+```
