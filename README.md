@@ -287,7 +287,7 @@ function preload() {
 </details>
 
 ### 5.1 **Show presents**
-In `present.js` we have to functions: `this.show = function()` and `this.update = function()`. Now we actually want to show the present so add the present variable, x, y, width and height as parameters in the show function.
+In `present.js` we have to functions: `this.show = function()` and `this.update = function()`. Now we actually want to show the presents so add the present variable, x, y, width and height as parameters in the show function.
 
 The `update()` will update the presents so they start moving from right to left of the canvas. Take the x variable and substract with the speed variable.
 
@@ -303,11 +303,23 @@ this.update = function() {
 <b>}</pre></b>
 </details>
 
+
+When the steps above is completed we actually have to draw the presents in `function draw()` in `index.js`. To draw infinite loops of present we have to loop through all presents and for each present call the `show()` and `update()`.
+
+<details>
+<summary><b>Cheatsheet: Check the code here</b></summary>
+<h4>index.js</h4><pre>
+<b>for (let i = presents.length-1; i >= 0; i--) {</b>
+<b>   presents[i].show();</b>
+<b>   presents[i].update();</b>
+<b>}</pre></b>
+</details>
+
 ### 5.2 **Hit detection**
-At this point we want something to happen when the wasp actually hits a present. Here we must do a calculation, a quite similar one to the calculation for the hit detection for the pipes.
+At this point we want something to happen when the wasp actually hits a present. Here we must do a calculation, a quite similar one to the calculation for the hit detection for the pipes. Use `this.hits = function(wasp)` in `present.js`.
 
 We must check if the height of the wasp is greater than the presents height and... you try to finish the calculation ;).  
-Write a `console.log`in the if-statement to check if it works. 
+Write a `console.log` in the if-statement to check if it works. 
 
 <details>
 <summary><b>Cheatsheet: Check the code here</b></summary>
@@ -323,37 +335,30 @@ this.hits = function(wasp) {
 <b> }</pre></b>
 </details>
 
+Now we want a new present to generate each 75% of the frame, use [frameCount()](https://p5js.org/reference/#/p5/frameCount) and push the presents to `christmasPresent()` in `index.js`.
 
-WIP index.js and extra score
-  for (let i = presents.length-1; i >= 0; i--) {
-    presents[i].show();
-    presents[i].update();
-    if (presents[i].hits(wasp)) {
-      score += 3;
-      presents.splice(i, 1);
-    }
-  }
-
-  if (frameCount % 75 == 0) {
-    presents.push(new christmasPresent());
-  }
-### 5.3 **Get extra score**
-WIP
 <details>
 <summary><b>Cheatsheet: Check the code here</b></summary>
 <h4>index.js</h4><pre>
-<b>for (let i = presents.length-1; i >= 0; i--) {</b>
-<b> presents[i].show();</b>
-<b> presents[i].update();</b>
-<b> if (presents[i].hits(wasp)) {</b>
-<b>   score += 3;</b>
-<b>   presents.splice(i, 1);</b>
-<b> }</b>
-<b>}</b>
-<b>reset() {</b>
-<b> presents = [];</b>
-<b> presents.push(new christmasPresent());</b>
-<b>}</pre></b>
+<b>if (frameCount % 75 == 0) {</b>
+<b>    presents.push(new christmasPresent());</b>
+<b> }</pre></b>
+</details>
+
+### 5.3 **Get extra score**
+To make the game more fun we can set that the user will get extra score when hitting a present. Add extra score in `index.js` in the for-loop we created in 5.1.
+<details>
+<summary><b>Cheatsheet: Check the code here</b></summary>
+<h4>index.js</h4><pre>
+  for (let i = presents.length-1; i >= 0; i--) {
+    presents[i].show();
+    presents[i].update();
+<b>    if (presents[i].hits(wasp)) {</b>
+<b>      score += 3;</b>
+<b>      presents.splice(i, 1);</b>
+<b>    }</b>
+  }</pre>
+
 </details>
 
 ---
@@ -362,5 +367,6 @@ WIP
 ## 6. **More ideas**
 - The game gradually increases in speed.
 - Make start screen with the Expressen, Code Pub, or Netlight logo.
+- Add a start game button
 
 
