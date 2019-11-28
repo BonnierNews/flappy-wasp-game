@@ -1,11 +1,11 @@
 # Flappy Wasp Game
 
-This is a guide for making Flappy Wasp Game.
+This is a guide for making Flappy Wasp Game. Just follow this guide and at the end you will have created a game!
 
-## **Tips & Tricks**
+## **Before you start**
 
-Förklara att man kan se den färdiga koden.
-Förklara att man kan trycka på funktionerna för att se deras dokumentation.
+- Please visit the links to p5.js's documentation if you get stuck!
+- If you still don't get it; you can view the complete code snippet for each step if you click **"Cheatcheet: Complete code"**.
 
 ---
 
@@ -31,17 +31,22 @@ After Live Server is installed, you should be able to click “Go Live” in the
 
 Get started with p5.js by visiting https://p5js.org/get-started/.
 
+
 ### 1.1. **Open index.html**
 
 This document contains `<script>` tags with all the JavaScript files we need to make the game. First we add `https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.js`, the library we are using for creative coding. Then all our custom files `index.js`, `wasp.js`, `pipe.js`, and `present.js`.
+
 
 ### 1.2. **Open index.js**
 
 The index.js is our main file. To help you, we have predefined all methods you need.
 
+
 ### 1.1. **Create a canvas**
 
 To add a canvas with p5.js we can use their createCanvas() method. [Read documentation here](https://p5js.org/reference/#/p5/createCanvas).
+
+**index.js**
 
 ```js
 const CANVAS_HEIGHT = 600;
@@ -62,9 +67,11 @@ function setup() {
 }</pre>
 </details>
 
+
 ### 1.2. **Load background image**
+
 To add a background we must first load our image `images/background.png` into our variable `backgroundImg`. We can use **p5.js**'s method `loadImage()`.
-**TIP:** [Read documentation here](https://p5js.org/reference/#/p5/loadImage).
+[Read documentation here](https://p5js.org/reference/#/p5/loadImage).
 
 **index.js**
 
@@ -78,20 +85,25 @@ function preload() {
 
 <details style="border: 1px solid lightgray; padding: 10px;">
 <summary><b>Cheatsheet: Complete code</b></summary>
-<h4>index.js</h4><div class="highlight highlight-source-js"><pre>
+<h4>index.js</h4><pre>
 let backgroundImg;<br>
 function preload() {
   <b>backgroundImg = loadImage("images/background.png");</b>
-}</pre></div>
+}</pre>
 </details>
 
+
 ### 1.3. **Draw background**
+
+- When we have loaded `backgroundImg`, we can draw it!
+- Use **p5.js**'s `image()` method to draw the image on the canvas.
+- [Read documentation about image() here](https://p5js.org/reference/#/p5/image).
 
 **index.js**
 
 ```js
 function draw() {
-  // Use image() and pass backgroundImg, backgroundImg.width,
+  // Use image() and pass backgroundImg, x, y, backgroundImg.width,
   // and CANVAS_HEIGHT as arguments. Set the x and y to 0.
 }
 ```
@@ -110,21 +122,45 @@ function draw() {
 ## 2. **Create wasp**
 
 
+### 2.1. **Create wasp instance**
+
+- Start by opening `wasp.js`.
+- To create a wasp we must create an instance of the function `Wasp()` in `index.js`.
+- [Read documentation about instances here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new).
+- Open `index.js`.
+
+**index.js**
+
+```js
+function startGame() {
+  // Create a new instance of Wasp() and assign it to our variable wasp.
+}
+```
+
+<details style="border: 1px solid lightgray; padding: 10px;">
+<summary><b>Cheatsheet: Complete code</b></summary>
+<h4>index.js</h4><pre>
+function startGame() {
+  <b>wasp = new Wasp();</b>
+}</pre>
+</details>
+
+
 ### 2.1. **Load wasp image**
 
-#### **index.js**
+- We want to load our `images/wasp.png` image.
+- We can use **p5.js**'s method `loadImage()`.
+- [Read documentation about loadImage() here](https://p5js.org/reference/#/p5/loadImage).
+
+**index.js**
+
 ```js
 let backgroundImg;
-let waspImg; // Use this variable.
+let waspImg;
 
 function preload() {
   backgroundImg = loadImage("images/background.png");
-  // Use loadImage("images/wasp.png") and assign it to waspImg.
-}
-
-function draw() {
-  // Use image() and pass backgroundImg, backgroundImg.width,
-  // and CANVAS_HEIGHT as arguments. Set the x and y position to 0.
+  // Use loadImage() here.
 }
 ```
 
@@ -136,7 +172,25 @@ function preload() {
 }</pre>
 </details>
 
-In `wasp.js`, use p5.js’s [image()](https://p5js.org/reference/#/p5/image) function in the `this.show()` function. Pass the variables `this.x`, `this.y` and `this.size` as parameters.
+
+### 2.2. **Draw wasp image**
+
+- We want to draw the wasp on the canvas.
+- Use **p5.js**’s image() method. 
+- [Read documentation about image() here](https://p5js.org/reference/#/p5/loadImage).
+- Add variables `wasp.x`, `wasp.y` and `wasp.size` as parameters.
+
+**index.js**
+
+```js
+let backgroundImg;
+let waspImg;
+
+function draw() {
+  image(backgroundImg, 0, 0, backgroundImg.width, CANVAS_HEIGHT);
+  // Use image() here.
+}
+```
 
 <details style="border: 1px solid lightgray; padding: 10px;">
 <summary><b>Cheatsheet: Complete code</b></summary>
@@ -145,8 +199,6 @@ this.show = function() {
   <b>image(waspImg, this.x - 16, this.y - 16, 32, 32);</b>
 }</pre>
 </details>
-
-Then create a new wasp instance, `wasp = new Wasp()`, and call the `wasp.show()` function in the `draw()` function.
 
 <details style="border: 1px solid lightgray; padding: 10px;">
 <summary><b>Cheatsheet: Complete code</b></summary>
@@ -170,6 +222,7 @@ this.show = function() {
 
 
 ### 2.2. **Add gravity**
+
 The wasp should fall to the ground because it is affected by gravity! In `wasp.js`, we need to use `this.gravity`, `this.y`, and `this.velocity` (the wasp’s speed) to create a falling wasp. Try adding gravity in `this.show` in `wasp.js` and then use the `wasp.show()` in the the `draw()` function. **BONUS:** See if you can check if the wasp falls outside the canvas and stop the wasp from falling!
 
 <details style="border: 1px solid lightgray; padding: 10px;">
