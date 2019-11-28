@@ -1,6 +1,11 @@
 # Flappy Wasp Game
 
-This is a guide for making the Flappy Wasp Game.
+This is a guide for making Flappy Wasp Game.
+
+## **Tips & Tricks**
+
+Förklara att man kan se den färdiga koden.
+Förklara att man kan trycka på funktionerna för att se deras dokumentation.
 
 ---
 
@@ -8,17 +13,16 @@ This is a guide for making the Flappy Wasp Game.
 ## 0. **Getting Started**
 
 ### 0.1. **Download project from GitHub**
-Download project by clicking the green button named “Clone or download”. When a small dialogue appears, click “Download ZIP” in the right bottom corner to download it to your computer. Or if you have `git` installed, you can just clone the project.
+Download project by clicking the green button named “Clone or download”. When a small dialogue appears, click “Download ZIP”. Unzip the folder.
 
 ### 0.2. **Install Visual Studio Code**
-Download Visual Studio Code from https://code.visualstudio.com/ or use editor of your choice. You also need a running local server on your computer.
+Download Visual Studio Code from https://code.visualstudio.com/, install, and open the unzipped folder.
 
-**TIP:** In Visual Studio Code you can install [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) as a plugin from the [Visual Studio Code Marketplace](https://marketplace.visualstudio.com/). When Live Server is installed, you should be able to click “Go Live” in the bottom right corner of the Visual Studio Code editor.
+### 0.3. **Install Live Server**
+In Visual Studio Code you can install [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) as a plugin from the [Visual Studio Code Marketplace](https://marketplace.visualstudio.com/). 
 
-### 0.3. ****
-Förklara hur index.html fungerar.
-Förklara att man kan se den färdiga koden.
-Förklara att man kan trycka på funktionerna för att se deras dokumentation.
+### 0.4. **Start Live Server**
+After Live Server is installed, you should be able to click “Go Live” in the bottom right corner of the Visual Studio Code editor.
 
 ---
 
@@ -26,8 +30,23 @@ Förklara att man kan trycka på funktionerna för att se deras dokumentation.
 ## 1. **Create game**
 Get started with p5.js by visiting https://p5js.org/get-started/.
 
+### 1.1. **Open index.html**
+This document contains `<script>` tags with all the JavaScript files we need to make the game. First we add `https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.js`, the library we are using for creative coding. Then all our custom files `index.js`, `wasp.js`, `pipe.js`, and `present.js`.
+
+### 1.2. **Open index.js**
+The index.js is our main file. To help you, we have predefined all methods you need.
+
 ### 1.1. **Create a canvas**
-The first thing we need to do is add a canvas by using the [createCanvas()](https://p5js.org/reference/#/p5/createCanvas) function. Pass the `CANVAS_WIDTH` and `CANVAS_HEIGHT` variables as arguments. Add it inside `function setup()` in `index.js` file. This will create a white canvas, so nothing will show yet in the browser.
+Read the documentation for [createCanvas()](https://p5js.org/reference/#/p5/createCanvas).
+
+#### **index.js**
+```js
+function setup() {
+  // Use createCanvas() to create a canvas.
+  // Pass the `CANVAS_WIDTH` and `CANVAS_HEIGHT` variables as arguments.
+  // This will create a white canvas, so nothing will show yet in the browser.
+}
+```
 
 <details>
 <summary><b>Cheatsheet: Check the code here</b></summary>
@@ -37,12 +56,27 @@ function setup() {
 }</pre>
 </details>
 
-### 1.2. **Add a background**
-In `index.js`, use [loadImage()](https://p5js.org/reference/#/p5/loadImage) and [image()](https://p5js.org/reference/#/p5/image) function to show `images/background.png` as a background. **TIP:** You can use `backgroundImg.width` as an argument to `image()`.
+### 1.2. **Load background image**
+Read the documentation for [loadImage()](https://p5js.org/reference/#/p5/loadImage) and [image()](https://p5js.org/reference/#/p5/image).
+
+#### **index.js**
+```js
+let backgroundImg; // Use this variable.
+
+function preload() {
+  // Use loadImage("images/background.png") and assign it to backgroundImg.
+}
+
+function draw() {
+  // Use image() and pass backgroundImg, backgroundImg.width,
+  // and CANVAS_HEIGHT as arguments. Set the x and y position to 0.
+}
+```
 
 <details>
 <summary><b>Cheatsheet: Check the code here</b></summary>
 <h4>index.js</h4><pre>
+let backgroundImg;<br>
 function preload() {
   <b>backgroundImg = loadImage("images/background.png");</b>
 }<br>
@@ -51,14 +85,31 @@ function draw() {
 }</pre>
 </details>
 
+### 1.3. **Draw background**
+
 ---
 
 
 ## 2. **Create wasp**
 
 
-### 2.1. **Show wasp**
-In `index.js`, use [loadImage()](https://p5js.org/reference/#/p5/loadImage) to load `images/wasp.png` and assign it to the variable `waspImg`.
+### 2.1. **Load wasp image**
+
+#### **index.js**
+```js
+let backgroundImg;
+let waspImg; // Use this variable.
+
+function preload() {
+  backgroundImg = loadImage("images/background.png");
+  // Use loadImage("images/wasp.png") and assign it to waspImg.
+}
+
+function draw() {
+  // Use image() and pass backgroundImg, backgroundImg.width,
+  // and CANVAS_HEIGHT as arguments. Set the x and y position to 0.
+}
+```
 
 <details>
 <summary><b>Cheatsheet: Check the code here</b></summary>
@@ -221,12 +272,12 @@ Do not forget to call the `showScores()` we just created in `index.js`. Call the
 ## 5. **Create presents**
 We want something that the wasp can collect to get extra score. To make the game more christmas-y we can generate christmas presents that randomly flies against the wasp. But this time, compared to the pipes, we actually want to hit each present to be able to get extra score. 
 
-To start off with the presents we want to declare a global variable in `index.js`. Next up we want to use the variable and set to a [loadImage()](https://p5js.org/reference/#/p5/loadimage), it is a magical p5 function, and take the present.png image which you will find in the images folder and use it inside of the `preload()`.
+To start off with the presents we jump to `index.js` where we find a global variable in the top called `presentImg;`. Next up we want to use the variable and set to a [loadImage()](https://p5js.org/reference/#/p5/loadimage), which is a magical p5 function, and take the present.png image which you will find in the images folder and use it inside of the `preload()`.
 
 <details>
 <summary><b>Cheatsheet: Check the code here</b></summary>
 <h4>index.js</h4><pre>
-<b>let presentImg;</b>
+let presentImg;
 <br>
 function preload() {
   waspImg = loadImage('wasp.png');
@@ -236,24 +287,53 @@ function preload() {
 </details>
 
 ### 5.1 **Show presents**
-Then we want to set up a `show()` and a `update()` in `christmasPresent.js`. Do not forget to use `this` when creating the functions. E.g: `this.show = function()`.
-The `show()` will take the present variable, (which we have just declared), x, y, width and height.
-The `update()` will update the presents so they start moving from right to left of the canvas.
+In `present.js` we have to functions: `this.show = function()` and `this.update = function()`. Now we actually want to show the present so add the present variable, x, y, width and height as parameters in the show function.
+
+The `update()` will update the presents so they start moving from right to left of the canvas. Take the x variable and substract with the speed variable.
 
 <details>
 <summary><b>Cheatsheet: Check the code here</b></summary>
-<h4>christmasPresent.js</h4><pre>
-<b>this.show = function() {</b>
+<h4>present.js</h4><pre>
+this.show = function() {
 <b> image(presentImg, this.x, this.y, this.width, this.height);</b>
 <b>}</b>
 <br>
-<b>this.update = function() {</b>
+this.update = function() {
 <b> this.x -= this.speed;</b>
 <b>}</pre></b>
 </details>
 
 ### 5.2 **Hit detection**
-WIP
+At this point we want something to happen when the wasp actually hits a present. Here we must do a calculation, a quite similar one to the calculation for the hit detection for the pipes.
+
+We must check if the height of the wasp is greater than the presents height and... you try to finish the calculation ;).  
+Write a `console.log`in the if-statement to check if it works. 
+
+<details>
+<summary><b>Cheatsheet: Check the code here</b></summary>
+<h4>present.js</h4><pre>
+this.hits = function(wasp) {
+<b>   if (wasp.y > this.y && wasp.y < this.y + this.height) {</b>
+<b>     if (wasp.x > this.x && wasp.x < this.x + this.width) {</b>
+<b>       console.log("HITS");</b>
+<b>      return true;</b>
+<b>     }</b>
+<b>   }</b>
+<b>  return false;</b>
+<b> }</pre></b>
+</details>
+
+
+WIP index.js and extra score
+  for (let i = presents.length-1; i >= 0; i--) {
+    presents[i].show();
+    presents[i].update();
+    if (presents[i].hits(wasp)) {
+      score += 3;
+      presents.splice(i, 1);
+    }
+  }
+
   if (frameCount % 75 == 0) {
     presents.push(new christmasPresent());
   }
