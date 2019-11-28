@@ -377,7 +377,7 @@ function startgame() {
   wasp = new Wasp();
   pipes.push(new Pipe());
   isOver = false;
-<b>score = 0;</b>
+  <b>score = 0;</b>
   loop();
 }</pre>
 </details>
