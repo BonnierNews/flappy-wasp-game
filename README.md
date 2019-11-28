@@ -15,6 +15,11 @@ Download Visual Studio Code from https://code.visualstudio.com/ or use editor of
 
 **TIP:** In Visual Studio Code you can install [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) as a plugin from the [Visual Studio Code Marketplace](https://marketplace.visualstudio.com/). When Live Server is installed, you should be able to click “Go Live” in the bottom right corner of the Visual Studio Code editor.
 
+### 0.3. ****
+Förklara hur index.html fungerar.
+Förklara att man kan se den färdiga koden.
+Förklara att man kan trycka på funktionerna för att se deras dokumentation.
+
 ---
 
 
@@ -73,7 +78,7 @@ this.show = function() {
 }</pre>
 </details>
 
-Then in `index.js`, load the image by using [loadImage()](https://p5js.org/reference/#/p5/loadImage). Then create a new wasp instance, `wasp = new Wasp()`, and call the `wasp.show()` function in the `draw()` function.
+Then create a new wasp instance, `wasp = new Wasp()`, and call the `wasp.show()` function in the `draw()` function.
 
 <details>
 <summary><b>Cheatsheet: Check the code here</b></summary>
@@ -86,7 +91,7 @@ function startGame() {
   <b>wasp = new Wasp();</b>
 }<br>
 function draw() {
-  <b>wasp.update();</b>
+  image(backgroundImg, 0, 0, backgroundImg.width, CANVAS_HEIGHT);
   <b>wasp.show();</b>
 }</pre>
 <h4>wasp.js</h4><pre>
