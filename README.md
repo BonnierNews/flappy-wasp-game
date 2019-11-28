@@ -44,18 +44,16 @@ The index.js is our main file. To help you, we have predefined all methods you n
 
 ### 1.1. **Create a canvas**
 
-To add a canvas with p5.js we can use their createCanvas() method. [Read documentation here](https://p5js.org/reference/#/p5/createCanvas).
+- To add a canvas with p5.js we can use their createCanvas() method.
+- This will create a white canvas, so nothing will show yet in the browser.
+- [Read documentation about createCanvas() here](https://p5js.org/reference/#/p5/createCanvas).
+- Pass `CANVAS_WIDTH` and `CANVAS_HEIGHT` as arguments.
 
 **index.js**
 
 ```js
-const CANVAS_HEIGHT = 600;
-const CANVAS_WIDTH = 400;
-
 function setup() {
-  // Use createCanvas() here to create a canvas.
-  // Pass CANVAS_WIDTH and CANVAS_HEIGHT as arguments.
-  // This will create a white canvas, so nothing will show yet in the browser.
+  // Use createCanvas() here.
 }
 ```
 
@@ -70,16 +68,17 @@ function setup() {
 
 ### 1.2. **Load background image**
 
-To add a background we must first load our image `images/background.png` into our variable `backgroundImg`. We can use **p5.js**'s method `loadImage()`.
-[Read documentation here](https://p5js.org/reference/#/p5/loadImage).
+- To add a background we must first load our image.
+- We can use **p5.js**'s method `loadImage()`.
+- [Read documentation about loadImage() here](https://p5js.org/reference/#/p5/loadImage).
+- Pass `images/background.png` as an argument.
+- Assign the return value to `backgroundImg`.
 
 **index.js**
 
 ```js
-let backgroundImg;
-
 function preload() {
-  // Use loadImage() and assign it to our variable backgroundImg.
+  // Use loadImage() here.
 }
 ```
 
@@ -95,16 +94,16 @@ function preload() {
 
 ### 1.3. **Draw background**
 
-- When we have loaded `backgroundImg`, we can draw it!
+- We have loaded `backgroundImg`, now we can draw it!
 - Use **p5.js**'s `image()` method to draw the image on the canvas.
 - [Read documentation about image() here](https://p5js.org/reference/#/p5/image).
+- Pass `backgroundImg`, `backgroundX`, `backgroundY`, `backgroundImg.width`, `CANVAS_HEIGHT` as arguments.
 
 **index.js**
 
 ```js
 function draw() {
-  // Use image() and pass backgroundImg, x, y, backgroundImg.width,
-  // and CANVAS_HEIGHT as arguments. Set the x and y to 0.
+  // Use image() here.
 }
 ```
 
@@ -112,7 +111,32 @@ function draw() {
 <summary><b>Cheatsheet: Complete code</b></summary>
 <h4>index.js</h4><pre>
 function draw() {
-  <b>image(backgroundImg, 0, 0, backgroundImg.width, CANVAS_HEIGHT);</b>
+  <b>image(backgroundImg, backgroundX, backgroundY, backgroundImg.width, CANVAS_HEIGHT);</b>
+}</pre>
+</details>
+
+
+### 1.4. **Move background**
+
+- Now we want the clouds to move!
+- Use the `-=` to substract `1` from `backgroundX`.
+- This makes the background move 1 pixel every time **p5.js** re-draws the canvas.
+
+**index.js**
+
+```js
+function draw() {
+  image(backgroundImg, backgroundX, backgroundY, backgroundImg.width, CANVAS_HEIGHT);
+  // Subtract 1 from backgroundX here.
+}
+```
+
+<details style="border: 1px solid lightgray; padding: 10px;">
+<summary><b>Cheatsheet: Complete code</b></summary>
+<h4>index.js</h4><pre>
+function draw() {
+  image(backgroundImg, backgroundX, backgroundY, backgroundImg.width, CANVAS_HEIGHT);
+  <b>backgroundX -= 1;</b>
 }</pre>
 </details>
 
