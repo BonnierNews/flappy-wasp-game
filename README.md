@@ -2,11 +2,6 @@
 
 This is a guide for making Flappy Wasp Game. Just follow this guide and at the end you will have created a game!
 
-## **Before you start**
-
-- Please visit the links to p5.js's documentation if you get stuck!
-- If you still don't get it; you can view the complete code snippet for each step if you click **"Cheatcheet: Complete code"**.
-
 ---
 
 
@@ -29,17 +24,49 @@ After Live Server is installed, you should be able to click “Go Live” in the
 
 ## 1. **Create game**
 
-Get started with p5.js by visiting https://p5js.org/get-started/.
-
-The `index.html` contains `<script>` tags with all the JavaScript files we need to make the game. First we add `https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.js`, the library we are using for creative coding. Then all our custom files `index.js`, `wasp.js`, `pipe.js`, and `present.js`.
-
----
-
-**ALERT:** This will make all variables accessible globally. So if you declare a variable in `index.js`, you will also be able to use it in, for example, `wasp.js`.
+- We will use a library called **p5.js** to create our game. It is a library people use for creative coding.
+- Get started with **p5.js** by visiting https://p5js.org/get-started/.
 
 ---
 
-To help you, we have predefined all methods and variables you need in the JavaScript files.
+**To help you, we have predefined all methods and variables you need in the JavaScript files.**
+
+---
+
+
+### 1.1. **`index.html`**
+
+- The `index.html` contains `<script>` tags with all the JavaScript files we need to make the game.
+- First we add `https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.js`, the **p5.js** library.
+- Then all our custom files `index.js`, `wasp.js`, `pipe.js`, and `present.js`.
+
+---
+
+
+### 1.2. **`index.js`**
+
+- We have created a file called `index.js`. This is where our main **methods** and **variables** for our game are predefined.
+
+- Our predefined **variables**;
+  - `wasp` will contain an instance object of the `class Wasp` located in our predefined file `wasp.js`.
+  - `pipes` will contain an instance object of the `class Pipe` located in our predefined file `pipe.js`.
+  - `background` will contain an instance object of the `class Background` located in our predefined file `background.js`.
+  - `waspImg` will contain an image object from `images/wasp.png`.
+  - `backgroundImg` will contain an image object from `images/background.png`.
+  - `presentImg` will contain an image object from `images/present.png`.
+  - `isOver` will contain a boolean if the player has lost the game or not.
+  - `score` will contain an integer with the players score.
+  - `CANVAS_HEIGHT` contains the canvas height.
+  - `CANVAS_WIDTH` contains the canvas width.
+
+- Our predefined **methods**;
+  - `preload()`
+  - `setup()`
+  - `draw()`
+  - `keyPressed()`
+  - `startGame()`
+  - `gameOver()`
+  - `showScores()`
 
 ---
 
@@ -363,60 +390,24 @@ We want the wasp to move past obstacles, like the pipes in Flappy Bird.
 ### 4.1. **`pipe.js`**
 
 - We have created a separate file `pipe.js` to handle all pipe-related code.
-- The pipe will have a `speed`, `top`, and `bottom` variable.
+- Variables;
+  - `speed` contains the pipe speed.
   - `top` contains an object with properties for the upper pipe.
   - `bottom` contains an object with properties for the lower pipe.
-- It also contains the methods;
-  - `show()` that we will use for drawing the image.
-  - `update()` that we will use for animation, in this case, creating gravity.
-  - `hits()`
-  - `pass()`
-  - `offscreen()`
+- Methods;
+  - `show()` will be used for drawing an upper and lower pipe.
+  - `update()` will be used for animation, in this case, moving the pipes from right to left on the canvas.
+  - `hits()` will be used for checking if our wasp hits a pipe.
+  - `pass()` will be used for checking if our wasp passes (NOT hits) a pipe.
+  - `offscreen()` will be used for checking of the pipe has moved outside the canvas.
 
 ---
 
 
 ### 4.2. **Create instance**
 
-- We must first create an instance object of `Wasp` in `index.js` to use it there.
-- Assign the instance object to our predefined variable `wasp`.
-
-**`index.js`**
-
-```js
-function setup() {
-  createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
-  background = new Background();
-  wasp = new Wasp();
-  pipe = new Pipe();
-}
-```
-
----
-
-
-### 4.1. **Define drawing**
-
-- We want to draw pipes both at the top and the bottom of the canvas.
-- First we use **p5.js** `fill()` method to define which color to use. [Read documentation here](https://p5js.org/reference/#/p5/rect).
-- Then we add two rectangles by using **p5.js** `rect()` method.
-
-**pipe.js**
-```js
-show() {
-  fill(121, 85, 72);
-  rect(this.x, 0, this.width, this.topPipeHeight);
-  rect(this.x, CANVAS_HEIGHT - this.bottomPipeHeight, this.width, this.bottomPipeHeight);
-}
-```
-
----
-
-
-### 4.2. **Add new pipes**
-
-- Because we want to have many pipes, we create an array to store our pipes in.
-- We can then start by adding a pipe to the array.
+- We must first create an instance object of `Pipe` in `index.js`.
+- In this case, we want to add our pipe to an array. Because we want to continuosly add new pipes to show when a pair of pipes has moved offscreen. We use our predefined variable `pipes` and give it a value of an empty array.
 
 **`index.js`**
 
@@ -428,6 +419,28 @@ function setup() {
   pipes.push(new Pipe());
 }
 ```
+
+---
+
+
+### 4.1. **Define drawing**
+
+- We want to draw a pair of pipes at the top and the bottom of the canvas.
+- First, we use **p5.js** `fill()` method to define which color to use. [Read documentation here](https://p5js.org/reference/#/p5/fill).
+- Then we add two rectangles by using **p5.js** `rect()` method. [Read documentation here](https://p5js.org/reference/#/p5/rect).
+
+**`pipe.js`**
+
+```js
+show() {
+  fill(121, 85, 72);
+  rect(this.x, 0, this.width, this.top.height);
+  rect(this.x, CANVAS_HEIGHT - this.bottom.height, this.width, this.bottom.height);
+}
+```
+
+---
+
 
 ### 4.3. **Show pipes**
 
@@ -449,7 +462,7 @@ function draw() {
 
 - In `pipe.js`, we can add movement to the pipes by subtracting `this.speed` (the pipe's speed) from `this.x` (the pipes x position).
 
-**pipe.js**
+**`pipe.js`**
 
 ```js
 update() {
