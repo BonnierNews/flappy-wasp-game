@@ -39,15 +39,16 @@ The `index.html` contains `<script>` tags with all the JavaScript files we need 
 
 ---
 
-To help you, we have predefined all methods you need in the JavaScript files. In the below step, we will fill in those methods with code.
+To help you, we have predefined all methods and variables you need in the JavaScript files.
 
 
 ### 1.1. **Create a canvas**
 
-- To add a canvas with **p5.js** we can use their `createCanvas()` method.
+- To add a canvas with **p5.js** we can use their `createCanvas()` method. [Read documentation here](https://p5js.org/reference/#/p5/createCanvas).
 - This will create a white canvas.
-- [Read documentation about createCanvas() here](https://p5js.org/reference/#/p5/createCanvas).
-- Pass `CANVAS_WIDTH` and `CANVAS_HEIGHT` as arguments.
+- Arguments for `createCanvas()`;
+  - `CANVAS_WIDTH` is a predefined variable that contains the canvas width.
+  - `CANVAS_HEIGHT` is a predefined variable that contains the canvas height.
 
 **index.js**
 
@@ -58,106 +59,15 @@ function setup() {
 ```
 
 
-### 1.2. **Load background image**
+### 1.2. **Load images**
 
-- To add a background we must first load our image.
-- We can use **p5.js**'s method `loadImage()`.
-- [Read documentation about loadImage() here](https://p5js.org/reference/#/p5/loadImage).
-- Pass `images/background.png` as an argument.
-- Assign the return value to `backgroundImg`.
-
-**index.js**
-
-```js
-function preload() {
-  backgroundImg = loadImage("images/background.png");
-}
-```
-
-
-### 1.3. **Draw background**
-
-- We have loaded `backgroundImg`, now we can draw it!
-- Use **p5.js**'s `image()` method to draw the image on the canvas.
-- [Read documentation about image() here](https://p5js.org/reference/#/p5/image).
-- Pass `backgroundImg`, `backgroundX`, `backgroundY`, `backgroundImg.width`, `CANVAS_HEIGHT` as arguments.
-
-**background.js**
-
-```js
-show() {
-  image(backgroundImg, backgroundX, backgroundY, backgroundImg.width, CANVAS_HEIGHT);
-}
-```
-
-**index.js**
-
-```js
-function draw() {
-  image(backgroundImg, backgroundX, backgroundY, backgroundImg.width, CANVAS_HEIGHT);
-}
-```
-
-
-### 1.4. **Move background**
-
-**background.js**
-
-```js
-update() {
-  // Subtract `this.x` with speed to move background to the left.
-  this.x -= this.speed;
-  // This handles the "infinite loop" by checking if
-  // the right edge of the image would be on the
-  // screen, if it is draw a second copy of the image
-  // right next to it once the second image gets to 
-  // the 0 point we can reset backgroundX to 0 and go 
-  // back to drawing just one image.
-  if (this.x <= -backgroundImg.width + width) {
-    image(backgroundImg, this.x + backgroundImg.width, 0, backgroundImg.width, height);
-    if (this.x <= -backgroundImg.width) {
-      this.x = 0;
-    }
-  }
-}
-```
-
-**index.js**
-
-```js
-function draw() {
-  image(backgroundImg, backgroundX, backgroundY, backgroundImg.width, CANVAS_HEIGHT);
-  moveBackground();
-}
-```
-
----
-
-
-## 2. **Create wasp**
-
-
-### 2.1. **Create wasp instance**
-
-- To create a wasp we must create an instance of the function `Wasp()`.
-- [Read documentation about instances here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new).
-- Assign the instance to our `wasp` variable.
-
-**index.js**
-
-```js
-function setup() {
-  createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
-  wasp = new Wasp();
-}
-```
-
-
-### 2.1. **Load wasp image**
-
-- We want to load our `images/wasp.png`.
-- We can use **p5.js**'s method `loadImage()`.
-- [Read documentation about loadImage() here](https://p5js.org/reference/#/p5/loadImage).
+- Then we want to load some images;
+  - `images/background.png` is our background image.
+  - `images/wasp.png` is our main character in the game!
+- To add our background we must first load the image.
+- We can use **p5.js** method `loadImage()`. [Read documentation here](https://p5js.org/reference/#/p5/loadImage).
+- Pass `"images/background.png"` and `"images/wasp.png"` as an argument to `loadImage()`.
+- Assign the return value to our predefined variable `backgroundImg` and `waspImg`.
 
 **index.js**
 
@@ -169,20 +79,146 @@ function preload() {
 ```
 
 
-### 2.2. **Draw wasp image**
+## 2. **Create background**
 
-- We want to draw the wasp on the canvas.
-- Use **p5.js**’s image() method. 
-- [Read documentation about image() here](https://p5js.org/reference/#/p5/image).
-- Pass `waspImg`, `this.x`, `this.y` and `this.size` as parameters.
+### 2.1. **`background.js`**
+
+- We have created a separate file `background.js` to handle all background-related code.
+- The background will have a `speed`, `x`, `y`, `width` and `height` variable.
+- It also contains the methods;
+  - `show()` that we will use for drawing.
+  - `update()` that we will use for animation.
+
+
+### 2.2. **Create Background instance object**
+
+- To use our `Background` class in our `index.js` file, we must create a new instance object.
+- In our `index.js`, we can use the keyword `new` to create a new instance object and save it in our predefined variable `background`.
+
+**index.js**
+
+```js
+function setup() {
+  background = new Background();
+}
+```
+
+
+### 2.3. **Define drawing**
+
+- Now we have to tell p5.js how we want to draw the background on the canvas.
+- Use **p5.js**'s `image()` method. [Read documentation here](https://p5js.org/reference/#/p5/image).
+- Arguments to `image()`;
+  - `backgroundImg`: Global variable defined in our `index.js` file. Contains the actual image file.
+  - `this.x`: Variable defined in `background.js`. Contains the image x position.
+  - `this.y`: Variable defined in `background.js`. Contains the image y position.
+  - `this.width`: Variable defined in `background.js`. Contains the image width.
+  - `this.height`: Global variable defined in our `index.js` file. Contains the image height.
+
+**background.js**
+
+```js
+show() {
+  image(backgroundImg, this.x, this.y, this.width, this.height);
+}
+```
+
+### 1.6. **Draw background**
+
+- The most important **p5.js** method for drawing is the `draw()` method! [Read documentation here](https://p5js.org/reference/#/p5/draw).
+- If you don't add any code for drawing here, nothing will show.
+- Let's add our `background.show()` method.
+- We should now see a background image on our canvas!
+
+**index.js**
+
+```js
+function draw() {
+  background.show();
+}
+```
+
+
+### 1.6. **Move background**
+
+- We also want our background to move. Let's add some code to our `update()` method in `background.js`.
+
+**background.js**
+
+```js
+update() {
+  this.x -= this.speed;
+  if (this.x <= -this.width + CANVAS_WIDTH) {
+    image(backgroundImg, this.x + this.width, 0, this.width, height);
+    if (this.x <= -this.width) {
+      this.x = 0;
+    }
+  }
+}
+```
+
+- Then just add the `background.update()` beneath the `background.show()` in the `index.js` file.
+
+**index.js**
+
+```js
+function draw() {
+  background.show();
+  background.update();
+}
+```
+
+---
+
+
+## 2. **Create wasp**
+
+
+### 2.1. **`wasp.js`**
+
+- We have created a separate file `wasp.js` to handle all wasp-related code.
+- The wasp will have a `speed`, `x`, `y`, `width`, `height`, `gravity`, and `lift` variable.
+- It also contains the methods;
+  - `show()` that we will use for drawing the image.
+  - `update()` that we will use for animation, in this case, creating gravity.
+  - `up()` that we will use for creating jump animation when user press `Space Bar`.
+
+
+### 2.2. **Create instance object**
+
+- We must first create an instance object of `Wasp` in `index.js` to use it there.
+- Assign the instance object to our predefined variable `wasp`.
+
+**index.js**
+
+```js
+function setup() {
+  createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+  background = new Background();
+  wasp = new Wasp();
+}
+```
+
+
+### 2.3. **Define drawing**
+
+- In the Wasp's `show()` method, we want to use **p5.js**’s `image()` method.
+- Pass `waspImg`, `this.x`, `this.y`, `this.width`, and `this.height` as parameters.
 
 **wasp.js**
 
 ```js
-this.show = function() {
+show() {
   image(waspImg, this.x, this.y, this.size, this.size);
 }
 ```
+
+### 2.4. **Draw wasp**
+
+- The most important **p5.js** method for drawing is the `draw()` method! [Read documentation here](https://p5js.org/reference/#/p5/draw).
+- If you don't add any code for drawing here, nothing will show.
+- Let's add our `background.show()` method.
+- We should now see a background image on our canvas!
 
 - We must also call the `wasp.show()` in `index.js` to draw the wasp.
 
