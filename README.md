@@ -120,6 +120,8 @@ function preload() {
 
 ## 2. **Create background**
 
+![](images/background.png)
+
 
 ### 2.1. **Open `background.js`**
 
@@ -257,6 +259,8 @@ function draw() {
 
 
 ## 3. **Create wasp**
+
+![](images/wasp.png)
 
 
 ### 3.1. **`wasp.js`**
@@ -766,6 +770,8 @@ showScores();
 
 
 ## 6. **Create presents**
+
+![](images/present.png)
 
 - We want something that the wasp can collect to get extra score. To make the game more christmas-y we can generate christmas presents that randomly flies against the wasp. But this time, compared to the pipes, we actually want to hit each present to be able to get extra score. 
 
