@@ -16,8 +16,8 @@ let backgroundImg;
 let presentImg;
 let isOver = false;
 let score = 0;
-const CANVAS_HEIGHT = 600;
 const CANVAS_WIDTH = 400;
+const CANVAS_HEIGHT = 600;
 
 
 /**************************************************** 
