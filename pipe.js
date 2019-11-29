@@ -7,11 +7,19 @@
  ****************************************************/
 
 class Pipe {
-  topPipeHeight = random(height / 2);
-  bottomPipeHeight = random(height / 2);
-  x = width;
-  width = 20;
   speed = 2;
+  top = {
+    height: random(CANVAS_HEIGHT / 2),
+    width = 20,
+    x: CANVAS_WIDTH,
+    y: 0
+  }
+  bottom = {
+    height: random(CANVAS_HEIGHT / 2),
+    width = 20,
+    x: CANVAS_WIDTH,
+    y: CANVAS_HEIGHT - this.bottom.height
+  }
 
   /****************************************************
    * Create pipes
