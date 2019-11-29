@@ -41,6 +41,8 @@ The `index.html` contains `<script>` tags with all the JavaScript files we need 
 
 To help you, we have predefined all methods and variables you need in the JavaScript files.
 
+---
+
 
 ### 1.1. **Create a canvas**
 
@@ -57,6 +59,8 @@ function setup() {
   createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 }
 ```
+
+---
 
 
 ### 1.2. **Load images**
@@ -78,8 +82,11 @@ function preload() {
 }
 ```
 
+---
+
 
 ## 2. **Create background**
+
 
 ### 2.1. **`background.js`**
 
@@ -89,8 +96,10 @@ function preload() {
   - `show()` that we will use for drawing.
   - `update()` that we will use for animation.
 
+---
 
-### 2.2. **Create Background instance object**
+
+### 2.2. **Create instance**
 
 - To use our `Background` class in our `index.js` file, we must create a new instance object.
 - In our `index.js`, we can use the keyword `new` to create a new instance object and save it in our predefined variable `background`.
@@ -102,6 +111,8 @@ function setup() {
   background = new Background();
 }
 ```
+
+---
 
 
 ### 2.3. **Define drawing**
@@ -123,12 +134,12 @@ show() {
 }
 ```
 
+---
+
 ### 1.6. **Draw background**
 
 - The most important **p5.js** method for drawing is the `draw()` method! [Read documentation here](https://p5js.org/reference/#/p5/draw).
-- If you don't add any code for drawing here, nothing will show.
-- Let's add our `background.show()` method.
-- We should now see a background image on our canvas!
+- If we don't add our `background.show()` here, nothing will show, so let's add it!
 
 **`index.js`**
 
@@ -137,6 +148,12 @@ function draw() {
   background.show();
 }
 ```
+
+---
+
+- **We should now see a background image on our canvas!**
+
+---
 
 
 ### 1.6. **Move background**
@@ -167,6 +184,10 @@ function draw() {
   background.update();
 }
 ```
+
+---
+
+- **We should now have a moving background!**
 
 ---
 
@@ -251,7 +272,11 @@ update() {
 }
 ```
 
-- Don't forget to call `wasp.show()` in `index.js`!
+---
+
+- **Don't forget to call `wasp.show()` in `index.js`!**
+
+---
 
 **`index.js`**
 
@@ -264,38 +289,14 @@ function draw() {
 }
 ```
 
-- You should now have a falling wasp!
-- **BONUS:** See if you can check if the wasp falls outside the canvas and stop the wasp from falling!
+---
+
+- **We should now have a falling wasp!**
 
 ---
 
 
-### 3.6. **Stop wasp from falling outside canvas**
-
-- To stop the wasp from falling outside the canvas, we can add some code to the `update()` in `wasp.js`.
-
-**`wasp.js`**
-
-```js
-update() {
-  // ... (earlier code)
-
-  if (this.y > height) {
-    this.y = height;
-    this.velocity = 0;
-  }
-
-  if (this.y < 0) {
-    this.y = 0;
-    this.velocity = 0;
-  }
-}
-```
-
----
-
-
-### 3.6. **Add jump**
+### 3.6. **Add jumping wasp**
 
 - Now the wasp is just falling. It must be able to fly!
 - Use the p5.js function named [keyPressed()](https://p5js.org/reference/#/p5/keyPressed) in `index.js`.
@@ -310,7 +311,7 @@ function keyPressed() {
 ```
 
 - Nothing is happening when calling the `wasp.up()` function? We need to add some code to it!
-- In `wasp.js`, go to `this.up()`.
+- In `wasp.js`, go to `up()`.
 - We can make the wasp fly by adding a positive lift force to `this.speed`.
 
 **`wasp.js`**
@@ -323,10 +324,75 @@ up() {
 
 ---
 
+- **We should now have a jumping wasp!**
+
+---
+
+
+### 3.7. **Stop wasp from falling outside canvas**
+
+- At the moment the wasp just disappears when falling outside the canvas.
+- To stop the wasp from falling outside the canvas, we can add some code to the `update()` in `wasp.js`.
+
+**`wasp.js`**
+
+```js
+update() {
+  // ... (earlier code)
+
+  if (this.y > CANVAS_HEIGHT) {
+    this.y = CANVAS_HEIGHT;
+    this.speed = 0;
+  }
+
+  if (this.y < 0) {
+    this.y = 0;
+    this.speed = 0;
+  }
+}
+```
+
+---
+
 
 ## 4. **Create pipes**
 
 We want the wasp to move past obstacles, like the pipes in Flappy Bird.
+
+
+### 4.1. **`pipe.js`**
+
+- We have created a separate file `pipe.js` to handle all pipe-related code.
+- The pipe will have a `speed`, `top`, and `bottom` variable.
+  - `top` contains an object with properties for the upper pipe.
+  - `bottom` contains an object with properties for the lower pipe.
+- It also contains the methods;
+  - `show()` that we will use for drawing the image.
+  - `update()` that we will use for animation, in this case, creating gravity.
+  - `hits()`
+  - `pass()`
+  - `offscreen()`
+
+---
+
+
+### 4.2. **Create instance**
+
+- We must first create an instance object of `Wasp` in `index.js` to use it there.
+- Assign the instance object to our predefined variable `wasp`.
+
+**`index.js`**
+
+```js
+function setup() {
+  createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+  background = new Background();
+  wasp = new Wasp();
+  pipe = new Pipe();
+}
+```
+
+---
 
 
 ### 4.1. **Define drawing**
@@ -338,9 +404,9 @@ We want the wasp to move past obstacles, like the pipes in Flappy Bird.
 **pipe.js**
 ```js
 show() {
-  fill(121, 85, 72); // First we define a color to use.
-  rect(this.x, 0, this.width, this.topPipeHeight); // This will draw the top pipe.
-  rect(this.x, CANVAS_HEIGHT - this.bottomPipeHeight, this.width, this.bottomPipeHeight); // This will draw the bottom pipe.
+  fill(121, 85, 72);
+  rect(this.x, 0, this.width, this.topPipeHeight);
+  rect(this.x, CANVAS_HEIGHT - this.bottomPipeHeight, this.width, this.bottomPipeHeight);
 }
 ```
 
@@ -538,7 +604,7 @@ In `present.js` we have to functions: `this.show = function()` and `this.update 
 
 The `update()` will update the presents so they start moving from right to left of the canvas. Take the x variable and substract with the speed variable.
 
-**present.js**
+**`present.js`**
 
 ```js
 this.show = function() {
@@ -568,7 +634,7 @@ At this point we want something to happen when the wasp actually hits a present.
 We must check if the height of the wasp is greater than the presents height and... you try to finish the calculation ;).  
 Write a `console.log` in the if-statement to check if it works. 
 
-**present.js**
+**`present.js`**
 
 ```js
 this.hits = function(wasp) {
