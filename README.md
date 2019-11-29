@@ -25,11 +25,16 @@ After Live Server is installed, you should be able to click “Go Live” in the
 ## 1. **Create game**
 
 - We will use a library called **p5.js** to create our game. It is a library people use for creative coding.
+
 - Get started with **p5.js** by visiting https://p5js.org/get-started/.
 
 ---
 
-**To help you, we have predefined all methods and variables you need in the JavaScript files.**
+### [NOTE]
+
+- **To help you, we have predefined all methods and variables you need in the JavaScript files.**
+
+- **In the code examples, we will use `// ... (earlier code)` as a comment to let you know when there is written code earlier but we don't want to show all of it.**
 
 ---
 
@@ -226,7 +231,7 @@ update() {
 
   // This will make the image loop infinitely by adding a new image when the old one ends.
   if (this.x <= -this.width + CANVAS_WIDTH) {
-    image(backgroundImg, this.x + this.width, 0, this.width, height);
+    image(backgroundImg, this.x + this.width, 0, this.width, this.height);
     if (this.x <= -this.width) {
       this.x = 0;
     }
@@ -344,6 +349,8 @@ show() {
 
 ```js
 function draw() {
+  // ... (earlier code)
+
   wasp.show();
 }
 ```
@@ -616,7 +623,9 @@ function draw() {
 
 - Now we only get two pipes and then nothing more?
 
-- Add some code for adding new Pipe to array.
+- Now we want a new present to generate each 100% of the frame.
+
+- Check [frameCount](https://p5js.org/reference/#/p5/frameCount) and push a new Pipe to `pipes` in `index.js` inside the `draw()` method.
 
 - See example below.
 
@@ -628,23 +637,91 @@ function draw() {
 function draw() {
   // ... (earlier code)
 
+  for (let pipe of pipes) {
+    // ... (earlier code)
+  }
+
+  // Check when frameCount is 100%.
   if (frameCount % 100 == 0) {
     pipes.push(new Pipe());
   }
+
 }
 ```
 
 ---
 
-## 4. **Game over**
+## 5. **Game over**
 
 - It's game over when you hit a pipe.
 
-- In `index.js` we have a `gameOver()` method. Here we want to display a text using [text()](https://p5js.org/reference/#/p5/text), which takes plain text and the position.
+### 
 
-- Do not forget to set our predefined variable `isOver` to true. 
+- So we should check in `index.js` inside `draw()` if we are actually hitting a pipe.
 
-- To actually end the game so it stops looping, add the [noLoop()](https://p5js.org/reference/#/p5/noLoop) in the function as well. 
+- See example below.
+
+---
+
+**`index.js`**
+
+```js
+function draw() {
+  // ... (earlier code)
+
+  for (let pipe of pipes) {
+    pipe.show();
+    pipe.update();
+
+    // Check if the wasp hit a pipe.
+    if (pipe.hits(wasp)) {
+      gameOver();
+    }
+  }
+
+  // ... (earlier code)
+}
+```
+
+---
+
+- Now we need to add some code to `hits()` in `pipe.js` to check if wasp is hitting a pipe.
+
+---
+
+**`pipe.js`**
+
+```js
+hits() {
+  // Check if the wasp is touching a top or bottom pipe y position.
+  if (wasp.y < this.top.height || wasp.y > CANVAS_HEIGHT - this.bottom.height) {
+    
+    // Check if the wasp is touching a top pipe x position.
+    if (wasp.x > this.top.x && wasp.x < this.top.x + this.top.width) {
+      return true;
+    }
+
+    // Check if the wasp is touching a bottom pipe x position.
+    if (wasp.x > this.bottom.x && wasp.x < this.bottom.x + this.bottom.width) {
+      return true;
+    }
+  }
+
+  // Else just return false – the wasp is not touching a pipe.
+  return false;
+}
+```
+
+---
+
+- Now, our `if (pipe.hits(wasp))` in `index.js` should return true when the wasp is hitting i pipe. Now we can add a game over screen.
+
+- In `index.js` `gameOver()` method, we will add following...
+  - Set our text size using **p5.js** [textSize()](https://p5js.org/reference/#/p5/textsize) method.
+  - Set our fill color using **p5.js** [fill()](https://p5js.org/reference/#/p5/fill) method.
+  - Add a text "GAME OVER" using **p5.js** [text()](https://p5js.org/reference/#/p5/text) method.
+  - Set our predefined variable `isOver` to true. We will use it later in `index.js` `keyPressed()` method.
+  - To actually end the game so it stops looping, add **p5.js** [noLoop()](https://p5js.org/reference/#/p5/noLoop) method.
 
 - See example below.
 
@@ -664,7 +741,13 @@ function gameOver() {
 
 ---
 
-- Add `isOver` and `startgame()` in `keyPressed()` to reset the game. 
+- **We should now show a game over screen when we hit a pipe!**
+
+---
+
+- We want to start a new game when the player presses the `Space` key.
+
+- Add `isOver` and `startGame()` in `index.js` inside the `keyPressed()` method to start a new game.
 
 - See example below.
 
@@ -713,7 +796,7 @@ if (pipes[i].pass(wasp)) {
 **`index.js`**
 
 ```js
-function startgame() {
+function startGame() {
   backgroundX = 0;
   pipes = [];
   wasp = new Wasp();
@@ -796,7 +879,7 @@ function preload() {
 
 ### 6.1. **Show presents**
 
-In `present.js` we have to functions: `this.show = function()` and `this.update = function()`. Now we actually want to show the presents so add the present variable, x, y, width and height as parameters in the show function.
+In `present.js` we have to functions: `show()` and `update()`. Now we actually want to show the presents so add the present variable, x, y, width and height as parameters in the show function.
 
 The `update()` will update the presents so they start moving from right to left of the canvas. Take the x variable and substract with the speed variable.
 
@@ -807,11 +890,11 @@ The `update()` will update the presents so they start moving from right to left 
 **`present.js`**
 
 ```js
-this.show = function() {
+show() {
   image(presentImg, this.x, this.y, this.width, this.height);
 }
 
-this.update = function() {
+update() {
  this.x -= this.speed;
 }
 ```
@@ -838,7 +921,7 @@ for (let i = presents.length-1; i >= 0; i--) {
 
 ### 6.2 **Hit detection**
 
-- At this point we want something to happen when the wasp actually hits a present. Here we must do a calculation, a quite similar one to the calculation for the hit detection for the pipes. Use `this.hits = function(wasp)` in `present.js`.
+- At this point we want something to happen when the wasp actually hits a present. Here we must do a calculation, a quite similar one to the calculation for the hit detection for the pipes. Use `hits(wasp)` in `present.js`.
 
 - We must check if the height of the wasp is greater than the presents height and... you try to finish the calculation ;).  
 Write a `console.log` in the if-statement to check if it works.
@@ -850,7 +933,7 @@ Write a `console.log` in the if-statement to check if it works.
 **`present.js`**
 
 ```js
-this.hits = function(wasp) {
+hits(wasp) {
   if (wasp.y > this.y && wasp.y < this.y + this.height) {
     if (wasp.x > this.x && wasp.x < this.x + this.width) {
       console.log("HITS");
