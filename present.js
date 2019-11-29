@@ -6,12 +6,12 @@
  *
  ****************************************************/
 
-function Present() {
-  this.y = random(height);
-  this.speed = 2;
-  this.x = width;
-  this.height = 32;
-  this.width = 32;
+class Present {
+  y = random(height);
+  speed = 2;
+  x = width;
+  height = 32;
+  width = 32;
 
 
   /****************************************************
@@ -19,7 +19,7 @@ function Present() {
    * together with x, y, width and height
    * @custom
    ****************************************************/
-  this.show = function() {
+  show() {
   
   }
 
@@ -29,14 +29,15 @@ function Present() {
    * move to the left. 
    * Use x and speed.
    ****************************************************/
-  this.update = function() {
+  update() {
     
   }
+
 
   /****************************************************
    * Here you want the wasp to hit the present
    ****************************************************/
-  this.hits = function(wasp) {
+  hits(wasp) {
 
   }
 }
