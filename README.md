@@ -34,7 +34,7 @@ After Live Server is installed, you should be able to click “Go Live” in the
 ---
 
 
-### 1.1. **`index.html`**
+### 1.1. **Open `index.html`**
 
 - The `index.html` contains `<script>` tags with all the JavaScript files we need to make the game.
 - First we add `https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.js`, the **p5.js** library.
@@ -43,7 +43,7 @@ After Live Server is installed, you should be able to click “Go Live” in the
 ---
 
 
-### 1.2. **`index.js`**
+### 1.2. **Open `index.js`**
 
 - We have created a file called `index.js`. This is where our main **methods** and **variables** for our game are predefined.
 
@@ -73,11 +73,11 @@ After Live Server is installed, you should be able to click “Go Live” in the
 
 ### 1.1. **Create a canvas**
 
-- To add a canvas with **p5.js** we can use their `createCanvas()` method. [Read documentation here](https://p5js.org/reference/#/p5/createCanvas).
-- This will create a white canvas.
-- Arguments for `createCanvas()`;
-  - `CANVAS_WIDTH` is a predefined variable that contains the canvas width.
-  - `CANVAS_HEIGHT` is a predefined variable that contains the canvas height.
+- To add a canvas with **p5.js** we can use their `createCanvas()` method and pass our predefined variables `CANVAS_HEIGHT` and `CANVAS_WIDTH` as arguments. [Read documentation here](https://p5js.org/reference/#/p5/createCanvas).
+
+- See example below.
+
+---
 
 **`index.js`**
 
@@ -92,13 +92,19 @@ function setup() {
 
 ### 1.2. **Load images**
 
-- Then we want to load some images;
+- Then we want to load some images into our game;
   - `images/background.png` is our background image.
   - `images/wasp.png` is our main character in the game!
-- To add our background we must first load the image.
+
 - We can use **p5.js** method `loadImage()`. [Read documentation here](https://p5js.org/reference/#/p5/loadImage).
-- Pass `"images/background.png"` and `"images/wasp.png"` as an argument to `loadImage()`.
-- Assign the return value to our predefined variable `backgroundImg` and `waspImg`.
+
+- We pass `"images/background.png"` and `"images/wasp.png"` as arguments to `loadImage()`.
+
+- We assign the return value to our predefined variables `backgroundImg` and `waspImg`.
+
+- See example below.
+
+---
 
 **`index.js`**
 
@@ -115,11 +121,17 @@ function preload() {
 ## 2. **Create background**
 
 
-### 2.1. **`background.js`**
+### 2.1. **Open `background.js`**
 
 - We have created a separate file `background.js` to handle all background-related code.
-- The background will have a `speed`, `x`, `y`, `width` and `height` variable.
-- It also contains the methods;
+- Our predefined **variables**;
+  - `speed`
+  - `x`
+  - `y`
+  - `width`
+  - `height`
+
+- Our predefined **methods**;
   - `show()` that we will use for drawing.
   - `update()` that we will use for animation.
 
@@ -128,8 +140,13 @@ function preload() {
 
 ### 2.2. **Create instance**
 
-- To use our `Background` class in our `index.js` file, we must create a new instance object.
-- In our `index.js`, we can use the keyword `new` to create a new instance object and save it in our predefined variable `background`.
+- To use our `class Background` in our `index.js` file, we must create a new instance object.
+
+- In our `index.js` file, in the `setup()` method, we can use the keyword `new` to create a new instance object and save it in our predefined variable `background`.
+
+- See example below.
+
+---
 
 **`index.js`**
 
@@ -146,12 +163,14 @@ function setup() {
 
 - Now we have to tell **p5.js** how we want to draw the background on the canvas.
 - Use **p5.js**'s `image()` method. [Read documentation here](https://p5js.org/reference/#/p5/image).
-- Arguments to `image()`;
-  - `backgroundImg`: Global variable defined in our `index.js` file. Contains the actual image file.
-  - `this.x`: Variable defined in `background.js`. Contains the image x position.
-  - `this.y`: Variable defined in `background.js`. Contains the image y position.
-  - `this.width`: Variable defined in `background.js`. Contains the image width.
-  - `this.height`: Global variable defined in our `index.js` file. Contains the image height.
+
+- In `background.js`, we start by passing `backgroundImg` as an argument to **p5.js** `image()` method. Remember that we defined the `backgroundImg` variable in the `index.js` file? It is also accessible in this file `background.js` because it is a *global* variable.
+
+- We also pass `class Background`'s `x`, `y`, `width`, `height` as arguments to **p5.js** `image()` function. You may have noticed that we have added `this` keyword before these variables. This is a rule when using class variables inside the class itself.
+
+- See example below.
+
+---
 
 **`background.js`**
 
@@ -166,7 +185,12 @@ show() {
 ### 1.6. **Draw background**
 
 - The most important **p5.js** method for drawing is the `draw()` method! [Read documentation here](https://p5js.org/reference/#/p5/draw).
+
 - If we don't add our `background.show()` here, nothing will show, so let's add it!
+
+- See example below.
+
+---
 
 **`index.js`**
 
@@ -187,11 +211,18 @@ function draw() {
 
 - We also want our background to move. Let's add some code to our `update()` method in `background.js`.
 
+- See example below.
+
+---
+
 **`background.js`**
 
 ```js
 update() {
+  // This will make the image move to the left.
   this.x -= this.speed;
+
+  // This will make the image loop infinitely by adding a new image when the old one ends.
   if (this.x <= -this.width + CANVAS_WIDTH) {
     image(backgroundImg, this.x + this.width, 0, this.width, height);
     if (this.x <= -this.width) {
@@ -201,7 +232,13 @@ update() {
 }
 ```
 
+---
+
 - Then just add the `background.update()` beneath the `background.show()` in the `index.js` file.
+
+- See example below.
+
+---
 
 **`index.js`**
 
@@ -225,8 +262,17 @@ function draw() {
 ### 3.1. **`wasp.js`**
 
 - We have created a separate file `wasp.js` to handle all wasp-related code.
-- The wasp will have a `speed`, `x`, `y`, `width`, `height`, `gravity`, and `lift` variable.
-- It also contains the methods;
+
+- Our predefined **variables**;
+  - `speed`
+  - `x`
+  - `y`
+  - `width`
+  - `height`
+  - `gravity`
+  - `lift`
+
+- Our predefined **methods**;
   - `show()` that we will use for drawing the image.
   - `update()` that we will use for animation, in this case, creating gravity.
   - `up()` that we will use for creating jump animation when user press `Space Bar`.
@@ -234,10 +280,15 @@ function draw() {
 ---
 
 
-### 3.2. **Create instance object**
+### 3.2. **Create instance**
 
 - We must first create an instance object of `Wasp` in `index.js` to use it there.
+
 - Assign the instance object to our predefined variable `wasp`.
+
+- See example below.
+
+---
 
 **`index.js`**
 
@@ -255,7 +306,12 @@ function setup() {
 ### 3.3. **Define drawing**
 
 - In the Wasp's `show()` method, we want to use **p5.js**’s `image()` method.
+
 - Pass `waspImg`, `this.x`, `this.y`, `this.width`, and `this.height` as parameters.
+
+- See example below.
+
+---
 
 **`wasp.js`**
 
@@ -271,8 +327,14 @@ show() {
 ### 3.4. **Draw wasp**
 
 - Let's add our `wasp.show()` method.
+
 - We should now see a wasp image on our canvas!
+
 - We must also call the `wasp.show()` in `index.js` to draw the wasp.
+
+- See example below.
+
+---
 
 **`index.js`**
 
@@ -288,7 +350,12 @@ function draw() {
 ### 3.5. **Add gravity**
 
 - The wasp should fall to the ground because it is affected by gravity! 
+
 - In `wasp.js`, we need to use `this.gravity`, `this.y`, and `this.speed` to create a falling wasp.
+
+- See example below.
+
+---
 
 **`wasp.js`**
 
@@ -302,6 +369,8 @@ update() {
 ---
 
 - **Don't forget to call `wasp.show()` in `index.js`!**
+
+- See example below.
 
 ---
 
@@ -326,8 +395,16 @@ function draw() {
 ### 3.6. **Add jumping wasp**
 
 - Now the wasp is just falling. It must be able to fly!
+
 - Use the p5.js function named [keyPressed()](https://p5js.org/reference/#/p5/keyPressed) in `index.js`.
+
 - Check if the space bar key is pressed, then call the `wasp.up()` function.
+
+- See example below.
+
+---
+
+**`index.js`**
 
 ```js
 function keyPressed() {
@@ -337,9 +414,17 @@ function keyPressed() {
 }
 ```
 
+---
+
 - Nothing is happening when calling the `wasp.up()` function? We need to add some code to it!
+
 - In `wasp.js`, go to `up()`.
+
 - We can make the wasp fly by adding a positive lift force to `this.speed`.
+
+- See example below.
+
+---
 
 **`wasp.js`**
 
@@ -359,7 +444,12 @@ up() {
 ### 3.7. **Stop wasp from falling outside canvas**
 
 - At the moment the wasp just disappears when falling outside the canvas.
+
 - To stop the wasp from falling outside the canvas, we can add some code to the `update()` in `wasp.js`.
+
+- See example below.
+
+---
 
 **`wasp.js`**
 
@@ -387,14 +477,16 @@ update() {
 We want the wasp to move past obstacles, like the pipes in Flappy Bird.
 
 
-### 4.1. **`pipe.js`**
+### 4.1. **Open `pipe.js`**
 
 - We have created a separate file `pipe.js` to handle all pipe-related code.
-- Variables;
+
+- Our predefined **variables**;
   - `speed` contains the pipe speed.
   - `top` contains an object with properties for the upper pipe.
   - `bottom` contains an object with properties for the lower pipe.
-- Methods;
+
+- Our predefined **methods**;
   - `show()` will be used for drawing an upper and lower pipe.
   - `update()` will be used for animation, in this case, moving the pipes from right to left on the canvas.
   - `hits()` will be used for checking if our wasp hits a pipe.
@@ -407,7 +499,12 @@ We want the wasp to move past obstacles, like the pipes in Flappy Bird.
 ### 4.2. **Create instance**
 
 - We must first create an instance object of `Pipe` in `index.js`.
+
 - In this case, we want to add our pipe to an array. Because we want to continuosly add new pipes to show when a pair of pipes has moved offscreen. We use our predefined variable `pipes` and give it a value of an empty array.
+
+- See example below.
+
+---
 
 **`index.js`**
 
@@ -426,8 +523,14 @@ function setup() {
 ### 4.1. **Define drawing**
 
 - We want to draw a pair of pipes at the top and the bottom of the canvas.
+
 - First, we use **p5.js** `fill()` method to define which color to use. [Read documentation here](https://p5js.org/reference/#/p5/fill).
+
 - Then we add two rectangles by using **p5.js** `rect()` method. [Read documentation here](https://p5js.org/reference/#/p5/rect).
+
+- See example below.
+
+---
 
 **`pipe.js`**
 
@@ -446,6 +549,10 @@ show() {
 
 - Because we have an array of pipes, we need to loop the array to be able to call the `pipe.show()`.
 
+- See example below.
+
+---
+
 **`index.js`**
 
 ```js
@@ -458,9 +565,16 @@ function draw() {
 }
 ```
 
+---
+
+
 ### 4.4. **Add movement to pipes**
 
 - In `pipe.js`, we can add movement to the pipes by subtracting `this.speed` (the pipe's speed) from `this.x` (the pipes x position).
+
+- See example below.
+
+---
 
 **`pipe.js`**
 
@@ -470,7 +584,13 @@ update() {
 }
 ```
 
-- Don't forget to also call the `pipe.update()` function in `index.js`.
+---
+
+- Don't forget to also call the `pipe.update()` function in `index.js` inside the `draw()` method.
+
+- See example below.
+
+---
 
 **`index.js`**
 
@@ -485,9 +605,18 @@ function draw() {
 }
 ```
 
+---
+
+
 ### 4.5. **Repeatedly add new pipes**
 
-- Now we only get two pipes and then nothing more.
+- Now we only get two pipes and then nothing more?
+
+- Add some code for adding new Pipe to array.
+
+- See example below.
+
+---
 
 **`index.js`**
 
@@ -506,13 +635,21 @@ function draw() {
 ## 4. **Game over**
 
 - It's game over when you hit a pipe.
-- In `index.js` we have a `gameover()` and here we want to display a text using [text()](https://p5js.org/reference/#/p5/text), which takes plain text and the position.
-- Do not forget to set the `isOver` variable to true, which is declared in the top. To actually end the game so it stops looping, add the [noLoop()](https://p5js.org/reference/#/p5/noLoop) in the function as well. 
+
+- In `index.js` we have a `gameOver()` method. Here we want to display a text using [text()](https://p5js.org/reference/#/p5/text), which takes plain text and the position.
+
+- Do not forget to set our predefined variable `isOver` to true. 
+
+- To actually end the game so it stops looping, add the [noLoop()](https://p5js.org/reference/#/p5/noLoop) in the function as well. 
+
+- See example below.
+
+---
 
 **`index.js`**
 
 ```js
-function gameover() {
+function gameOver() {
   textSize(50);
   fill(000);
   text("GAME OVER", 50, 300);
@@ -521,7 +658,13 @@ function gameover() {
 }
 ```
 
+---
+
 - Add `isOver` and `startgame()` in `keyPressed()` to reset the game. 
+
+- See example below.
+
+---
 
 **`index.js`**
 
@@ -539,8 +682,13 @@ function keyPressed() {
 
 ## 5. **Create score**
 
-Of course we want to show off our score and here we will check if the wasp has passed a pipe and add a score.
-Here we should add more logic in the for-loop in `index.js`, that goes through each pipe which we just did in the step above!
+- Of course we want to show off our score and here we will check if the wasp has passed a pipe and add a score.
+
+- Here we should add more logic in the for-loop in `index.js`, that goes through each pipe which we just did in the step above!
+
+- See example below.
+
+---
 
 **`index.js`**
 
@@ -550,7 +698,13 @@ if (pipes[i].pass(wasp)) {
 }
 ```
 
-We also have to use the score variable in `startgame()`, so the score starts at 0.
+---
+
+- We also have to use the score variable in `startgame()`, so the score starts at 0.
+
+- See example below.
+
+---
 
 **`index.js`**
 
@@ -566,11 +720,20 @@ function startgame() {
 }
 ```
 
+---
+
+
 ### 5.1. **Display score**
 
-In `showScores()` we want to display the score, which is plain text, here we can use p5 function's, such as [text()](https://p5js.org/reference/#/p5/text) function. We have to pass in the text, variable and position. The position can be e.g 1, 32.
+- In `showScores()` we want to display the score, which is plain text, here we can use p5 function's, such as [text()](https://p5js.org/reference/#/p5/text) function.
 
-Feel free to play around with the different function's but we will come a long way with text size and color.
+- We have to pass in the text, variable and position. The position can be e.g 1, 32.
+
+- Feel free to play around with the different function's but we will come a long way with text size and color.
+
+- See example below.
+
+---
 
 **`index.js`**
 
@@ -582,9 +745,16 @@ function showScores() {
 }
 ```
 
+---
+
+
 ### 5.2 **Call the score function**
 
-Do not forget to call the `showScores()` we just created in `index.js`. Call the function inside the for-loop that goes through each pipe, without this step nothing will happen.
+- Do not forget to call the `showScores()` we just created in `index.js`. Call the function inside the for-loop that goes through each pipe, without this step nothing will happen.
+
+- See example below.
+
+---
 
 **`index.js`**
 
@@ -597,9 +767,13 @@ showScores();
 
 ## 6. **Create presents**
 
-We want something that the wasp can collect to get extra score. To make the game more christmas-y we can generate christmas presents that randomly flies against the wasp. But this time, compared to the pipes, we actually want to hit each present to be able to get extra score. 
+- We want something that the wasp can collect to get extra score. To make the game more christmas-y we can generate christmas presents that randomly flies against the wasp. But this time, compared to the pipes, we actually want to hit each present to be able to get extra score. 
 
-To start off with the presents we jump to `index.js` where we find a global variable in the top called `presentImg;`. Next up we want to use the variable and set to a [loadImage()](https://p5js.org/reference/#/p5/loadimage), which is a magical p5 function, and take the present.png image which you will find in the images folder and use it inside of the `preload()`.
+- To start off with the presents we jump to `index.js` where we find a global variable in the top called `presentImg;`. Next up we want to use the variable and set to a [loadImage()](https://p5js.org/reference/#/p5/loadimage), which is a magical p5 function, and take the present.png image which you will find in the images folder and use it inside of the `preload()`.
+
+- See example below.
+
+---
 
 **`index.js`**
 
@@ -611,11 +785,18 @@ function preload() {
 }
 ```
 
+---
+
+
 ### 6.1. **Show presents**
 
 In `present.js` we have to functions: `this.show = function()` and `this.update = function()`. Now we actually want to show the presents so add the present variable, x, y, width and height as parameters in the show function.
 
 The `update()` will update the presents so they start moving from right to left of the canvas. Take the x variable and substract with the speed variable.
+
+- See example below.
+
+---
 
 **`present.js`**
 
@@ -629,7 +810,13 @@ this.update = function() {
 }
 ```
 
+---
+
 When the steps above is completed we actually have to draw the presents in `function draw()` in `index.js`. To draw infinite loops of present we have to loop through all presents and for each present call the `show()` and `update()`.
+
+- See example below.
+
+---
 
 **`index.js`**
 
@@ -640,12 +827,19 @@ for (let i = presents.length-1; i >= 0; i--) {
 }
 ```
 
+---
+
+
 ### 6.2 **Hit detection**
 
-At this point we want something to happen when the wasp actually hits a present. Here we must do a calculation, a quite similar one to the calculation for the hit detection for the pipes. Use `this.hits = function(wasp)` in `present.js`.
+- At this point we want something to happen when the wasp actually hits a present. Here we must do a calculation, a quite similar one to the calculation for the hit detection for the pipes. Use `this.hits = function(wasp)` in `present.js`.
 
-We must check if the height of the wasp is greater than the presents height and... you try to finish the calculation ;).  
-Write a `console.log` in the if-statement to check if it works. 
+- We must check if the height of the wasp is greater than the presents height and... you try to finish the calculation ;).  
+Write a `console.log` in the if-statement to check if it works.
+
+- See example below.
+
+---
 
 **`present.js`**
 
@@ -661,7 +855,13 @@ this.hits = function(wasp) {
 }
 ```
 
-Now we want a new present to generate each 75% of the frame, use [frameCount()](https://p5js.org/reference/#/p5/frameCount) and push the presents to `christmasPresent()` in `index.js`.
+---
+
+- Now we want a new present to generate each 75% of the frame, use [frameCount()](https://p5js.org/reference/#/p5/frameCount) and push the presents to `christmasPresent()` in `index.js`.
+
+- See example below.
+
+---
 
 **`index.js`**
 
@@ -671,9 +871,18 @@ if (frameCount % 75 == 0) {</b>
 }
 ```
 
+---
+
+
 ### 6.3 **Get extra score**
 
-To make the game more fun we can set that the user will get extra score when hitting a present. Add extra score in `index.js` in the for-loop we created in 5.1.
+- To make the game more fun we can set that the user will get extra score when hitting a present.
+
+- Add extra score in `index.js` in the for-loop we created in 5.1.
+
+- See example below.
+
+---
 
 **`index.js`**
 
@@ -688,9 +897,16 @@ for (let i = presents.length-1; i >= 0; i--) {
 }
 ```
 
+---
+
+
 ### 6.4 **Reset presents**
 
-When we start a new game we want the presents array to be empty. Add an empy array in `index.js` in the `startgame()`:
+- When we start a new game we want the presents array to be empty. Add an empy array in `index.js` in the `startgame()`:
+
+- See example below.
+
+---
 
 **`index.js`**
 
@@ -710,8 +926,10 @@ function startgame() {
 
 ---
 
+## 7. **DONE!**
 
-## 7. **More ideas**
+### 7.1. **More ideas**
 
-- The game gradually increases in speed.
-- Make start screen with, for example, the Expressen, Code Pub, or Netlight logo.
+- If you are done, but still have time left? Try implementing your own ideas or try out these below;
+  - The game gradually increases in speed.
+  - Make start screen with, for example, the Expressen, Code Pub, or Netlight logo.
