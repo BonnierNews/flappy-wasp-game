@@ -1,20 +1,18 @@
 /****************************************************
- * wasp.js
+ * background.js
  * 
  ****************************************************/
 
-class Wasp {
-  speed = 0;
-  x = 64;
-  y = CANVAS_HEIGHT / 2;
-  width = 32;
-  height = 32;
-  gravity = 0.1;
-  lift = -7;
+class Background {
+  speed = 1;
+  x = 0;
+  y = 0;
+  width = 800;
+  height = 600;
 
 
   /****************************************************
-   * Show the wasp by using the image() from p5,
+   * Show the background by using the image() from p5,
    * which takes img, x, y and size
    * @custom
    ****************************************************/
@@ -24,19 +22,12 @@ class Wasp {
 
 
   /****************************************************
-   * Create gravity
+   * Background starts to the right of the canvas and
+   * moves to the left
+   * This function updates in draw()
    * @custom
    ****************************************************/
   update() {
-
-  }
-
-
-  /****************************************************
-   * Make the wasp go upwards
-   * @custom
-   ****************************************************/
-  up() {
 
   }
 }
