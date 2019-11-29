@@ -1034,5 +1034,7 @@ function startgame() {
 ### 8.1. **More ideas**
 
 - If you are done, but still have time left? Try implementing your own ideas or try out these below;
-  - The game gradually increases in speed.
-  - Make start screen with, for example, the Expressen, Code Pub, or Netlight logo.
+  - Make the wasp fly faster and faster as the game progresses.
+  - Experiment with the physics of the wasp, such as gravity and lift.
+  - Show a high score-list of best scores.
+  - Make a start screen, to show before the game starts.
