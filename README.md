@@ -1038,3 +1038,7 @@ function startgame() {
   - Experiment with the physics of the wasp, such as gravity and lift.
   - Show a high score-list of best scores.
   - Make a start screen, to show before the game starts.
+
+
+_Note: This project is inspired by 
+[The Coding Train](https://thecodingtrain.com/). Check him out - he has many more fun workshops like this on his YouTube channel!_
