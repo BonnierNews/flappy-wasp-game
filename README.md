@@ -76,7 +76,7 @@ After Live Server is installed, you should be able to click “Go Live” in the
 ---
 
 
-### 1.1. **Create a canvas**
+### 1.3. **Create a canvas**
 
 - To add a canvas with **p5.js** we can use their `createCanvas()` method and pass our predefined variables `CANVAS_HEIGHT` and `CANVAS_WIDTH` as arguments. [Read documentation here](https://p5js.org/reference/#/p5/createCanvas).
 
@@ -95,7 +95,7 @@ function setup() {
 ---
 
 
-### 1.2. **Load images**
+### 1.4. **Load images**
 
 - Then we want to load some images into our game;
   - `images/background.png` is our background image.
