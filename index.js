@@ -82,7 +82,7 @@ function startGame() {
  * 
  * @customMethod
  ****************************************************/
-function gameover() {
+function gameOver() {
 
 }
 
