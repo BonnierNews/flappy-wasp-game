@@ -655,7 +655,7 @@ function draw() {
 
 - It's game over when you hit a pipe.
 
-### 
+### 5.1. **Check if wasp hits pipe**
 
 - So we should check in `index.js` inside `draw()` if we are actually hitting a pipe.
 
@@ -714,6 +714,8 @@ hits() {
 
 ---
 
+
+
 - Now, our `if (pipe.hits(wasp))` in `index.js` should return true when the wasp is hitting i pipe. Now we can add a game over screen.
 
 - In `index.js` `gameOver()` method, we will add following...
@@ -747,7 +749,7 @@ function gameOver() {
 
 - We want to start a new game when the player presses the `Space` key.
 
-- Add `isOver` and `startGame()` in `index.js` inside the `keyPressed()` method to start a new game.
+- In `index.js`, check if `isOver` is true inside the `keyPressed()` method. If true, run `startGame()` to start a new game.
 
 - See example below.
 
@@ -759,7 +761,9 @@ function gameOver() {
 function keyPressed() {
   if (key === " ") {
     wasp.up();
-    if (isOver) startGame();
+    if (isOver) {
+      startGame();
+    }
   }
 }
 ```
