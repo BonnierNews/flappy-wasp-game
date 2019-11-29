@@ -145,28 +145,7 @@ function preload() {
 ---
 
 
-### 2.2. **Create instance**
-
-- To use our `class Background` in our `index.js` file, we must create a new instance object.
-
-- In our `index.js` file, in the `setup()` method, we can use the keyword `new` to create a new instance object and save it in our predefined variable `background`.
-
-- See example below.
-
----
-
-**`index.js`**
-
-```js
-function setup() {
-  background = new Background();
-}
-```
-
----
-
-
-### 2.3. **Define drawing**
+### 2.2. **Define drawing**
 
 - Now we have to tell **p5.js** how we want to draw the background on the canvas.
 - Use **p5.js**'s `image()` method. [Read documentation here](https://p5js.org/reference/#/p5/image).
@@ -189,7 +168,29 @@ show() {
 
 ---
 
-### 1.6. **Draw background**
+
+### 2.3. **Create instance**
+
+- To use our `class Background` in our `index.js` file, we must create a new instance object.
+
+- In our `index.js` file, in the `setup()` method, we can use the keyword `new` to create a new instance object and save it in our predefined variable `background`.
+
+- See example below.
+
+---
+
+**`index.js`**
+
+```js
+function setup() {
+  background = new Background();
+}
+```
+
+---
+
+
+### 2.4. **Draw background**
 
 - The most important **p5.js** method for drawing is the `draw()` method! [Read documentation here](https://p5js.org/reference/#/p5/draw).
 
@@ -214,7 +215,7 @@ function draw() {
 ---
 
 
-### 1.6. **Move background**
+### 2.5. **Move background**
 
 - We also want our background to move. Let's add some code to our `update()` method in `background.js`.
 
@@ -531,7 +532,7 @@ function setup() {
 ---
 
 
-### 4.1. **Define drawing**
+### 4.3. **Define drawing**
 
 - We want to draw a pair of pipes at the top and the bottom of the canvas.
 
@@ -556,7 +557,7 @@ show() {
 ---
 
 
-### 4.3. **Show pipes**
+### 4.4. **Show pipes**
 
 - Because we have an array of pipes, we need to loop the array to be able to call the `pipe.show()`.
 
@@ -579,7 +580,7 @@ function draw() {
 ---
 
 
-### 4.4. **Add movement to pipes**
+### 4.5. **Add movement to pipes**
 
 - In `pipe.js`, we can add movement to the pipes by subtracting `this.speed` (the pipe's speed) from `this.x` (the pipes x position).
 
@@ -619,7 +620,7 @@ function draw() {
 ---
 
 
-### 4.5. **Repeatedly add new pipes**
+### 4.6. **Repeatedly add new pipes**
 
 - Now we only get two pipes and then nothing more?
 
@@ -771,7 +772,7 @@ function keyPressed() {
 ---
 
 
-## 5. **Create score**
+## 6. **Create score**
 
 - Of course we want to show off our score and here we will check if the wasp has passed a pipe and add a score.
 
@@ -779,13 +780,22 @@ function keyPressed() {
 
 - See example below.
 
----
-
 **`index.js`**
 
 ```js
-if (pipes[i].pass(wasp)) {
-  score++;
+function draw() {
+  // ... (earlier code)
+
+  for (let pipe of pipes) {
+    // ... (earlier code)
+
+    // Check if wasp passes a pipe.
+    if (pipe.pass(wasp)) {
+      score++;
+    }
+  }
+
+  // ... (earlier code)
 }
 ```
 
@@ -814,7 +824,7 @@ function startGame() {
 ---
 
 
-### 5.1. **Display score**
+### 6.1. **Display score**
 
 - In `showScores()` we want to display the score, which is plain text, here we can use p5 function's, such as [text()](https://p5js.org/reference/#/p5/text) function.
 
@@ -839,7 +849,7 @@ function showScores() {
 ---
 
 
-### 5.2 **Call the score function**
+### 6.2 **Call the score function**
 
 - Do not forget to call the `showScores()` we just created in `index.js`. Call the function inside the for-loop that goes through each pipe, without this step nothing will happen.
 
@@ -856,7 +866,7 @@ showScores();
 ---
 
 
-## 6. **Create presents**
+## 7. **Create presents**
 
 ![](images/present.png)
 
@@ -881,7 +891,7 @@ function preload() {
 ---
 
 
-### 6.1. **Show presents**
+### 7.1. **Show presents**
 
 In `present.js` we have to functions: `show()` and `update()`. Now we actually want to show the presents so add the present variable, x, y, width and height as parameters in the show function.
 
@@ -923,7 +933,7 @@ for (let i = presents.length-1; i >= 0; i--) {
 ---
 
 
-### 6.2 **Hit detection**
+### 7.2 **Hit detection**
 
 - At this point we want something to happen when the wasp actually hits a present. Here we must do a calculation, a quite similar one to the calculation for the hit detection for the pipes. Use `hits(wasp)` in `present.js`.
 
@@ -967,7 +977,7 @@ if (frameCount % 75 == 0) {</b>
 ---
 
 
-### 6.3 **Get extra score**
+### 7.3 **Get extra score**
 
 - To make the game more fun we can set that the user will get extra score when hitting a present.
 
@@ -993,7 +1003,7 @@ for (let i = presents.length-1; i >= 0; i--) {
 ---
 
 
-### 6.4 **Reset presents**
+### 7.4 **Reset presents**
 
 - When we start a new game we want the presents array to be empty. Add an empy array in `index.js` in the `startgame()`:
 
@@ -1019,9 +1029,9 @@ function startgame() {
 
 ---
 
-## 7. **DONE!**
+## 8. **DONE!**
 
-### 7.1. **More ideas**
+### 8.1. **More ideas**
 
 - If you are done, but still have time left? Try implementing your own ideas or try out these below;
   - The game gradually increases in speed.
