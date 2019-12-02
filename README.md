@@ -819,6 +819,22 @@ function draw() {
 }
 ```
 
+- In the previous step we are using `pass`, but at me moment we are not doing anything with the function.
+ We have to check if the wasp has passed a pipe.
+
+- See example below. 
+
+**`pipe.js`**
+
+```js
+pass(wasp) {
+  if (wasp.x > this.x && !this.passed) {
+    this.passed = true;
+    return true;
+  }
+  return false;
+}
+```
 ---
 
 - We also have to use the score variable in `startgame()`, so the score starts at 0.
@@ -831,13 +847,9 @@ function draw() {
 
 ```js
 function startGame() {
-  backgroundX = 0;
-  pipes = [];
-  wasp = new Wasp();
-  pipes.push(new Pipe());
-  isOver = false;
+  // ... (earlier code)
+   
   score = 0;
-  loop();
 }
 ```
 
@@ -871,7 +883,7 @@ function showScores() {
 
 ### 6.2 **Call the score function**
 
-- Do not forget to call the `showScores()` we just created in `index.js`. Call the function inside the for-loop that goes through each pipe, without this step nothing will happen.
+- Do not forget to call the `showScores()` we just created in `index.js`. Call the function inside `draw()`.
 
 - See example below.
 
@@ -880,7 +892,11 @@ function showScores() {
 **`index.js`**
 
 ```js
-showScores();
+draw() {
+  // ... (earlier code)
+
+  showScores();
+}
 ```
 
 ---

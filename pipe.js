@@ -62,7 +62,11 @@ class Pipe {
    * @custom
    ****************************************************/
   pass(wasp) {
-
+    if (wasp.x > this.x && !this.passed) {
+      this.passed = true;
+      return true;
+    }
+    return false;
   }
 
   /****************************************************

@@ -64,6 +64,12 @@ function draw() {
     pipe.show();
     pipe.update();
 
+    
+    // Check if wasp passes a pipe.
+    if (pipe.pass(wasp)) {
+      score++;
+    }
+    
     // Check if the wasp hit a pipe.
     if (pipe.hits(wasp)) {
       gameOver();
@@ -73,6 +79,8 @@ function draw() {
   if (frameCount % 100 == 0) {
     pipes.push(new Pipe());
   }
+
+  showScores();
 }
 
 
@@ -132,5 +140,7 @@ function gameOver() {
  * @customMethod
  ****************************************************/
 function showScores() {
-
+  fill (000);
+  textSize(32);
+  text("Score: " + score, 1, 32);
 }
