@@ -279,11 +279,11 @@ function draw() {
 - We have created a separate file `wasp.js` to handle all wasp-related code.
 
 - Our predefined **variables**;
-  - `speed` – we will animate the background to move so it will have a speed.
+  - `speed` – we will animate the wasp to move so it will have a speed.
   - `x` – the wasp's x-axis position.
   - `y` – the wasp's y-axis position.
   - `width` – the wasp's width.
-  - `height` – the background's height.
+  - `height` – the wasp's height.
   - `gravity` – the wasp will have a gravity for "falling" animation.
   - `lift` – the wasp will have a lift for "jumping" animation.
 
