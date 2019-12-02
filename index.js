@@ -63,6 +63,11 @@ function draw() {
   for (let pipe of pipes) {
     pipe.show();
     pipe.update();
+
+    // Check if the wasp hit a pipe.
+    if (pipe.hits(wasp)) {
+      gameOver();
+    }
   }
 
   if (frameCount % 100 == 0) {
@@ -79,6 +84,9 @@ function draw() {
 function keyPressed() {
   if (key === " ") {
     wasp.up();
+    if (isOver) {
+      startGame();
+    }
   }
 }
 
@@ -91,7 +99,13 @@ function keyPressed() {
  * @customMethod
  ****************************************************/
 function startGame() {
-
+  backgroundX = 0;
+  pipes = [];
+  wasp = new Wasp();
+  pipes.push(new Pipe());
+  isOver = false;
+  score = 0;
+  loop();
 }
 
 
@@ -102,6 +116,11 @@ function startGame() {
  * @customMethod
  ****************************************************/
 function gameOver() {
+  textSize(50);
+  fill(000);
+  text("GAME OVER", 50, 300);
+  isOver = true;
+  noLoop();
 
 }
 

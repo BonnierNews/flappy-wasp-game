@@ -774,6 +774,21 @@ function keyPressed() {
 }
 ```
 
+- To start a new game we have to add some code in `startGame()`.
+- See example below.
+
+**`index.js`**
+
+```js
+function startGame() {
+  backgroundX = 0;
+  pipes = [];
+  wasp = new Wasp();
+  pipes.push(new Pipe());
+  isOver = false;
+  loop();
+}
+```
 ---
 
 
