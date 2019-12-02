@@ -136,11 +136,11 @@ function preload() {
 
 - We have created a separate file `background.js` to handle all background-related code.
 - Our predefined **variables**;
-  - `speed`
-  - `x`
-  - `y`
-  - `width`
-  - `height`
+  - `speed` – we will animate the background to move so it will have a speed.
+  - `x` – the background's x-axis position.
+  - `y` – the background's y-axis position.
+  - `width` – the background's width.
+  - `height` – the background's height.
 
 - Our predefined **methods**;
   - `show()` that we will use for drawing.
