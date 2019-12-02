@@ -1,31 +1,42 @@
-function Wasp() {
-  this.y = height / 2;
-  this.x = 64;
-  this.gravity = 0.1;
-  this.lift = -10;
-  this.velocity = 0;
+/****************************************************
+ * wasp.js
+ * 
+ ****************************************************/
 
-  this.show = function() {
-    image(waspImg, this.x - 16, this.y - 16, 32, 32);
+class Wasp {
+  speed = 0;
+  x = 64;
+  y = CANVAS_HEIGHT / 2;
+  width = 32;
+  height = 32;
+  gravity = 0.1;
+  lift = -7;
+
+
+  /****************************************************
+   * Show the wasp by using the image() from p5,
+   * which takes img, x, y and size
+   * @custom
+   ****************************************************/
+  show() {
+
   }
 
-  this.up = function() {
-    this.velocity += this.lift; 
+
+  /****************************************************
+   * Create gravity
+   * @custom
+   ****************************************************/
+  update() {
+
   }
 
-  this.update = function() {
-    this.velocity += this.gravity;
-    this.velocity += 0.2;
-    this.y += this.velocity;
 
-    if (this.y > height) {
-      this.y = height;
-      this.velocity = 0;
-    }
+  /****************************************************
+   * Make the wasp go upwards
+   * @custom
+   ****************************************************/
+  up() {
 
-    if (this.y < 0) {
-      this.y = 0;
-      this.velocity = 0;
-    }
   }
 }
