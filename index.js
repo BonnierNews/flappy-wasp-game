@@ -111,11 +111,10 @@ function draw() {
 
   showScores();
 
-  // Presents
-  for (let i = presents.length-1; i >= 0; i--) {
-    presents[i].show();
-    presents[i].update();
-    if (presents[i].hits(wasp)) {
+  for (let present of presents) {
+    present.show();
+    present.update();
+    if (present.hits(wasp)) {
       score += 3;
       presents.splice(i, 1);
     }
