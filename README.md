@@ -65,13 +65,13 @@ After Live Server is installed, you should be able to click “Go Live” in the
   - `CANVAS_WIDTH` contains the canvas width.
 
 - Our predefined **methods**;
-  - `preload()`
-  - `setup()`
-  - `draw()`
-  - `keyPressed()`
-  - `startGame()`
-  - `gameOver()`
-  - `showScores()`
+  - `preload()` – a **p5.js** method.
+  - `setup()` – a **p5.js** method.
+  - `draw()` – a **p5.js** method.
+  - `keyPressed()` – a **p5.js** method.
+  - `startGame()` – a custom method.
+  - `gameOver()` – a custom method.
+  - `showScores()` – a custom method.
 
 ---
 
