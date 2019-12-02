@@ -385,7 +385,7 @@ update() {
 
 ---
 
-- **Don't forget to call `wasp.show()` in `index.js`!**
+- Don't forget to call `wasp.update()` in `index.js`!
 
 - See example below.
 
