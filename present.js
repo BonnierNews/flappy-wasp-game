@@ -4,9 +4,9 @@
  ****************************************************/
 
 class Present {
-  y = random(height);
   speed = 2;
-  x = width;
+  y = random(height);
+  x = CANVAS_WIDTH;
   height = 32;
   width = 32;
   taken = false;
@@ -39,7 +39,6 @@ class Present {
     if (wasp.y > this.y && wasp.y < this.y + this.height) {
       if (wasp.x > this.x && wasp.x < this.x + this.width) {
         if (!this.taken) {
-          console.log("HITS");
           this.taken = true;
           return true;
         }
