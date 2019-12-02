@@ -955,6 +955,19 @@ update() {
 
 ---
 
+**`index.js`**
+- Now we must create an empty array for the presents and push a new present to the array.
+- See example below.
+
+```js
+function setup() {
+  // ... (earlier code)
+
+  presents = [];
+  presents.push(new Present()); 
+}
+```
+---
 When the steps above is completed we actually have to draw the presents in `function draw()` in `index.js`. To draw infinite loops of present we have to loop through all presents and for each present call the `show()` and `update()`.
 
 - See example below.
@@ -964,9 +977,17 @@ When the steps above is completed we actually have to draw the presents in `func
 **`index.js`**
 
 ```js
-for (let i = presents.length-1; i >= 0; i--) {
-  presents[i].show();
-  presents[i].update();
+function draw() {
+// ... (earlier code)
+
+  for (let present of presents) {
+    present.show();
+    present.update();
+  }
+
+  if (frameCount % 75 == 0) {
+    presents.push(new Present());
+  }
 }
 ```
 

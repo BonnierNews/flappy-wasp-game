@@ -16,6 +16,7 @@ let backgroundImg;
 let presentImg;
 let isOver = false;
 let score = 0;
+let presents;
 const CANVAS_WIDTH = 400;
 const CANVAS_HEIGHT = 600;
 
@@ -30,6 +31,7 @@ const CANVAS_HEIGHT = 600;
 function preload() {
   backgroundImg = loadImage("images/background.png");
   waspImg = loadImage("images/wasp.png");
+  presentImg = loadImage("images/present.png");
 }
 
 
@@ -45,6 +47,8 @@ function setup() {
   wasp = new Wasp();
   pipes = [];
   pipes.push(new Pipe());
+  presents = [];
+  presents.push(new Present()); 
 }
 
 
@@ -82,6 +86,15 @@ function draw() {
   }
 
   showScores();
+
+  for (let present of presents) {
+    present.show();
+    present.update();
+  }
+
+  if (frameCount % 75 == 0) {
+    presents.push(new Present());
+  }
 }
 
 

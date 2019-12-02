@@ -17,7 +17,7 @@ class Present {
    * @custom
    ****************************************************/
   show() {
-  
+    image(presentImg, this.x, this.y, this.width, this.height);
   }
 
 
@@ -27,7 +27,7 @@ class Present {
    * Use x and speed.
    ****************************************************/
   update() {
-    
+    this.x -= this.speed;
   }
 
 
