@@ -499,16 +499,20 @@ We want the wasp to move past obstacles, like the pipes in Flappy Bird.
 - We have created a separate file `pipe.js` to handle all pipe-related code.
 
 - Our predefined **variables**;
-  - `speed` contains the pipe speed.
-  - `top` contains an object with properties for the upper pipe.
-  - `bottom` contains an object with properties for the lower pipe.
+  - `speed` – contains the pipe speed that we will use for moving animation.
+  - `width` – the width of the pipe.
+  - `x` – x-axis position of pipe.
+  - `topY` – the upper pipe's y-axis positioning.
+  - `bottomY` – the lower pipe's y-axis positioning.
+  - `topHeight` – the upper pipe's height.
+  - `bottomHeight` – the lower pipe's height.
 
 - Our predefined **methods**;
-  - `show()` will be used for drawing an upper and lower pipe.
-  - `update()` will be used for animation, in this case, moving the pipes from right to left on the canvas.
-  - `hits()` will be used for checking if our wasp hits a pipe.
-  - `pass()` will be used for checking if our wasp passes (NOT hits) a pipe.
-  - `offscreen()` will be used for checking of the pipe has moved outside the canvas.
+  - `show()` – will be used for drawing an upper and lower pipe.
+  - `update()` – will be used for animation, in this case, moving the pipes from right to left on the canvas.
+  - `hits()` – will be used for checking if our wasp hits a pipe.
+  - `pass()` – will be used for checking if our wasp passes (NOT hits) a pipe.
+  - `offscreen()` – will be used for checking of the pipe has moved outside the canvas.
 
 ---
 
