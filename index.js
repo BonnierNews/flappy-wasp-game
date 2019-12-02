@@ -28,7 +28,8 @@ const CANVAS_HEIGHT = 600;
  * @p5jsMethod
  ****************************************************/
 function preload() {
-
+  backgroundImg = loadImage("images/background.png");
+  waspImg = loadImage("images/wasp.png");
 }
 
 
@@ -39,7 +40,8 @@ function preload() {
  * @p5jsMethod
  ****************************************************/
 function setup() {
-
+  createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+  background = new Background();
 }
 
 
@@ -50,7 +52,8 @@ function setup() {
  * @p5jsMethod
  ****************************************************/
 function draw() {
-
+  background.show();
+  background.update();
 }
 
 
