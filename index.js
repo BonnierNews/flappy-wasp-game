@@ -32,14 +32,14 @@
  * You can read more about them in the README.md.
  ****************************************************/
 let wasp;
-let pipes;
+let pipes = [];
 let background;
 let waspImg;
 let backgroundImg;
 let presentImg;
 let isOver = false;
 let score = 0;
-let presents;
+let presents = [];
 const CANVAS_WIDTH = 400;
 const CANVAS_HEIGHT = 600;
 
@@ -68,10 +68,6 @@ function setup() {
   createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
   background = new Background();
   wasp = new Wasp();
-  pipes = [];
-  pipes.push(new Pipe());
-  presents = [];
-  presents.push(new Present()); 
 }
 
 
@@ -88,6 +84,8 @@ function draw() {
   wasp.show();
   wasp.update();
 
+  if (frameCount % 100 === 0) pipes.push(new Pipe());
+
   for (let pipe of pipes) {
     pipe.show();
     pipe.update();
@@ -95,12 +93,9 @@ function draw() {
     if (pipe.hits(wasp)) gameOver();
   }
 
-  // Add a new pipe every 100 frame.
-  if (frameCount % 100 === 0) {
-    pipes.push(new Pipe());
-  }
-
   showScores();
+  
+  if (frameCount % 75 === 0) presents.push(new Present());
 
   for (let present of presents) {
     present.show();
@@ -110,10 +105,6 @@ function draw() {
       presents.splice(i, 1);
     }
   } 
-
-  if (frameCount % 75 == 0) {
-    presents.push(new Present());
-  }
 }
 
 
