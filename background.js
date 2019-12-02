@@ -1,6 +1,19 @@
 /****************************************************
  * background.js
  * 
+ * Our predefined variables:
+ * 
+ *  - speed     we will animate the background to move so it will have a speed.
+ *  - x         the background's x-axis position.
+ *  - y         the background's y-axis position.
+ *  - width     the background's width.
+ *  - height    the background's height.
+ * 
+ * Our predefined methods:
+ * 
+ *  - show()    that we will use for drawing the background onto the canvas.
+ *  - update()  that we will use for animating the background.
+ * 
  ****************************************************/
 
 class Background {
