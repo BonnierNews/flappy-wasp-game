@@ -968,7 +968,7 @@ function setup() {
 }
 ```
 ---
-When the steps above is completed we actually have to draw the presents in `function draw()` in `index.js`. To draw infinite loops of present we have to loop through all presents and for each present call the `show()` and `update()`.
+When the steps above is completed we actually have to draw the presents in `function draw()` in `index.js`. To draw infinite loops of present we have to loop through all presents and for each present call the `show()` and `update()`. We also want to draw a new present for each 75% of the frame.
 
 - See example below.
 
@@ -1011,32 +1011,18 @@ Write a `console.log` in the if-statement to check if it works.
 hits(wasp) {
   if (wasp.y > this.y && wasp.y < this.y + this.height) {
     if (wasp.x > this.x && wasp.x < this.x + this.width) {
-      console.log("HITS");
-     return true;
+      if (!this.taken) {
+        console.log("HITS");
+        this.taken = true;
+        return true;
+      }
     }
   }
- return false;
+  return false;
 }
 ```
 
 ---
-
-- Now we want a new present to generate each 75% of the frame, use [frameCount()](https://p5js.org/reference/#/p5/frameCount) and push the presents to `christmasPresent()` in `index.js`.
-
-- See example below.
-
----
-
-**`index.js`**
-
-```js
-if (frameCount % 75 == 0) {</b>
-  presents.push(new christmasPresent());
-}
-```
-
----
-
 
 ### 7.3 **Get extra score**
 
