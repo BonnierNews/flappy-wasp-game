@@ -91,17 +91,8 @@ function draw() {
   for (let pipe of pipes) {
     pipe.show();
     pipe.update();
-
-    
-    // Check if wasp passes a pipe.
-    if (pipe.pass(wasp)) {
-      score++;
-    }
-    
-    // Check if the wasp hit a pipe.
-    if (pipe.hits(wasp)) {
-      gameOver();
-    }
+    if (pipe.pass(wasp)) score++;
+    if (pipe.hits(wasp)) gameOver();
   }
 
   // Add a new pipe every 100 frame.
