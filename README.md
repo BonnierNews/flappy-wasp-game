@@ -143,8 +143,8 @@ function preload() {
   - `height` – the background's height.
 
 - Our predefined **methods**;
-  - `show()` that we will use for drawing.
-  - `update()` that we will use for animation.
+  - `show()` that we will use for drawing the background onto the canvas.
+  - `update()` that we will use for animating the background.
 
 ---
 
