@@ -133,6 +133,8 @@ function startGame() {
   isOver = false;
   score = 0;
   loop();
+  presents = [];
+  presents.push(new Present());
 }
 
 

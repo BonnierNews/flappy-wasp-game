@@ -1070,7 +1070,7 @@ function startgame() {
   score = 0;
   loop();
   presents = [];
-  presents.push(new christmasPresent());
+  presents.push(new Present());
 }
 ```
 
