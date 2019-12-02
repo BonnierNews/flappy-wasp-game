@@ -663,39 +663,15 @@ function draw() {
 
 ## 5. **Game over**
 
-- It's game over when you hit a pipe.
+- It's game over when you hit a pipe. At the moment, nothing will happen when we hit a pipe. So it's time for us to implement the game over functionality!
 
-### 5.1. **Check if wasp hits pipe**
+### 5.1. **Check if wasp hits a pipe**
 
-- So we should check in `index.js` inside `draw()` if we are actually hitting a pipe.
+- In `index.js` `draw()`, we want to check if the wasp is hitting a pipe.
+
+- In `pipe.js`, we have a function called `hits()`. Here we can place the code for checking if the wasp is hitting a pipe. It will contain a lot of logic for checking if the wasp's x and y position is in the scope of the x and y position for a pipe.
 
 - See example below.
-
----
-
-**`index.js`**
-
-```js
-function draw() {
-  // ... (earlier code)
-
-  for (let pipe of pipes) {
-    pipe.show();
-    pipe.update();
-
-    // Check if the wasp hit a pipe.
-    if (pipe.hits(wasp)) {
-      gameOver();
-    }
-  }
-
-  // ... (earlier code)
-}
-```
-
----
-
-- Now we need to add some code to `hits()` in `pipe.js` to check if wasp is hitting a pipe.
 
 ---
 
@@ -703,15 +679,15 @@ function draw() {
 
 ```js
 hits(wasp) {
-  // Check if the wasp is touching a top or bottom pipe y position.
+  // Check if the wasp is touching a top or bottom pipe's y position.
   if (wasp.y < this.topHeight || wasp.y > CANVAS_HEIGHT - this.bottomHeight) {
     
-    // Check if the wasp is touching a top pipe x position.
+    // Check if wasp is touching the top pipe's x position, and return true when it does.
     if (wasp.x > this.x && wasp.x < this.x + this.topWidth) {
       return true;
     }
 
-    // Check if the wasp is touching a bottom pipe x position.
+    // Check if wasp is touching bottom pipe's x position, and return true when it does.
     if (wasp.x > this.x && wasp.x < this.x + this.width) {
       return true;
     }
@@ -724,11 +700,33 @@ hits(wasp) {
 
 ---
 
+**`index.js`**
+
+```js
+function draw() {
+  // ... (earlier code)
+
+  for (let pipe of pipes) {
+    // ... (earlier code)
+
+    // Check if the wasp hits a pipe.
+    if (pipe.hits(wasp)) {
+      gameOver();
+    }
+  }
+
+  // ... (earlier code)
+}
+```
+
+---
 
 
-- Now, our `if (pipe.hits(wasp))` in `index.js` should return true when the wasp is hitting i pipe. Now we can add a game over screen.
+### 5.2. **Add game over screen**
 
-- In `index.js` `gameOver()` method, we will add following...
+- Now when we know when the wasp is hitting a pipe, we want to stop the game and show a game over screen instead.
+
+- In `index.js` `gameOver()` method, we will add following:
   - Set our text size using **p5.js** [textSize()](https://p5js.org/reference/#/p5/textsize) method.
   - Set our fill color using **p5.js** [fill()](https://p5js.org/reference/#/p5/fill) method.
   - Add a text "GAME OVER" using **p5.js** [text()](https://p5js.org/reference/#/p5/text) method.
