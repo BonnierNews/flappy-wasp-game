@@ -187,6 +187,7 @@ show() {
 
 ```js
 function setup() {
+  createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
   background = new Background();
 }
 ```
