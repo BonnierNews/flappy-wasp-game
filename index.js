@@ -81,7 +81,8 @@ function draw() {
     }
   }
 
-  if (frameCount % 100 == 0) {
+  // Add a new pipe every 100 frame.
+  if (frameCount % 100 === 0) {
     pipes.push(new Pipe());
   }
 
