@@ -40,23 +40,24 @@ class Pipe {
    * @custom
    ****************************************************/
   hits(wasp) {
-  // Check if the wasp is touching a top or bottom pipe y position.
-  if (wasp.y < this.topHeight || wasp.y > CANVAS_HEIGHT - this.bottomHeight) {
-    
-    // Check if the wasp is touching a top pipe x position.
-    if (wasp.x > this.x && wasp.x < this.x + this.topWidth) {
-      return true;
+    // Check if the wasp is touching a top or bottom pipe y position.
+    if (wasp.y < this.topHeight || wasp.y > CANVAS_HEIGHT - this.bottomHeight) {
+      
+      // Check if the wasp is touching a top pipe x position.
+      if (wasp.x > this.x && wasp.x < this.x + this.topWidth) {
+        return true;
+      }
+
+      // Check if the wasp is touching a bottom pipe x position.
+      if (wasp.x > this.x && wasp.x < this.x + this.width) {
+        return true;
+      }
     }
 
-    // Check if the wasp is touching a bottom pipe x position.
-    if (wasp.x > this.x && wasp.x < this.x + this.width) {
-      return true;
-    }
+    // Else just return false – the wasp is not touching a pipe.
+    return false;
   }
 
-  // Else just return false – the wasp is not touching a pipe.
-  return false;
-}
 
   /****************************************************
    * When the wasp passes a pipe
