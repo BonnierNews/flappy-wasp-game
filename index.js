@@ -94,7 +94,7 @@ function draw() {
   }
 
   showScores();
-  
+
   if (frameCount % 75 === 0) presents.push(new Present());
 
   for (let present of presents) {
@@ -116,9 +116,7 @@ function draw() {
 function keyPressed() {
   if (key === " ") {
     wasp.up();
-    if (isOver) {
-      startGame();
-    }
+    if (isOver) startGame();
   }
 }
 
