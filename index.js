@@ -57,6 +57,7 @@ function setup() {
 function draw() {
   background.show();
   background.update();
+
   wasp.show();
   wasp.update();
 

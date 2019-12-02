@@ -499,16 +499,20 @@ We want the wasp to move past obstacles, like the pipes in Flappy Bird.
 - We have created a separate file `pipe.js` to handle all pipe-related code.
 
 - Our predefined **variables**;
-  - `speed` contains the pipe speed.
-  - `top` contains an object with properties for the upper pipe.
-  - `bottom` contains an object with properties for the lower pipe.
+  - `speed` – contains the pipe speed that we will use for moving animation.
+  - `width` – the width of the pipe.
+  - `x` – x-axis position of pipe.
+  - `topY` – the upper pipe's y-axis positioning.
+  - `bottomY` – the lower pipe's y-axis positioning.
+  - `topHeight` – the upper pipe's height.
+  - `bottomHeight` – the lower pipe's height.
 
 - Our predefined **methods**;
-  - `show()` will be used for drawing an upper and lower pipe.
-  - `update()` will be used for animation, in this case, moving the pipes from right to left on the canvas.
-  - `hits()` will be used for checking if our wasp hits a pipe.
-  - `pass()` will be used for checking if our wasp passes (NOT hits) a pipe.
-  - `offscreen()` will be used for checking of the pipe has moved outside the canvas.
+  - `show()` – will be used for drawing an upper and lower pipe.
+  - `update()` – will be used for animation, in this case, moving the pipes from right to left on the canvas.
+  - `hits()` – will be used for checking if our wasp hits a pipe.
+  - `pass()` – will be used for checking if our wasp passes (NOT hits) a pipe.
+  - `offscreen()` – will be used for checking of the pipe has moved outside the canvas.
 
 ---
 
@@ -629,9 +633,9 @@ function draw() {
 
 - Now we only get two pipes and then nothing more?
 
-- Now we want a new present to generate each 100% of the frame.
+- The **p5.js** variable [frameCount](https://p5js.org/reference/#/p5/frameCount) contains the number of frames that have been displayed since the game started. We can use that number to know when to add a new pipe and show them to the player in a consistent way.
 
-- Check [frameCount](https://p5js.org/reference/#/p5/frameCount) and push a new Pipe to `pipes` in `index.js` inside the `draw()` method.
+- We will use the [modulo operation](https://en.wikipedia.org/wiki/Modulo_operation) to do that inside `index.js` `draw()` method, and add a new pipe every 100 frame.
 
 - See example below.
 
@@ -647,8 +651,8 @@ function draw() {
     // ... (earlier code)
   }
 
-  // Check when frameCount is 100%.
-  if (frameCount % 100 == 0) {
+  // Add a new pipe every 100 frame.
+  if (frameCount % 100 === 0) {
     pipes.push(new Pipe());
   }
 
