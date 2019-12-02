@@ -122,6 +122,10 @@ function preload() {
 
 ---
 
+- No images will show yet, but we will get there!
+
+---
+
 
 ## 2. **Create background**
 
