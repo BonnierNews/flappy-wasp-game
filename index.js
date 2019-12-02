@@ -132,12 +132,10 @@ function startGame() {
   backgroundX = 0;
   pipes = [];
   wasp = new Wasp();
-  pipes.push(new Pipe());
   isOver = false;
   score = 0;
   loop();
   presents = [];
-  presents.push(new Present());
 }
 
 
