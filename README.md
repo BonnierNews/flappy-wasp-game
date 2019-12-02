@@ -316,7 +316,30 @@ show() {
 ---
 
 
-### 3.3. **Draw wasp**
+### 3.3. **Create instance**
+
+- We must first create an instance object of `Wasp` in `index.js` to use it there.
+
+- Assign the instance object to our predefined variable `wasp`.
+
+- See example below.
+
+---
+
+**`index.js`**
+
+```js
+function setup() {
+  createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+  background = new Background();
+  wasp = new Wasp();
+}
+```
+
+---
+
+
+### 3.4. **Draw wasp**
 
 - Let's add our `wasp.show()` method.
 
@@ -335,29 +358,6 @@ function draw() {
   // ... (earlier code)
 
   wasp.show();
-}
-```
-
----
-
-
-### 3.4. **Create instance**
-
-- We must first create an instance object of `Wasp` in `index.js` to use it there.
-
-- Assign the instance object to our predefined variable `wasp`.
-
-- See example below.
-
----
-
-**`index.js`**
-
-```js
-function setup() {
-  createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
-  background = new Background();
-  wasp = new Wasp();
 }
 ```
 
