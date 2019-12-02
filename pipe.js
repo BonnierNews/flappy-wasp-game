@@ -63,10 +63,13 @@ class Pipe {
    * @custom
    ****************************************************/
   pass(wasp) {
+    // If the wasp's x position is bigger than the pipe's x position
+    // it means that the wasp has passed the pipe! 
     if (wasp.x > this.x && !this.passed) {
       this.passed = true;
       return true;
     }
+    // Else return false, the wasp has not passed the pipe.
     return false;
   }
 
