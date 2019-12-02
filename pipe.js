@@ -7,6 +7,7 @@ class Pipe {
   speed         = 2;
   width         = 20;
   x             = CANVAS_WIDTH;
+  passed        = false;
   topHeight     = random(CANVAS_HEIGHT / 2);
   bottomHeight  = random(CANVAS_HEIGHT / 2);
   topY          = 0;
