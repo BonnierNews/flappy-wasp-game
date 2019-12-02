@@ -100,12 +100,13 @@ function setup() {
 - Then we want to load some images into our game;
   - `images/background.png` is our background image.
   - `images/wasp.png` is our main character in the game!
+  - `images/present.png` we will need christmas presents!
 
 - We can use **p5.js** method `loadImage()`. [Read documentation here](https://p5js.org/reference/#/p5/loadImage).
 
-- We pass `"images/background.png"` and `"images/wasp.png"` as arguments to `loadImage()`.
+- We pass `"images/background.png"`, `"images/wasp.png"`, and `"images/present.png"` as arguments to `loadImage()`.
 
-- We assign the return value to our predefined variables `backgroundImg` and `waspImg`.
+- We assign the return value to our predefined variables `backgroundImg`, `waspImg` and `presentImg`.
 
 - See example below.
 
@@ -117,6 +118,7 @@ function setup() {
 function preload() {
   backgroundImg = loadImage("images/background.png");
   waspImg = loadImage("images/wasp.png");
+  presentImg = loadImage("images/present.png");
 }
 ```
 
@@ -665,9 +667,10 @@ function draw() {
 
 - It's game over when you hit a pipe. At the moment, nothing will happen when we hit a pipe. So it's time for us to implement the game over functionality!
 
+
 ### 5.1. **Check if wasp hits a pipe**
 
-- In `index.js` `draw()`, we want to check if the wasp is hitting a pipe.
+- We want to check if the wasp is hitting a pipe.
 
 - In `pipe.js`, we have a function called `hits()`. Here we can place the code for checking if the wasp is hitting a pipe. It will contain a lot of logic for checking if the wasp's x and y position is in the scope of the x and y position for a pipe.
 
@@ -700,6 +703,46 @@ hits(wasp) {
 
 ---
 
+- We will use `pipe.hits()` later in `index.js` `draw()`!
+
+---
+
+
+### 5.2. **Define drawing for "game over" screen**
+
+- We also want to draw a game over screen to our canvas.
+
+- In `index.js` `gameOver()` method, we will add following:
+  - Set our text size using **p5.js** [textSize()](https://p5js.org/reference/#/p5/textsize) method.
+  - Set our fill color using **p5.js** [fill()](https://p5js.org/reference/#/p5/fill) method.
+  - Add a text "GAME OVER" using **p5.js** [text()](https://p5js.org/reference/#/p5/text) method.
+  - Set our predefined variable `isOver` to true. We will use it later in `index.js` `keyPressed()` method to restart the game.
+  - To pause the game, add **p5.js** [noLoop()](https://p5js.org/reference/#/p5/noLoop) method.
+
+- See example below.
+
+---
+
+**`index.js`**
+
+```js
+function gameOver() {
+  textSize(50);
+  fill(000);
+  text("GAME OVER", 50, 300);
+  isOver = true;
+  noLoop();
+}
+```
+
+---
+
+### 5.3. **Show game over screen**
+
+- Then in `index.js` `draw()`, we can check when the wasp is hitting a pipe and show a game over screen.
+
+---
+
 **`index.js`**
 
 ```js
@@ -721,43 +764,13 @@ function draw() {
 
 ---
 
-
-### 5.2. **Add game over screen**
-
-- Now when we know when the wasp is hitting a pipe, we want to stop the game and show a game over screen instead.
-
-- In `index.js` `gameOver()` method, we will add following:
-  - Set our text size using **p5.js** [textSize()](https://p5js.org/reference/#/p5/textsize) method.
-  - Set our fill color using **p5.js** [fill()](https://p5js.org/reference/#/p5/fill) method.
-  - Add a text "GAME OVER" using **p5.js** [text()](https://p5js.org/reference/#/p5/text) method.
-  - Set our predefined variable `isOver` to true. We will use it later in `index.js` `keyPressed()` method.
-  - To actually end the game so it stops looping, add **p5.js** [noLoop()](https://p5js.org/reference/#/p5/noLoop) method.
-
-- See example below.
-
----
-
-**`index.js`**
-
-```js
-function gameOver() {
-  textSize(50);
-  fill(000);
-  text("GAME OVER", 50, 300);
-  isOver = true;
-  noLoop();
-}
-```
-
----
-
-- **We should now show a game over screen when we hit a pipe!**
-
----
+### 5.4. **Start a new game**
 
 - We want to start a new game when the player presses the `Space` key.
 
-- In `index.js`, check if `isOver` is true inside the `keyPressed()` method. If true, run `startGame()` to start a new game.
+- In `index.js` `keyPressed()`, check if `isOver` is true. If true, run `startGame()` to start a new game.
+
+- This will make sure we only start a new game when the variable `isOver` is set to true.
 
 - See example below.
 
@@ -776,21 +789,34 @@ function keyPressed() {
 }
 ```
 
-- To start a new game we have to add some code in `startGame()`.
+---
+
+- Navigate to the `index.js` `startGame()` method.
+
+- To start a new game we have to add some code in `startGame()`. This code will reset the game.
+
 - See example below.
+
+---
 
 **`index.js`**
 
 ```js
 function startGame() {
-  backgroundX = 0;
-  pipes = [];
-  wasp = new Wasp();
-  pipes.push(new Pipe());
-  isOver = false;
-  loop();
+  backgroundX = 0;        // reset the background's x position.
+  pipes = [];             // we reset the number of pipes we are showing.
+  wasp = new Wasp();      // we create a new wasp to original position.
+  pipes.push(new Pipe()); // add a new pipe.
+  isOver = false;         // set isOver to false when starting the game again.
+  loop();                 // start looping again (adding frames), else game will be paused.
+  score = 0;              // We set the score to 0. We will implement this in the next step!
 }
 ```
+
+---
+
+- **We should now show a game over screen when we hit a pipe!**
+
 ---
 
 
@@ -798,9 +824,40 @@ function startGame() {
 
 - Of course we want to show off our score and here we will check if the wasp has passed a pipe and add a score.
 
-- Here we should add more logic in the for-loop in `index.js`, that goes through each pipe which we just did in the step above!
+---
+
+### 6.1. **Check if wasp passes a pipe**
+
+- Navigate to `pipe.js` `pass()` method, here we have to add some logic the check if the wasp has passed a pipe. We will use `pipe.pass()` method later in `index.js` `draw()`.
 
 - See example below.
+
+---
+
+**`pipe.js`**
+
+```js
+pass(wasp) {
+  // If the wasp's x position is bigger than the pipe's x position
+  // it means that the wasp has passed the pipe!
+  if (wasp.x > this.x && !this.passed) {
+    this.passed = true;
+    return true;
+  }
+
+  // Else return false, the wasp has not passed the pipe.
+  return false;
+}
+```
+
+---
+
+
+### 6.2. **Increase score**
+
+- Now we can use the `pipe.pass()` method in `index.js` `draw()` method.
+
+---
 
 **`index.js`**
 
@@ -811,7 +868,7 @@ function draw() {
   for (let pipe of pipes) {
     // ... (earlier code)
 
-    // Check if wasp passes a pipe.
+    // Check if wasp passes a pipe and increase the score.
     if (pipe.pass(wasp)) {
       score++;
     }
@@ -821,46 +878,12 @@ function draw() {
 }
 ```
 
-- In the previous step we are using `pass`, but at me moment we are not doing anything with the function.
- We have to check if the wasp has passed a pipe.
-
-- See example below. 
-
-**`pipe.js`**
-
-```js
-pass(wasp) {
-  if (wasp.x > this.x && !this.passed) {
-    this.passed = true;
-    return true;
-  }
-  return false;
-}
-```
----
-
-- We also have to use the score variable in `startgame()`, so the score starts at 0.
-
-- See example below.
-
----
-
-**`index.js`**
-
-```js
-function startGame() {
-  // ... (earlier code)
-   
-  score = 0;
-}
-```
-
 ---
 
 
-### 6.1. **Display score**
+### 6.3. **Display score**
 
-- In `showScores()` we want to display the score, which is plain text, here we can use p5 function's, such as [text()](https://p5js.org/reference/#/p5/text) function.
+- In `index.js` `draw()` we want to display the score, which is plain text, here we can use **p5.js** functions, such as [text()](https://p5js.org/reference/#/p5/text) function.
 
 - We have to pass in the text, variable and position. The position can be e.g 1, 32.
 
@@ -873,31 +896,13 @@ function startGame() {
 **`index.js`**
 
 ```js
-function showScores() {
+function draw() {
+  // ... (earlier code)
+
+  // Show score
   fill(000);
   textSize(32);
   text("Score: " + score, 1, 32);
-}
-```
-
----
-
-
-### 6.2 **Call the score function**
-
-- Do not forget to call the `showScores()` we just created in `index.js`. Call the function inside `draw()`.
-
-- See example below.
-
----
-
-**`index.js`**
-
-```js
-draw() {
-  // ... (earlier code)
-
-  showScores();
 }
 ```
 
@@ -910,30 +915,15 @@ draw() {
 
 - We want something that the wasp can collect to get extra score. To make the game more christmas-y we can generate christmas presents that randomly flies against the wasp. But this time, compared to the pipes, we actually want to hit each present to be able to get extra score. 
 
-- To start off with the presents we jump to `index.js` where we find a global variable in the top called `presentImg;`. Next up we want to use the variable and set to a [loadImage()](https://p5js.org/reference/#/p5/loadimage), which is a magical p5 function, and take the present.png image which you will find in the images folder and use it inside of the `preload()`.
-
-- See example below.
-
----
-
-**`index.js`**
-
-```js
-function preload() {
-  waspImg = loadImage("images/wasp.png");
-  backgroundImg = loadImage("images/background.png");
-  presentImg = loadImage("images/present.png");
-}
-```
-
 ---
 
 
 ### 7.1. **Show presents**
 
-In `present.js` we have to functions: `show()` and `update()`. Now we actually want to show the presents so add the present variable, x, y, width and height as parameters in the show function.
 
-The `update()` will update the presents so they start moving from right to left of the canvas. Take the x variable and substract with the speed variable.
+- In `present.js` we have to functions: `show()` and `update()`. Now we actually want to show the presents so add the present variable, x, y, width and height as parameters in the show function.
+
+- The `update()` will update the presents so they start moving from right to left of the canvas. Take the x variable and substract with the speed variable.
 
 - See example below.
 
@@ -1017,6 +1007,22 @@ hits(wasp) {
     }
   }
   return false;
+}
+```
+
+---
+
+- Now we want a new present to generate each 75% of the frame, use [frameCount()](https://p5js.org/reference/#/p5/frameCount) and push the presents to `christmasPresent()` in `index.js`.
+
+- See example below.
+
+---
+
+**`index.js`**
+
+```js
+if (frameCount % 75 == 0) {
+  presents.push(new christmasPresent());
 }
 ```
 
