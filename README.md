@@ -698,17 +698,17 @@ function draw() {
 **`pipe.js`**
 
 ```js
-hits() {
+hits(wasp) {
   // Check if the wasp is touching a top or bottom pipe y position.
-  if (wasp.y < this.top.height || wasp.y > CANVAS_HEIGHT - this.bottom.height) {
+  if (wasp.y < this.topHeight || wasp.y > CANVAS_HEIGHT - this.bottomHeight) {
     
     // Check if the wasp is touching a top pipe x position.
-    if (wasp.x > this.top.x && wasp.x < this.top.x + this.top.width) {
+    if (wasp.x > this.x && wasp.x < this.x + this.topWidth) {
       return true;
     }
 
     // Check if the wasp is touching a bottom pipe x position.
-    if (wasp.x > this.bottom.x && wasp.x < this.bottom.x + this.bottom.width) {
+    if (wasp.x > this.x && wasp.x < this.x + this.width) {
       return true;
     }
   }

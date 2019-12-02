@@ -50,12 +50,12 @@ class Pipe {
     // Check if the wasp is touching a bottom pipe x position.
     if (wasp.x > this.x && wasp.x < this.x + this.width) {
       return true;
+    }
   }
-}
 
-// Else just return false – the wasp is not touching a pipe.
-return false;
-  }
+  // Else just return false – the wasp is not touching a pipe.
+  return false;
+}
 
   /****************************************************
    * When the wasp passes a pipe
