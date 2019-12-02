@@ -42,6 +42,9 @@ function preload() {
 function setup() {
   createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
   background = new Background();
+  wasp = new Wasp();
+  pipes = [];
+  pipes.push(new Pipe());
 }
 
 
@@ -54,6 +57,8 @@ function setup() {
 function draw() {
   background.show();
   background.update();
+  wasp.show();
+  wasp.update();
 }
 
 
@@ -63,7 +68,9 @@ function draw() {
  * @p5jsMethod
  ****************************************************/
 function keyPressed() {
-
+  if (key === " ") {
+    wasp.up();
+  }
 }
 
 
