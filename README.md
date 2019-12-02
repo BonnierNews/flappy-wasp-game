@@ -309,7 +309,7 @@ function draw() {
 
 ```js
 show() {
-  image(waspImg, this.x, this.y, this.width, this.height);
+  image(waspImg, this.x - 16, this.y - 16, this.width, this.height);
 }
 ```
 
