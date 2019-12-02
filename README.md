@@ -53,16 +53,16 @@ After Live Server is installed, you should be able to click “Go Live” in the
 - We have created a file called `index.js`. This is where our main **methods** and **variables** for our game are predefined.
 
 - Our predefined **variables**;
-  - `wasp` will contain an instance object of the `class Wasp` located in our predefined file `wasp.js`.
-  - `pipes` will contain an instance object of the `class Pipe` located in our predefined file `pipe.js`.
-  - `background` will contain an instance object of the `class Background` located in our predefined file `background.js`.
-  - `waspImg` will contain an image object from `images/wasp.png`.
-  - `backgroundImg` will contain an image object from `images/background.png`.
-  - `presentImg` will contain an image object from `images/present.png`.
-  - `isOver` will contain a boolean if the player has lost the game or not.
-  - `score` will contain an integer with the players score.
-  - `CANVAS_HEIGHT` contains the canvas height.
-  - `CANVAS_WIDTH` contains the canvas width.
+  - `wasp` – will contain an instance object of the `class Wasp` located in our predefined file `wasp.js`.
+  - `pipes` – will contain an instance object of the `class Pipe` located in our predefined file `pipe.js`.
+  - `background` – will contain an instance object of the `class Background` located in our predefined file `background.js`.
+  - `waspImg` – will contain an image object from `images/wasp.png`.
+  - `backgroundImg` – will contain an image object from `images/background.png`.
+  - `presentImg` – will contain an image object from `images/present.png`.
+  - `isOver` – will contain a boolean if the player has lost the game or not.
+  - `score` – will contain an integer with the players score.
+  - `CANVAS_HEIGHT` – contains the canvas height.
+  - `CANVAS_WIDTH` – contains the canvas width.
 
 - Our predefined **methods**;
   - `preload()` – a **p5.js** method.
@@ -143,8 +143,8 @@ function preload() {
   - `height` – the background's height.
 
 - Our predefined **methods**;
-  - `show()` that we will use for drawing the background onto the canvas.
-  - `update()` that we will use for animating the background.
+  - `show()` – that we will use for drawing the background onto the canvas.
+  - `update()` – that we will use for animating the background.
 
 ---
 
@@ -279,18 +279,18 @@ function draw() {
 - We have created a separate file `wasp.js` to handle all wasp-related code.
 
 - Our predefined **variables**;
-  - `speed`
-  - `x`
-  - `y`
-  - `width`
-  - `height`
-  - `gravity`
-  - `lift`
+  - `speed` – we will animate the background to move so it will have a speed.
+  - `x` – the wasp's x-axis position.
+  - `y` – the wasp's y-axis position.
+  - `width` – the wasp's width.
+  - `height` – the background's height.
+  - `gravity` – the wasp will have a gravity for "falling" animation.
+  - `lift` – the wasp will have a lift for "jumping" animation.
 
 - Our predefined **methods**;
-  - `show()` that we will use for drawing the image.
-  - `update()` that we will use for animation, in this case, creating gravity.
-  - `up()` that we will use for creating jump animation when user press `Space Bar`.
+  - `show()` – that we will use for drawing the image.
+  - `update()` – that we will use for animation, in this case, creating gravity.
+  - `up()` – that we will use for creating jump animation when user press `Space Bar`.
 
 ---
 
