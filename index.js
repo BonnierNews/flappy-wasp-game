@@ -102,7 +102,7 @@ function draw() {
     present.update();
     if (present.hits(wasp)) {
       score += 3;
-      presents.splice(i, 1);
+      presents.splice(presents.indexOf(present), 1);
     }
   } 
 }
