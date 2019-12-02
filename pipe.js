@@ -5,18 +5,12 @@
 
 class Pipe {
   speed = 2;
-  top = {
-    height: random(CANVAS_HEIGHT / 2),
-    width = 20,
-    x: CANVAS_WIDTH,
-    y: 0
-  }
-  bottom = {
-    height: random(CANVAS_HEIGHT / 2),
-    width = 20,
-    x: CANVAS_WIDTH,
-    y: CANVAS_HEIGHT - this.bottom.height
-  }
+  topHeight = random(CANVAS_HEIGHT / 2);
+  width = 20;
+  x = CANVAS_WIDTH;
+  topY = 0;
+  bottomHeight = random(CANVAS_HEIGHT / 2);
+  bottomY = CANVAS_HEIGHT - this.bottomHeight;
 
   /****************************************************
    * Create pipes
@@ -25,7 +19,9 @@ class Pipe {
    * @custom
    ****************************************************/
   show() {
-
+    fill(121, 85, 72);
+    rect(this.x, 0, this.width, this.topHeight);
+    rect(this.x, this.bottomY, this.width, this.bottomHeight);
   }
 
   /****************************************************
@@ -35,7 +31,7 @@ class Pipe {
    * @custom
    ****************************************************/
   update() {
-
+    this.x -= this.speed;
   }
 
   /****************************************************

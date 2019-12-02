@@ -541,8 +541,8 @@ function setup() {
 ```js
 show() {
   fill(121, 85, 72);
-  rect(this.x, 0, this.width, this.top.height);
-  rect(this.x, CANVAS_HEIGHT - this.bottom.height, this.width, this.bottom.height);
+  rect(this.x, 0, this.width, this.topHeight);
+  rect(this.x, this.bottomY, this.width, this.bottomHeight);
 }
 ```
 

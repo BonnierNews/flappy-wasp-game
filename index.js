@@ -59,6 +59,15 @@ function draw() {
   background.update();
   wasp.show();
   wasp.update();
+
+  for (let pipe of pipes) {
+    pipe.show();
+    pipe.update();
+  }
+
+  if (frameCount % 100 == 0) {
+    pipes.push(new Pipe());
+  }
 }
 
 
