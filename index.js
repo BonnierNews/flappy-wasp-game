@@ -117,6 +117,6 @@ function gameOver() {
  * 
  * @customMethod
  ****************************************************/
-function showScores() {
+function showScore() {
 
 }
