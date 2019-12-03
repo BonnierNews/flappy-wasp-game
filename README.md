@@ -396,7 +396,6 @@ It's game over when you hit a pipe. At the moment, nothing will happen when we h
 ```js
 hits(wasp) {
   if (wasp.y < this.topHeight || wasp.y > CANVAS_HEIGHT - this.bottomHeight) {
-    if (wasp.x > this.x && wasp.x < this.x + this.topWidth) return true;
     if (wasp.x > this.x && wasp.x < this.x + this.width) return true;
   }
   return false;
