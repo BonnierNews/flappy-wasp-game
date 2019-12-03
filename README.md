@@ -147,7 +147,7 @@ function draw() {
 ```js
 update() {
   /* ... */
-  if (this.x <= -this.width + CANVAS_WIDTH) {
+  if (this.x <= CANVAS_WIDTH - this.width) {
     image(backgroundImg, this.x + this.width, 0, this.width, this.height);
     if (this.x <= -this.width) this.x = 0;
   }
