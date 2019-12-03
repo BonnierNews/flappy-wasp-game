@@ -129,13 +129,13 @@ function keyPressed() {
  * @customMethod
  ****************************************************/
 function startGame() {
-  backgroundX = 0;
-  pipes = [];
+  background = new Background();
   wasp = new Wasp();
+  pipes = [];
+  presents = [];
   isOver = false;
   score = 0;
   loop();
-  presents = [];
 }
 
 
