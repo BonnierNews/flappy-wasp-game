@@ -120,7 +120,7 @@ function draw() {
 ---
 
 
-## 2.2. **Define animation**
+## 2.3. **Define moving animation**
 
 - Open background.js.
 - Go to function update().
@@ -147,7 +147,7 @@ function draw() {
 ---
 
 
-## 2.3. **Show background on canvas**
+## 2.4. **Show background on canvas**
 
 - In index.js. Go to function [draw()](https://p5js.org/reference/#/p5/draw).
 - We call on our function show() and update().
