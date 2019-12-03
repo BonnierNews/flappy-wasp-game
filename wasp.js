@@ -1,6 +1,22 @@
 /****************************************************
  * wasp.js
  * 
+ * Our predefined variables:
+ * 
+ *  - speed     we will animate the wasp to move so it will have a speed.
+ *  - x         the wasp's x-axis position.
+ *  - y         the wasp's y-axis position.
+ *  - width     the wasp's width.
+ *  - height    the wasp's height.
+ *  - gravity   the wasp will have a gravity for "falling" animation.
+ *  - lift      the wasp will have a lift for "jumping" animation.
+ * 
+ * Our predefined methods:
+ * 
+ *  - show()    that we will use for drawing the image.
+ *  - update()  that we will use for animation, in this case, creating gravity.
+ *  - up()      that we will use for creating jump animation when user press `Space Bar`.
+ * 
  ****************************************************/
 
 class Wasp {
