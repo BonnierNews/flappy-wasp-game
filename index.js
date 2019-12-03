@@ -32,7 +32,8 @@
  * You can read more about them in the README.md.
  ****************************************************/
 let wasp;
-let pipes;
+let pipes = [];
+let presents = [];
 let background;
 let waspImg;
 let backgroundImg;
