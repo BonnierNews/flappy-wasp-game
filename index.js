@@ -151,7 +151,6 @@ function gameOver() {
   text("GAME OVER", 50, 300);
   isOver = true;
   noLoop();
-
 }
 
 
