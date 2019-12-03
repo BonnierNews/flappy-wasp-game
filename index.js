@@ -1,6 +1,29 @@
 /****************************************************
  * index.js
  * 
+ * Our predefined variables:
+ * 
+ *  - wasp           will contain an instance object of the class Wasp located in our predefined file wasp.js.
+ *  - pipes          will contain an instance object of the class Pipe located in our predefined file pipe.js.
+ *  - background     will contain an instance object of the class Background located in our predefined file background.js.
+ *  - waspImg        will contain an image object from images/wasp.png.
+ *  - backgroundImg  will contain an image object from images/background.png.
+ *  - presentImg     will contain an image object from images/present.png.
+ *  - isOver         will contain a boolean if the player has lost the game or not.
+ *  - score          will contain an integer with the players score.
+ *  - CANVAS_HEIGHT  contains the canvas height.
+ *  - CANVAS_WIDTH   contains the canvas width.
+ *
+ * Our predefined methods:
+ *
+ *  - preload()      a p5.js method.
+ *  - setup()        a p5.js method.
+ *  - draw()         a p5.js method.
+ *  - keyPressed()   a p5.js method.
+ *  - startGame()    a custom method.
+ *  - gameOver()     a custom method.
+ *  - showScores()   a custom method.
+ * 
  ****************************************************/
 
 
