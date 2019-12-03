@@ -25,7 +25,7 @@ class Wasp {
   y = CANVAS_HEIGHT / 2;
   width = 32;
   height = 32;
-  gravity = 0.1;
+  gravity = 0.2;
   lift = -7;
 
 
