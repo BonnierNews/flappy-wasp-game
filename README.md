@@ -429,13 +429,13 @@ function draw() {
 **`index.js`**
 ```js
 function startGame() {
-  backgroundX = 0;        // Reset the background's x position.
-  pipes = [];             // We will need an empty pipes array to reset pipe positions.
-  presents = [];          // We will need an empty presents array. We will implement later.
-  wasp = new Wasp();      // we create a new wasp to original position.
-  isOver = false;         // Set isOver to false when starting the game again.
-  loop();                 // Start looping again (adding frames), else game will be paused.
-  score = 0;              // We set the score to 0. We will implement this in the next step!
+  background = new Background();  // Reset the background's x position.
+  wasp = new Wasp();              // we create a new wasp to original position.
+  pipes = [];                     // We will need an empty pipes array to reset pipe positions.
+  presents = [];                  // We will need an empty presents array. We will implement later.
+  isOver = false;                 // Set isOver to false when starting the game again.
+  loop();                         // Start looping again (adding frames), else game will be paused.
+  score = 0;                      // We set the score to 0. We will implement this in the next step!
 }
 ```
 
