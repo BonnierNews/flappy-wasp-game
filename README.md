@@ -191,44 +191,7 @@ update() {
 ![](images/wasp.png)
 
 
-## 3.1. **Define drawing and animation**
-
-- Open wasp.js.
-- Go to function show().
-- We use **p5.js**'s function [image()](https://p5js.org/reference/#/p5/image) to draw the wasp.
-
-**`wasp.js`**
-```js
-show() {
-  image(waspImg, this.x - 16, this.y - 16, this.width, this.height);
-}
-```
-
-- Go to function update().
-- To make the wasp fall to the ground, we add gravity to the wasp's speed, then add that speed to the wasp's y position to create accelerated falling wasp.
-
-**`wasp.js`**
-```js
-update() {
-  this.speed += this.gravity;
-  this.y += this.speed;
-}
-```
-
-- Go to function up().
-- We want to add a lift force to the wasp's speed to make wasp jump.
-
-**`wasp.js`**
-```js
-up() {
-  this.speed += this.lift;
-}
-```
-
----
-
-
-## 3.2. **Create instance**
+## 3.1. **Create instance**
 
 - Open index.js.
 - Go to function [setup()](https://p5js.org/reference/#/p5/draw).
@@ -245,28 +208,80 @@ function setup() {
 ---
 
 
-## 3.3. **Show wasp on canvas**
+## 3.2. **Define drawing**
 
-- Go to function [draw()](https://p5js.org/reference/#/p5/draw).
-- We call our functions show() and update().
+- Open wasp.js.
+- Go to function show().
+- We use **p5.js**'s function [image()](https://p5js.org/reference/#/p5/image) to draw the wasp.
+
+**`wasp.js`**
+```js
+show() {
+  image(waspImg, this.x, this.y, this.width, this.height);
+}
+```
+
+- Open index.js.
+- Go to function draw().
 
 **`index.js`**
 ```js
 function draw() {
   /* ... */
   wasp.show();
-  wasp.update();
 }
 ```
 
-- Open browser. Check that we have a falling wasp on the canvas.
+- Open browser. Check that we have a wasp.
 
 ---
 
 
-## 3.4. **Add jump**
+## 3.3. **Add gravity animation**
 
-- Open index.js. Go to function [keyPressed()](https://p5js.org/reference/#/p5/keyPressed).
+- To make the wasp fall to the ground, we add gravity to the wasp's speed, then add that speed to the wasp's y position to create accelerated falling wasp.
+- Open wasp.js.
+- Go to function update().
+
+**`wasp.js`**
+```js
+update() {
+  this.speed += this.gravity;
+  this.y += this.speed;
+}
+```
+
+- Open index.js.
+- Go to function draw().
+
+**`index.js`**
+```js
+function draw() {
+  /* ... */
+  wasp.update();
+}
+```
+
+- Open browser. Check that we have a falling wasp.
+
+---
+
+
+## 3.4. **Add jump animation**
+
+- We want to add a lift force to the wasp's speed to make wasp jump.
+- Open wasp.js.
+- Go to function up().
+
+**`wasp.js`**
+```js
+up() {
+  this.speed += this.lift;
+}
+```
+
+- Open index.js.
+- Go to function [keyPressed()](https://p5js.org/reference/#/p5/keyPressed).
 - If the space key is pressed we want to call the wasp.up() function that we made in step 3.1.
 
 **`index.js`**
@@ -283,9 +298,9 @@ function keyPressed() {
 
 ## 3.5. **Set wasp position limits**
 
+- We want to prevent the wasp from falling outside the canvas. We can do that by checking the wasp's position relative to the canvas height.
 - Open wasp.js.
 - Go to function update().
-- We want to prevent the wasp from falling outside the canvas. We can do that by checking the wasp's position relative to the canvas height.
 
 **`wasp.js`**
 ```js
