@@ -144,28 +144,12 @@ function draw() {
 }
 ```
 
----
-
-
-## 2.4. **Show background on canvas**
-
-- In index.js. Go to function [draw()](https://p5js.org/reference/#/p5/draw).
-- We call on our function show() and update().
-
-**`index.js`**
-```js
-function draw() {
-  background.show();
-  background.update();
-}
-```
-
 - Go to browser. We should now see a moving background image on our canvas.
 
 ---
 
 
-## 2.5. **Loop background**
+## 2.4. **Loop background**
 
 - Open background.js. Go to function update().
 - We add logic to make the background repeat itself in an infinite loop.
