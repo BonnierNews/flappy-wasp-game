@@ -78,33 +78,7 @@ function setup() {
 ![](images/background.png)
 
 
-## 2.1. **Define drawing and animation**
-
-- Open background.js.
-- Go to function show().
-- To draw the image, we can use **p5.js**'s drawing method [image()](https://p5js.org/reference/#/p5/image).
-
-**`background.js`**
-```js
-show() {
-  image(backgroundImg, this.x, this.y, this.width, this.height);
-}
-```
-
-- Go to function update().
-- To move the background, we subtract the speed from the background's x position.
-
-**`background.js`**
-```js
-update() {
-  this.x -= this.speed;
-}
-```
-
----
-
-
-## 2.3. **Create instance**
+## 2.1. **Create instance**
 
 - Open index.js. Go to function [setup()](https://p5js.org/reference/#/p5/draw).
 - We create a new instance of our class Background.
@@ -120,7 +94,60 @@ function setup() {
 ---
 
 
-## 2.4. **Show background on canvas**
+## 2.2. **Define drawing**
+
+- Open background.js.
+- Go to function show().
+- To draw the image, we can use **p5.js**'s drawing method [image()](https://p5js.org/reference/#/p5/image).
+
+**`background.js`**
+```js
+show() {
+  image(backgroundImg, this.x, this.y, this.width, this.height);
+}
+```
+
+- Open index.js.
+- Go to function draw().
+
+**`index.js`**
+```js
+function draw() {
+  background.show();
+}
+```
+
+---
+
+
+## 2.2. **Define animation**
+
+- Open background.js.
+- Go to function update().
+- To move the background, we subtract the speed from the background's x position.
+
+**`background.js`**
+```js
+update() {
+  this.x -= this.speed;
+}
+```
+
+- Open index.js.
+- Go to function draw().
+
+**`index.js`**
+```js
+function draw() {
+  /* ... */
+  background.update();
+}
+```
+
+---
+
+
+## 2.3. **Show background on canvas**
 
 - In index.js. Go to function [draw()](https://p5js.org/reference/#/p5/draw).
 - We call on our function show() and update().
@@ -147,7 +174,7 @@ function draw() {
 ```js
 update() {
   /* ... */
-  if (this.x <= CANVAS_WIDTH - this.width) {
+  if (this.x + this.width <= CANVAS_WIDTH) {
     image(backgroundImg, this.x + this.width, 0, this.width, this.height);
     if (this.x <= -this.width) this.x = 0;
   }
