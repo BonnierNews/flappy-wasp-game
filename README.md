@@ -178,7 +178,7 @@ show() {
 ```
 
 - Go to function update().
-- To make the wasp fall to the ground, we add gravity to the wasp's speed, then add that speed to the wasp's y position.
+- To make the wasp fall to the ground, we add gravity to the wasp's speed, then add that speed to the wasp's y position to create accelerated falling wasp.
 
 **`wasp.js`**
 ```js
