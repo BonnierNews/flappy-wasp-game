@@ -1,4 +1,4 @@
-https://github.com/BonnierNews/expressen-lifestyle-netlight-codepub
+https://bonniernews.github.io/expressen-lifestyle-netlight-codepub/
 
 # Flappy Wasp Game
 
